@@ -1,0 +1,35 @@
+{
+  "name": "@schema-render/core-react",
+  "version": "1.0.0",
+  "description": "Through a set of simple JSON Schema, efficiently build a set of forms.",
+  "keywords": [
+    "SchemaRender"
+  ],
+  "bugs": {
+    "url": "https://github.com/Barrior/schema-render/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Barrior/schema-render.git"
+  },
+  "license": "MIT",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "father build"
+  },
+  "sideEffects": false,
+  "dependencies": {},
+  "peerDependencies": {
+    "react": ">=16.9.0",
+    "react-dom": ">=16.9.0"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "jsc": {
+    "target": "es5",
+    "loose": true,
+    "parser": {
+      "syntax": "typescript",
+      "tsx": false,
+      "decorators": false
+    },
+    "externalHelpers": false
+  },
+  "module": {
+    "type": "commonjs",
+    "strict": false,
+    "strictMode": true,
+    "lazy": false,
+    "noInterop": false
+  }
+}

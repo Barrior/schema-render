@@ -1,0 +1,55 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "outDir": "dist",
+    "rootDir": ".",
+    "declaration": true,
+
+    /* Module Resolution */
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+
+    /* Source Maps */
+    "sourceMap": true,
+
+    /* Strict Checks */
+    "strict": true,
+
+    /* Linter Checks */
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": false,
+    "noFallthroughCasesInSwitch": true,
+
+    /* Experimental Options */
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+
+    /* Advanced Options */
+    "resolveJsonModule": true,
+
+    /* JSX Options */
+    "jsx": "react-jsx",
+
+    /* path */
+    "baseUrl": "./",
+    "paths": {
+      // for test
+      "@core-react/*": ["packages/core-react/src/*"],
+      "@test/*": ["./test/*"],
+
+      // for Dumi
+      "@@/*": [".dumi/tmp/*"],
+      "@examples/*": ["./examples/*"],
+      "@schema-render/core-react": ["packages/core-react/src/index"],
+      "@schema-render/core-react/dist/esm/*": ["packages/core-react/src/*"],
+      "@schema-render/form-render-react": ["packages/form-render-react/src/index"],
+      "@schema-render/form-render-react/dist/esm/*": ["packages/form-render-react/src/*"],
+      "@schema-render/search-react": ["packages/search-react/src/index"],
+      "@schema-render/search-react/dist/esm/*": ["packages/search-react/src/*"]
+    }
+  },
+  "compileOnSave": true
+}

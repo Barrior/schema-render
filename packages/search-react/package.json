@@ -1,0 +1,33 @@
+{
+  "name": "@schema-render/search-react",
+  "description": "Conditional search component based on FormRender.",
+  "version": "1.0.0",
+  "license": "MIT",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Barrior/schema-render.git"
+  },
+  "scripts": {
+    "build": "father build"
+  },
+  "sideEffects": false,
+  "bugs": {
+    "url": "https://github.com/Barrior/schema-render/issues"
+  },
+  "peerDependencies": {
+    "@ant-design/icons": "^5.0.0"
+  },
+  "dependencies": {
+    "@schema-render/form-render-react": "^1.0.0"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "cSpell.words": [
+    "antd",
+    "commitlint",
+    "cssinjs",
+    "dumi",
+    "execa",
+    "Immer",
+    "Popconfirm",
+    "shenzhen",
+    "stylelint"
+  ],
+  "stylelint.validate": ["css", "less", "postcss", "scss"],
+  "editor.formatOnSave": true
+}

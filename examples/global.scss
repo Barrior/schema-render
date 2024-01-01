@@ -1,0 +1,26 @@
+@import './dumi';
+
+.example-layout-cols-2 {
+  display: flex;
+
+  > * {
+    width: 50%;
+    height: max-content;
+
+    &:last-child {
+      margin-left: 20px;
+    }
+  }
+}
+
+.api-table-col-3 {
+  table {
+    th:nth-child(1) {
+      width: 150px;
+    }
+
+    th:nth-child(3) {
+      width: 150px;
+    }
+  }
+}

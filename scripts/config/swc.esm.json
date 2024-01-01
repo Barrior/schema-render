@@ -1,0 +1,23 @@
+{
+  "jsc": {
+    "target": "es2016",
+    "loose": false,
+    "externalHelpers": false,
+    "parser": {
+      "syntax": "typescript",
+      "tsx": true,
+      "decorators": true
+    },
+    "transform": {
+      "legacyDecorator": true,
+      "decoratorMetadata": true
+    }
+  },
+  "module": {
+    "type": "es6",
+    "strict": false,
+    "strictMode": false,
+    "lazy": false,
+    "noInterop": false
+  }
+}
