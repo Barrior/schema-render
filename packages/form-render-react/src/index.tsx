@@ -2,7 +2,7 @@ import FormRender from './FormRender'
 
 export default FormRender
 
-export {
+export type {
   IFormRenderProps,
   IFormRenderRef,
   IFormRenderRootSchema,
