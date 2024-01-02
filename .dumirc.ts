@@ -6,8 +6,6 @@ const globalStyles = sass.compile('./examples/global.scss')
 
 export default defineConfig({
   outputPath: 'docs-dist',
-  base: '/schema-render/',
-  publicPath: '/schema-render/',
   resolve: {
     docDirs: ['examples'],
   },
