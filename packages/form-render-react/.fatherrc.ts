@@ -1,4 +1,4 @@
-import { defineConfig } from 'father';
+import { defineConfig } from 'father'
 
 export default defineConfig({
   // more father config: https://github.com/umijs/father/blob/master/docs/config.md
@@ -6,10 +6,12 @@ export default defineConfig({
     input: 'src',
     output: 'dist/esm',
     transformer: 'swc',
+    platform: 'node',
   },
   cjs: {
     input: 'src',
     output: 'dist/cjs',
     transformer: 'swc',
+    platform: 'browser',
   },
-});
+})

@@ -1,9 +1,6 @@
 {
   "name": "root",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
   "scripts": {
     "dev": "yarn docs",
     "build": "node scripts/build-cli.mjs",
@@ -54,7 +51,7 @@
     "dayjs": "^1.11.0",
     "dumi": "^2.2.7",
     "execa": "^7.1.1",
-    "father": "^4.1.7",
+    "father": "^4.3.8",
     "glob": "^10.0.0",
     "husky": "^8.0.3",
     "inquirer": "^9.1.5",
