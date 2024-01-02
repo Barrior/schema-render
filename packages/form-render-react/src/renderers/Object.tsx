@@ -5,7 +5,10 @@ import { Collapse, Popover } from 'antd'
 import type { FC } from 'react'
 import { useState } from 'react'
 
-const Object: FC<IOpenFormItemParams<object, IObjectSchema>> = ({
+/**
+ * 不能命名为 Object，否则编译为 commonjs 文件后与关键字 Object 对象冲突
+ */
+const ObjectRenderer: FC<IOpenFormItemParams<object, IObjectSchema>> = ({
   schema,
   path,
   objectStyle,
@@ -39,5 +42,5 @@ const Object: FC<IOpenFormItemParams<object, IObjectSchema>> = ({
 }
 
 export default {
-  formItem: Object as never,
+  formItem: ObjectRenderer as never,
 }
