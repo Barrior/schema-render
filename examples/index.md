@@ -10,7 +10,7 @@ hero:
 features:
   - title: Core
     emoji: 💎
-    description: 渲染内核：协议驱动、简洁易用、高可定制、轻量级零依赖（16.4k, gzip 6.3k）
+    description: 渲染内核：协议驱动、简洁易用、高可定制、轻量级零依赖（18.8k, gzip 6.9k）
     link: /core-react/001-intro
   - title: FormRender
     emoji: 🚀
