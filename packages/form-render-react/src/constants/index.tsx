@@ -53,3 +53,9 @@ export type IActionsLoading = typeof ACTIONS_DEFAULT_LOADING_STATE
  * Actions 渲染器名称
  */
 export const ACTIONS_RENDER_TYPE = '__FORM_RENDER_ACTIONS__'
+
+/**
+ * 默认时间展示格式
+ */
+export const DEFAULT_DATE_FORMAT = 'YYYY-MM-DD'
+export const DEFAULT_DATE_TIME_FORMAT = 'YYYY-MM-DD HH:mm:ss'

@@ -7,5 +7,7 @@ export default {
     reset: '重置',
     placeholderInput: '请输入${title}',
     placeholderSelect: '请选择${title}',
+    comma: '，',
+    displayDate: '${start} 至 ${end}',
   },
 }

@@ -1,5 +1,6 @@
 import type { IBaseSchema, IRootSchema } from '@schema-render/core-react'
 import { utils } from '@schema-render/core-react'
+import type { CheckboxOptionType } from 'antd'
 
 import { ACTIONS_RENDER_TYPE } from '../constants'
 import type { IInnerFormRenderProps } from '../typings'
@@ -36,4 +37,29 @@ export function calcActionsMarginLeft({
     return labelWidth + labelGap
   }
   return 0
+}
+
+/**
+ * 获取 Antd options 选项 label 数据
+ * @param options Antd options
+ * @param values label 对应的 value 值，可以多个
+ */
+export function getOptionsLabels(
+  options?: CheckboxOptionType[],
+  values?: (CheckboxOptionType['value'] | undefined)[]
+) {
+  const labels: string[] = []
+
+  if (utils.isArray(values) && utils.isArray(options)) {
+    values.forEach((value) => {
+      if (!utils.isNil(value)) {
+        const result = utils.find<CheckboxOptionType>(options, { value })
+        if (result) {
+          labels.push(result.label as string)
+        }
+      }
+    })
+  }
+
+  return labels
 }

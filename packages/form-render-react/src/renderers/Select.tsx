@@ -3,9 +3,13 @@ import { utils } from '@schema-render/core-react'
 import { Select as AntSelect } from 'antd'
 import React, { useMemo } from 'react'
 
+import Description from '../components/Description'
+import { getOptionsLabels } from '../utils'
+
 const Select: React.FC<IOpenComponentParams<string>> = ({
   schema,
   disabled,
+  readonly,
   value,
   onChange,
   locale,
@@ -18,6 +22,12 @@ const Select: React.FC<IOpenComponentParams<string>> = ({
       }),
     [schema.title, locale.FormRender.placeholderSelect]
   )
+
+  // 只读态
+  if (readonly) {
+    const labels = getOptionsLabels(schema.renderOptions?.options, [value])
+    return <Description>{labels.join(locale.FormRender?.comma)}</Description>
+  }
 
   return (
     <AntSelect

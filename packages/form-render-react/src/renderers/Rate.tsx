@@ -4,6 +4,7 @@ import { Rate as AntRate } from 'antd'
 const Rate: React.FC<IOpenComponentParams<number>> = ({
   schema,
   disabled,
+  readonly,
   value,
   onChange,
 }) => {
@@ -12,7 +13,7 @@ const Rate: React.FC<IOpenComponentParams<number>> = ({
       {...schema.renderOptions}
       value={value ?? 0}
       onChange={(val) => onChange(val)}
-      disabled={disabled}
+      disabled={disabled || readonly}
     />
   )
 }

@@ -3,9 +3,12 @@ import { utils } from '@schema-render/core-react'
 import { InputNumber as AntInputNumber } from 'antd'
 import React, { useMemo } from 'react'
 
+import Description from '../components/Description'
+
 const InputNumber: React.FC<IOpenComponentParams<number>> = ({
   schema,
   disabled,
+  readonly,
   value,
   onChange,
   validator,
@@ -18,6 +21,11 @@ const InputNumber: React.FC<IOpenComponentParams<number>> = ({
       }),
     [schema.title, locale.FormRender.placeholderInput]
   )
+
+  // 只读态
+  if (readonly) {
+    return <Description>{value}</Description>
+  }
 
   return (
     <AntInputNumber

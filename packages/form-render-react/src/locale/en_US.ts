@@ -7,5 +7,7 @@ export default {
     reset: 'Reset',
     placeholderInput: 'Please enter ${title}',
     placeholderSelect: 'Please select ${title}',
+    comma: ',',
+    displayDate: '${start} to ${end}',
   },
 }

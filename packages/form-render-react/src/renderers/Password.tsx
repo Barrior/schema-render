@@ -3,9 +3,12 @@ import { utils } from '@schema-render/core-react'
 import { Input } from 'antd'
 import React, { useMemo } from 'react'
 
+import Description from '../components/Description'
+
 const Password: React.FC<IOpenComponentParams<string>> = ({
   schema,
   disabled,
+  readonly,
   value,
   onChange,
   validator,
@@ -26,6 +29,11 @@ const Password: React.FC<IOpenComponentParams<string>> = ({
     if (val !== value) {
       onChange(val)
     }
+  }
+
+  // 只读态
+  if (readonly) {
+    return <Description>{value}</Description>
   }
 
   return (

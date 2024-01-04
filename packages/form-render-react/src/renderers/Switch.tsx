@@ -5,6 +5,7 @@ import React from 'react'
 const Switch: React.FC<IOpenComponentParams<boolean>> = ({
   schema,
   disabled,
+  readonly,
   value,
   onChange,
 }) => {
@@ -13,7 +14,7 @@ const Switch: React.FC<IOpenComponentParams<boolean>> = ({
       {...schema.renderOptions}
       checked={value}
       onChange={(val) => onChange(val)}
-      disabled={disabled}
+      disabled={disabled || readonly}
     />
   )
 }
