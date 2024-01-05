@@ -18,6 +18,7 @@ import * as styles from './styles'
 import schema from './schemas/all'
 
 const Demo = () => {
+  const [isDisabled, setIsDisabled] = useState(false)
   const [isReadonly, setIsReadonly] = useState(false)
   const [value, setValue] = useState<object>({
     Description: '纯展示的内容吧啦吧啦',
@@ -25,13 +26,18 @@ const Demo = () => {
 
   const registerActions = useMemo(() => {
     return {
+      disable: () => (
+        <Button type="dashed" onClick={() => setIsDisabled(!isDisabled)}>
+          {isDisabled ? '取消' : '设为'} disabled 状态
+        </Button>
+      ),
       readonly: () => (
         <Button type="dashed" onClick={() => setIsReadonly(!isReadonly)}>
-          {isReadonly ? '取消 ' : '设置为 '}readonly 状态
+          {isReadonly ? '取消' : '设为'} readonly 状态
         </Button>
       ),
     }
-  }, [isReadonly])
+  }, [isReadonly, isDisabled])
 
   return (
     <div className="example-layout-cols-2">
@@ -41,8 +47,10 @@ const Demo = () => {
         schema={schema}
         value={value}
         onChange={setValue}
-        actions={['submit', 'reset', 'readonly']}
+        actions={['submit', 'reset', 'disable', 'readonly']}
         registerActions={registerActions}
+        // 是否禁用态
+        disabled={isDisabled}
         // 是否只读状态
         readonly={isReadonly}
         // 只读状态没有数据时的占位符
