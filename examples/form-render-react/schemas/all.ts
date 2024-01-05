@@ -82,6 +82,7 @@ const schema: IRootSchema = {
       renderType: 'DatePicker',
       renderOptions: {
         placeholder: '请选择日期',
+        format: 'YYYY年MM月DD日',
       },
     },
     DateRangePicker: {
