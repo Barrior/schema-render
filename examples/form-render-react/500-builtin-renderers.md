@@ -58,6 +58,10 @@ export default Demo
 
 如无特别说明，内置渲染器的参数可以通过 `schema.renderOptions` 传递，对应 [Antd](https://ant-design.antgroup.com/components/overview-cn/) 组件的参数。
 
+## 公共区
+
+只读态时，多项选择器的内容是通过`逗号`拼接在一起的，参考 `locale` 的 [FormRender.comma](https://github.com/Barrior/schema-render/blob/main/packages/form-render-react/src/locale/zh_CN.ts#L10)。
+
 ## Description
 
 非 Antd Descriptions 组件，无入参，仅作纯数据展示。
@@ -70,7 +74,9 @@ export default Demo
 
 返回 ISOString 格式的日期值。
 
+只读态时，文案展示可以通过配置 `locale` 的 [FormRender.displayDateRange](https://github.com/Barrior/schema-render/blob/main/packages/form-render-react/src/locale/zh_CN.ts#L11) 来自定义。
+
 ## Object
 
-- `renderOptions.headerOptions` 可以配置对象容器头部的参数，对应 Antd [Collapse](https://ant-design.antgroup.com/components/collapse-cn#collapse) 组件参数
-- `renderOptions.panelOptions` 可以配置对象容器内容面板的参数，对应 Antd [Collapse.Panel](https://ant-design.antgroup.com/components/collapse-cn#collapse) 组件参数
+- `renderOptions.headerOptions` 可以配置对象容器头部的参数，对应 Antd [Collapse](https://ant-design.antgroup.com/components/collapse-cn#collapse) 组件参数。
+- `renderOptions.panelOptions` 可以配置对象容器内容面板的参数，对应 Antd [Collapse.Panel](https://ant-design.antgroup.com/components/collapse-cn#collapse) 组件参数。
