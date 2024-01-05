@@ -3,7 +3,6 @@ import { forwardRef, useMemo, useRef } from 'react'
 
 import ErrorBoundary from './components/ErrorBoundary'
 import useCoreValue from './hooks/useCoreValue'
-import useDevTool from './hooks/useDevTool'
 import useLayoutStyle, { LAYOUT_MIN_MAX } from './hooks/useLayoutStyle'
 import useOpenApi from './hooks/useOpenApi'
 import zhCN from './locale/zh_CN'
@@ -45,8 +44,7 @@ const InnerCore = forwardRef((coreProps: ICore, ref?: Ref<ICoreRef>) => {
   const rootContextRef = useRef<IRootContext>({} as IRootContext)
 
   // 表单数据 value 控制
-  const { value, valueRef, onChange, getValue, setValue, resetValue } =
-    useCoreValue(props)
+  const { value, onChange, getValue, setValue, resetValue } = useCoreValue(props)
 
   // 合并语言
   const locale = useMemo(
@@ -62,10 +60,6 @@ const InnerCore = forwardRef((coreProps: ICore, ref?: Ref<ICoreRef>) => {
     () => mapKeys(props.renderers, (_, key) => key.toLowerCase()),
     [props.renderers]
   )
-
-  // 注册 DevTool
-  // uid: 当前实例唯一 ID
-  const { uid } = useDevTool({ valueRef, props })
 
   // 计算布局样式
   const layoutStyle = useLayoutStyle(props)
@@ -111,7 +105,6 @@ const InnerCore = forwardRef((coreProps: ICore, ref?: Ref<ICoreRef>) => {
           ...props.style,
           ...layoutStyle,
         }}
-        data-sr-id={uid}
       >
         <RendererIterator schema={rootCtxVal.rootSchema} path={[]} />
       </div>
