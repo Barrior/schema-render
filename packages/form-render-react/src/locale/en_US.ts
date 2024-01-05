@@ -8,6 +8,6 @@ export default {
     placeholderInput: 'Please enter ${title}',
     placeholderSelect: 'Please select ${title}',
     comma: ',',
-    displayDate: '${start} to ${end}',
+    displayDateRange: '${start} to ${end}',
   },
 }

@@ -30,7 +30,7 @@ const DateRangePicker: React.FC<IOpenComponentParams<[string, string]>> = ({
         ? DEFAULT_DATE_TIME_FORMAT
         : DEFAULT_DATE_FORMAT
       const format = schema.renderOptions?.format || defaultFormat
-      displayText = utils.templateCompiled(locale.FormRender.displayDate, {
+      displayText = utils.templateCompiled(locale.FormRender.displayDateRange, {
         start: dayjs(value?.[0]).format(format),
         end: dayjs(value?.[1]).format(format),
       })
