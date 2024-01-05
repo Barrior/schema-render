@@ -86,6 +86,12 @@ export type IFormRenderProps = IOptional<
   rootStyle?: CSSProperties
 
   /**
+   * 只读状态没有数据时的占位符，默认 “-”
+   * 空数据：null、undefined 和空字符串
+   */
+  readonlyPlaceholder?: ReactNode
+
+  /**
    * 表单项布局结构
    */
   itemLayout?: 'horizontal' | 'vertical' | ICore['itemLayout']
@@ -188,6 +194,7 @@ export type IFormRenderContext = Pick<
   | 'registerActions'
   | 'layoutColumnGap'
   | 'layoutRowGap'
+  | 'readonlyPlaceholder'
 > & {
   locale: ILocale
   actionsLoading: IActionsLoading

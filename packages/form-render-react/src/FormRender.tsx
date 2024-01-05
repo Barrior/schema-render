@@ -66,7 +66,8 @@ const FormRender = (formRenderProps: IFormRenderProps, ref?: Ref<IFormRenderRef>
       'layoutColumnGap',
       'layoutRowGap',
       'actions',
-      'registerActions'
+      'registerActions',
+      'readonlyPlaceholder'
     ),
     locale,
     actionsLoading,

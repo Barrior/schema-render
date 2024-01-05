@@ -63,3 +63,10 @@ export function getOptionsLabels(
 
   return labels
 }
+
+/**
+ * 校验是否是空值：null、undefined 和空字符串判断为空
+ */
+export function isEmpty(value: unknown): value is null | undefined | '' {
+  return !!(utils.isNil(value) || value === '')
+}

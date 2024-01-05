@@ -29,6 +29,7 @@ export type IActionsRenderMode = keyof typeof ACTIONS_RENDER_MODE
 export const FORM_RENDER_DEFAULT_PROPS = {
   prefixCls: 'schema-render',
   itemLayout: 'horizontal',
+  readonlyPlaceholder: '-',
   labelWidth: 100,
   labelGap: 15,
   layoutColumnGap: 10,
