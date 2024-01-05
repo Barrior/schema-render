@@ -14,4 +14,18 @@
 - `Search`：基于 FormRender 封装的开箱即用的条件搜索组件。
 - `SearchTable`：基于 Search + Antd Table 封装的条件搜索表格（建设中）。
 
-更多详情请移步至官网：[中文官网](https://schema-render.js.org)
+更多详情请移步至官网：[schema-render.js.org](https://schema-render.js.org)
+
+---
+
+`SchemaRender` is a set of `simple by default`, but also pursues `flexible`, `highly customizable` and `easy to use` form rendering solutions. It aims to precipitate a rendering library to solve common form cases, and related common components , to improve development efficiency.
+
+Table of Contents:
+
+- `Core`: The core of the form rendering library, which builds a set of forms through a simple JSON Schema. The core mainly handles the Schema protocol, renderer arrangement, logical linkage, verification capabilities, etc., and supports SSR (Server-Side Rendering).
+  - Features: Protocol driven, easy to use, highly customizable, lightweight and zero dependency.
+- `FormRender`: An out-of-the-box form rendering library based on Core + [Antd](https://ant.design).
+- `Search`: out-of-the-box conditional search component based on FormRender.
+- `SearchTable`: A conditional search table based on Search + Antd Table (under construction).
+
+For more details, please go to the official website: [schema-render.js.org](https://schema-render.js.org)
