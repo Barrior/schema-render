@@ -84,7 +84,7 @@ const FormRender = (formRenderProps: IFormRenderProps, ref?: Ref<IFormRenderRef>
     <FormRenderContext.Provider value={formRenderCtx}>
       <form
         onSubmit={handleFormSubmit}
-        className={utils.classNames(props.rootClassName, styles.colorVariables)}
+        className={utils.classNames(props.rootClassName, styles.formRender)}
         style={props.rootStyle}
       >
         <Core
