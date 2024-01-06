@@ -39,4 +39,8 @@ export default defineConfig({
     '@schema-render/search-react': path.resolve('packages/search-react/src'),
   },
   mfsu: false,
+  analytics: {
+    // 百度统计
+    baidu: 'c5249e1a7532f134490322a9c0c82945',
+  },
 })
