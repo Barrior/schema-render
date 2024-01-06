@@ -16,6 +16,9 @@ jobs:
     steps:
       - name: Copy project to machine
         uses: actions/checkout@v3
+        with:
+          # 确保可以 Dumi 可以拿到正确的最后更新时间，当配置 themeConfig.lastUpdated 为 true
+          fetch-depth: 0
 
       - name: Setup Node
         uses: actions/setup-node@v3
