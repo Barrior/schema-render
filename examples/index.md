@@ -1,4 +1,7 @@
 ---
+title: SchemaRender
+description: 一套更好用的表单渲染解决方案，协议驱动、简洁易用、高可定制、轻量级零依赖
+keywords: ['SchemaRender', 'Form Render']
 hero:
   title: SchemaRender
   description: 一套更好用的表单渲染解决方案，提升研发效率
