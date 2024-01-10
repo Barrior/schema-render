@@ -1,5 +1,6 @@
 ## SchemaRender
 
+[![npm version](https://img.shields.io/npm/v/@schema-render/core-react/latest)](https://www.npmjs.com/package/@schema-render/core-react)
 [![Documentation Build](https://github.com/Barrior/schema-render/actions/workflows/docs.yml/badge.svg)](https://github.com/Barrior/schema-render/actions/workflows/docs.yml)
 [![Testing](https://github.com/Barrior/schema-render/actions/workflows/testing.yml/badge.svg)](https://github.com/Barrior/schema-render/actions/workflows/testing.yml)
 [![Dependencies](https://img.shields.io/badge/dependencies-none-brightgreen.svg)](https://www.npmjs.com/package/@schema-render/core-react)
