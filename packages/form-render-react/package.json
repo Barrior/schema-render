@@ -1,6 +1,10 @@
 {
   "name": "@schema-render/form-render-react",
   "description": "Out-of-the-box form rendering library based on Core and Antd.",
+  "keywords": [
+    "SchemaRender",
+    "FormRender"
+  ],
   "version": "1.1.1",
   "license": "MIT",
   "main": "dist/cjs/index.js",
