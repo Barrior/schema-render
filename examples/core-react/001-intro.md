@@ -41,4 +41,4 @@ const FormRender = dynamic(() => import('@schema-render/form-render-react'), {
 - `协议驱动`：通过编写一份简易的 JSON Schema 来实现内容的渲染，参考[快速上手](./002-quick-start.md)。
 - `简洁易用`：仁者见仁智者见智，笔者以为是比较言简意赅、易用的，如同内部源码一样，化繁为简，无必要不增实体。
 - `高可定制`：通过配置与组装 layout、itemLayout、renderers 等可以按需实现一个贴合业务自身的渲染库，如 FormRender。
-- `轻量级`：零依赖，资源包大小仅 18.8k, gzip 6.9k
+- `轻量级`：资源包大小仅 17.6k, gzip 6.5k

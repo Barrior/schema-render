@@ -1,6 +1,6 @@
 ---
 title: SchemaRender
-description: 一套更好用的表单渲染解决方案，协议驱动、简洁易用、高可定制、轻量级零依赖
+description: 一套更好用的表单渲染解决方案，协议驱动、简洁易用、高可定制、轻量级
 keywords: ['SchemaRender', 'Form Render']
 hero:
   title: SchemaRender
@@ -13,7 +13,7 @@ hero:
 features:
   - title: Core
     emoji: 💎
-    description: 渲染内核：协议驱动、简洁易用、高可定制、轻量级零依赖（18.8k, gzip 6.9k）
+    description: 渲染内核：协议驱动、简洁易用、高可定制、轻量级（17.6k, gzip 6.5k）
     link: /core-react/001-intro
   - title: FormRender
     emoji: 🚀
