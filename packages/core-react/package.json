@@ -18,7 +18,8 @@
   "types": "dist/esm/index.d.ts",
   "files": [
     "dist/cjs",
-    "dist/esm"
+    "dist/esm",
+    "dist/umd"
   ],
   "scripts": {
     "build": "father build"
