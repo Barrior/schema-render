@@ -1,4 +1,3 @@
-import classNames from 'classnames'
 import type { FC } from 'react'
 import { createElement, useMemo, useState } from 'react'
 
@@ -14,6 +13,7 @@ import type {
   IRenderer,
 } from '../typings/core'
 import assert from '../utils/assert'
+import classNames from '../utils/classnames'
 import { stringifyPath } from '../utils/misc'
 import { get, pick } from '../utils/tinyLodash'
 import { makeOpenValidatorParams, validateFormItem } from '../utils/validator'
