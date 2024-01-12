@@ -1,7 +1,7 @@
 {
   "name": "@schema-render/search-react",
   "description": "Conditional search component based on FormRender.",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "license": "MIT",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -28,6 +28,6 @@
     "@ant-design/icons": "^5.0.0"
   },
   "dependencies": {
-    "@schema-render/form-render-react": "^1.1.0"
+    "@schema-render/form-render-react": "^1.1.1"
   }
 }

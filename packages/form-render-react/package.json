@@ -1,7 +1,7 @@
 {
   "name": "@schema-render/form-render-react",
   "description": "Out-of-the-box form rendering library based on Core and Antd.",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "license": "MIT",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "dayjs": "^1.11.0",
-    "@schema-render/core-react": "^1.1.0",
+    "@schema-render/core-react": "^1.1.1",
     "@emotion/css": "^11.11.2"
   }
 }
