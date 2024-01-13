@@ -1,9 +1,11 @@
 import type { FC } from 'react'
 import { Fragment } from 'react'
 
+import { ELayout } from '../constants'
 import useRootContext from '../hooks/useRootContext'
 import type { ICommonProps } from '../typings/common'
 import type { IObjectSchema, IRootSchema } from '../typings/schema'
+import { isNumber } from '../utils/checking'
 import { stringifyPath } from '../utils/misc'
 import { performStatement } from '../utils/statement'
 import { get } from '../utils/tinyLodash'
@@ -80,16 +82,26 @@ const RendererIterator: FC<ICommonProps<IObjectSchema | IRootSchema>> = ({
      */
     let gridColumn: string | undefined
 
-    if (rootCtx.layout === 'normal') {
+    if (rootCtx.layout === ELayout.normal) {
       let start = prevColumnStart
       let end = 25
 
-      if (subSchema.span) {
+      // 没有 span 和 spanStart 属性时，恢复常规模式
+      if (!isNumber(subSchema.span) && !isNumber(subSchema.spanStart)) {
+        start = prevColumnStart = 1
+      } else {
+        // 不允许 spanStart 和 span 为 0
+        // 优先处理 spanStart
         if (subSchema.spanStart) {
           start = subSchema.spanStart
+          prevColumnStart = start
         }
-        end = start + subSchema.span
-        prevColumnStart = end
+
+        // span 最后决定下一个 column 的起始位置 start
+        if (subSchema.span) {
+          end = start + subSchema.span
+          prevColumnStart = end
+        }
       }
 
       gridColumn = `${start}/${end}`
