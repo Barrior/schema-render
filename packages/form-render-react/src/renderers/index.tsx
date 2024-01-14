@@ -7,6 +7,7 @@ import FromRenderActions from './FromRenderActions'
 import InputNumber from './InputNumber'
 import InputText from './InputText'
 import ObjectRenderer from './Object'
+import ObjectNull from './ObjectNull'
 import Password from './Password'
 import Radio from './Radio'
 import Rate from './Rate'
@@ -22,6 +23,7 @@ const renderers = {
    * 结构渲染器
    */
   Object: ObjectRenderer,
+  ObjectNull,
 
   /**
    * 常规渲染器
