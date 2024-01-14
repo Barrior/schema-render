@@ -24,3 +24,20 @@
     }
   }
 }
+
+.section-title {
+  display: flex;
+  align-items: center;
+  line-height: 1;
+  margin: 10px 0 15px;
+  font-weight: bold;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 1em;
+    margin-right: 10px;
+    background-color: #1677ff;
+  }
+}
