@@ -153,7 +153,7 @@ const Demo = () => {
   }
 
   return (
-    <div>
+    <div style={{ maxWidth: 800 }}>
       <Steps
         size="small"
         current={currentStep}

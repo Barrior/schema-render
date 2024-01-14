@@ -169,6 +169,28 @@ const schema: IRootSchema = {
         },
       },
     },
+    ObjectNull: {
+      title: '只渲染子节点的对象容器（ObjectNull）',
+      renderType: 'ObjectNull',
+      properties: {
+        InputText: {
+          title: '单行文本（InputText）',
+          renderType: 'InputText',
+          description: '来自只渲染子节点的对象容器（ObjectNull）',
+          renderOptions: {
+            placeholder: '请输入内容',
+          },
+        },
+        InputNumber: {
+          title: '数字（InputNumber）',
+          renderType: 'InputNumber',
+          description: '来自只渲染子节点的对象容器（ObjectNull）',
+          renderOptions: {
+            placeholder: '请输入数字',
+          },
+        },
+      },
+    },
   },
 }
 

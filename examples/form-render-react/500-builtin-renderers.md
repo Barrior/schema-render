@@ -88,3 +88,9 @@ export default Demo
 
 - `renderOptions.headerOptions` 可以配置对象容器头部的参数，对应 Antd [Collapse](https://ant-design.antgroup.com/components/collapse-cn#collapse) 组件参数。
 - `renderOptions.panelOptions` 可以配置对象容器内容面板的参数，对应 Antd [Collapse.Panel](https://ant-design.antgroup.com/components/collapse-cn#collapse) 组件参数。
+
+## ObjectNull
+
+只渲染子节点的对象容器，应用场景：步骤表单。
+
+- 接受 `className` 和 `style` 属性。
