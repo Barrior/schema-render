@@ -102,8 +102,8 @@ const InnerCore = forwardRef((coreProps: ICore, ref?: Ref<ICoreRef>) => {
         })}
         ref={rootElementRef}
         style={{
-          ...props.style,
           ...layoutStyle,
+          ...props.style,
         }}
       >
         <RendererIterator schema={rootCtxVal.rootSchema} path={[]} />
