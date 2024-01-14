@@ -59,6 +59,7 @@ export default Demo
 
 - `span`: 指定表单项宽度，以份计算。
 - `spanStart`: 指定表单项从第几个栅格开始，通常在需要换行的时候使用。
+- 当 `span` 和 `spanStart` 都未定义时，自动恢复常规模式（占满一行）
 
 ```tsx
 import Core from '@schema-render/core-react'
@@ -92,6 +93,11 @@ const schema = {
       title: '垂直位置',
       renderType: 'InputNumber',
       span: 12,
+    },
+    // 当 span 和 spanStart 都未定义时，自动恢复常规模式（占满一行）
+    rotate: {
+      title: '旋转角度',
+      renderType: 'InputNumber',
     },
   },
 } as const
