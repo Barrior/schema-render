@@ -1,6 +1,6 @@
 ---
 group:
-  title: 复杂案例
+  title: 案例集锦
   order: 850
 ---
 
