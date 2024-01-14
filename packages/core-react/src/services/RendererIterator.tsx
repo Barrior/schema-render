@@ -82,6 +82,7 @@ const RendererIterator: FC<ICommonProps<IObjectSchema | IRootSchema>> = ({
      */
     let gridColumn: string | undefined
 
+    // 常规模式支持 span 和 spanStart
     if (rootCtx.layout === ELayout.normal) {
       let start = prevColumnStart
       let end = 25
@@ -105,6 +106,11 @@ const RendererIterator: FC<ICommonProps<IObjectSchema | IRootSchema>> = ({
       }
 
       gridColumn = `${start}/${end}`
+    } else {
+      // autoFill 与 autoFit 模式只支持 spanStart
+      if (isNumber(subSchema.spanStart)) {
+        gridColumn = `${subSchema.spanStart}/auto`
+      }
     }
 
     const rendererProps = {
