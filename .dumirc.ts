@@ -25,6 +25,10 @@ export default defineConfig({
     rtl: true,
     footer: false,
   },
+  favicons: [
+    // 指向 public/favicon.png
+    '/favicon.png',
+  ],
   alias: {
     // 根据精确程度按顺序声明
     '@schema-render/core-react/dist/esm': path.resolve('packages/core-react/src'),
