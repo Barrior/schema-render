@@ -1,25 +1,8 @@
-import type { IDeepReadonly, IObjectAny } from '../typings/common'
+import type { IObjectAny } from '../typings/common'
 import { isString } from './checking'
 import type { IClassNamesParams } from './classnames'
 import classNames from './classnames'
 import logger from './logger'
-
-// ref https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze#examples
-export function deepFreeze<T extends IObjectAny>(object: T): IDeepReadonly<T> {
-  // Retrieve the property names defined on object
-  const propNames = Object.getOwnPropertyNames(object)
-
-  // Freeze properties before freezing self
-  for (const name of propNames) {
-    const value = object[name]
-
-    if (value && typeof value === 'object') {
-      deepFreeze(value)
-    }
-  }
-
-  return Object.freeze(object)
-}
 
 // 生成 Unique ID
 export function generateUID() {
@@ -27,24 +10,6 @@ export function generateUID() {
     /^(\d{4})(\d{4})(\d{4})(\d{4})/g,
     '$1-$2-$3-$4'
   )
-}
-
-/**
- * 字符串转换成 hash 码
- * fork from https://github.com/darkskyapp/string-hash
- */
-export function hashCode(str: string) {
-  let hash = 5381
-  let i = str.length
-
-  while (i) {
-    hash = (hash * 33) ^ str.charCodeAt(--i)
-  }
-
-  // JavaScript does bitwise operations (like XOR, above) on 32-bit signed
-  // integers. Since we want the results to be always positive, convert the
-  // signed int to an unsigned by doing an unsigned bitshift.
-  return hash >>> 0
 }
 
 /**
