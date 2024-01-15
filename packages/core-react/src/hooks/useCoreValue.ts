@@ -3,6 +3,7 @@ import { useRef } from 'react'
 import type { IObjectAny } from '../typings/common'
 import type { ICore } from '../typings/core'
 import type { IChangeEvent } from '../typings/rootContext'
+import { hasOwnProperty } from '../utils/base'
 import { isFunction } from '../utils/checking'
 import { stringifyPath } from '../utils/misc'
 import { set } from '../utils/tinyLodash'
@@ -21,7 +22,7 @@ export default function useCoreValue(props: ICore) {
   const { forceUpdate } = useForceUpdate()
 
   // 是否受控模式，存在 value 字段即为受控模式
-  const isControlled = Object.hasOwnProperty.call(props, 'value')
+  const isControlled = hasOwnProperty(props, 'value')
 
   if (isControlled) {
     valueRef.current = props.value ?? {}
