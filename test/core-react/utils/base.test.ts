@@ -1,4 +1,36 @@
-import { classNamesWithPrefix, templateCompiled } from '@core-react/utils/base'
+import {
+  classNamesWithPrefix,
+  createRegExpByString,
+  generateUID,
+  sleep,
+  templateCompiled,
+} from '@core-react/utils/base'
+
+describe('generateUID 验证', () => {
+  test('生成的 UID 应该是 4 组 4 个数字加中横线连接起来的字符串', () => {
+    expect(/^\d{4}-\d{4}-\d{4}-\d{4}$/.test(generateUID())).toBeTruthy()
+  })
+})
+
+describe('createRegExpByString 验证', () => {
+  test('非字符串类型时应该返回 null 值', () => {
+    const result = createRegExpByString(undefined)
+    expect(result).toBe(null)
+  })
+})
+
+describe('sleep 验证', () => {
+  test('默认 sleep 应该是 1s', async () => {
+    const start = Date.now()
+    await sleep()
+    expect(Date.now() - start).toBeGreaterThanOrEqual(1000)
+  })
+  test('传递时间时，应该等待传递时间', async () => {
+    const start = Date.now()
+    await sleep(2000)
+    expect(Date.now() - start).toBeGreaterThanOrEqual(2000)
+  })
+})
 
 describe('classNamesWithPrefix 验证', () => {
   const PREFIX_CLS = 'PREFIX_CLS'
