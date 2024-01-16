@@ -9,7 +9,10 @@ const config: Config.InitialOptions = {
     '^@form-render-react/(.*)': '<rootDir>/packages/form-render-react/src/$1',
   },
   roots: ['<rootDir>/test/'],
-  testPathIgnorePatterns: ['<rootDir>/test/@.+/'],
+  // 排查 test 目录以 @ 符号开头的目录，如 @helpers、core-react/@helpers
+  testPathIgnorePatterns: ['<rootDir>/test/(.+/)?@.+/'],
+  // 覆盖率同样的规则
+  coveragePathIgnorePatterns: ['<rootDir>/test/(.+/)?@.+/'],
   setupFilesAfterEnv: ['<rootDir>/test/@helpers/jest-setup.ts'],
   clearMocks: true,
   maxConcurrency: 10,
