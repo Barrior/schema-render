@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import { createElement, useMemo, useState } from 'react'
+import { createElement, useMemo, useRef, useState } from 'react'
 
 import ErrorBoundary from '../components/ErrorBoundary'
 import { EValidationStatus } from '../constants'
@@ -31,13 +31,15 @@ const RendererExecutor: FC<IProps> = ({ schema, path, renderer, gridColumn }) =>
     status: EValidationStatus.success,
   })
   const stringPath = stringifyPath(path)
+  const rootElementRef = useRef<HTMLDivElement>(null)
 
-  // 注册校验器状态通知事件
+  // 注册渲染器开发方法
   rootCtx.rendererStorage[stringPath] = useMemo(
     () => ({
-      setValidatorState: (state) => {
-        setValidatorState(state)
-      },
+      // 注册校验器状态通知事件
+      setValidatorState: (state) => setValidatorState(state),
+      // 获取根节点
+      getRootElement: () => rootElementRef.current,
     }),
     [setValidatorState]
   )
@@ -128,6 +130,7 @@ const RendererExecutor: FC<IProps> = ({ schema, path, renderer, gridColumn }) =>
 
   return (
     <div
+      ref={rootElementRef}
       className={classNames(
         rootCtx.prefixClassNames('form-item', `item-${schema.renderType}`),
         schema.className,

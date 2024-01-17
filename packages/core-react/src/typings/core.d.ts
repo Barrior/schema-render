@@ -9,8 +9,9 @@ import type {
   IMaybePromise,
   IObjectAny,
   IPath,
+  IWindow,
 } from './common'
-import type { IChangeEvent, IRootContext } from './rootContext'
+import type { IChangeEvent, IRendererInstance, IRootContext } from './rootContext'
 import type { IRootSchema, IRuleItem, ISchema } from './schema'
 
 export interface IItemChangeEvent extends IChangeEvent {
@@ -150,6 +151,22 @@ export interface IOpenValidateResult {
   warningList: IOpenValidateError[]
 }
 
+export interface IScrollToOptions {
+  /**
+   * 滚动过渡行为 'smooth' | 'instant' | 'auto'
+   * https://developer.mozilla.org/zh-CN/docs/Web/API/Element/scrollTo#behavior
+   */
+  behavior?: 'smooth'
+  /**  是否触发 x 轴移动，默认 true */
+  xAxis?: boolean
+  /**  是否触发 y 轴移动，默认 true */
+  yAxis?: boolean
+  /** 移动到指定位置的间隙，可以是正负值，默认为 0 */
+  gap?: number
+  /** 指定 “定位元素”，适用于外部滚动  */
+  positionedElement?: HTMLElement | IWindow | null
+}
+
 export interface ICoreRef {
   /**
    * 校验数据
@@ -175,6 +192,16 @@ export interface ICoreRef {
    * 获取根节点元素
    */
   getRootElement: () => HTMLDivElement | null
+  /**
+   * 查找指定表单项，返回表单项实例的开放 API
+   */
+  findItem: (paths?: string | string[]) => IRendererInstance | undefined
+  /**
+   * 滚动到指定表单项
+   * @param paths 表单项路径
+   * @param options 滚动参数
+   */
+  scrollTo: (paths?: string | string[], options?: IScrollToOptions) => void
 }
 
 export interface IRenderers<V extends any = any, S extends ISchema = ISchema> {

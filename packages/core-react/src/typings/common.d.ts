@@ -2,6 +2,8 @@ import type { ISchema } from './schema'
 
 export type IObjectAny = IDictionary<any>
 
+export type IWindow = typeof window
+
 export interface IDictionary<T> {
   [index: string]: T
 }

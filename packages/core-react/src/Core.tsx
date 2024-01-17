@@ -102,6 +102,7 @@ const InnerCore = forwardRef((coreProps: ICore, ref?: Ref<ICoreRef>) => {
         })}
         ref={rootElementRef}
         style={{
+          position: 'relative',
           ...layoutStyle,
           ...props.style,
         }}

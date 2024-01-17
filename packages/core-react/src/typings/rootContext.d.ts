@@ -1,5 +1,5 @@
 import type { IClassNamesParams } from '../utils/classnames'
-import type { IObjectAny, IPath } from './common'
+import type { IDictionary, IObjectAny, IPath } from './common'
 import type { ICore, IOpenFunctionValidatorResult } from './core'
 import type { IRootSchema } from './schema'
 
@@ -9,10 +9,9 @@ export interface IChangeEvent {
   extra?: any
 }
 
-export interface IRendererStorage {
-  [path: string]: {
-    setValidatorState: (state: IOpenFunctionValidatorResult) => void
-  }
+export interface IRendererInstance {
+  setValidatorState: (state: IOpenFunctionValidatorResult) => void
+  getRootElement: () => HTMLDivElement | null
 }
 
 export interface IRootContext {
@@ -31,7 +30,7 @@ export interface IRootContext {
   // 渲染器列表
   renderers: ICore['renderers']
   // 储存展示的渲染器
-  rendererStorage: IRendererStorage
+  rendererStorage: IDictionary<IRendererInstance>
   // 全局校验器
   validators: Exclude<ICore['validators'], undefined>
   // 全局上下文数据

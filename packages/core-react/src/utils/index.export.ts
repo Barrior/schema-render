@@ -1,6 +1,7 @@
 export { classNamesWithPrefix, templateCompiled } from './base'
 export * from './checking'
 export { default as classNames } from './classnames'
+export { positionedOffset } from './dom'
 export { default as logger } from './logger'
 export * from './tinyLodash'
 export { default as traverseSchema } from './traverseSchema'
