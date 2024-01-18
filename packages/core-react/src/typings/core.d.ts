@@ -210,11 +210,15 @@ export interface IRenderers<V extends any = any, S extends ISchema = ISchema> {
 
 // 开放渲染器
 export interface IRenderer<V extends any = any, S extends ISchema = ISchema> {
-  /* 渲染器组件 component 模式 */
+  /** 渲染器组件 component 模式 */
   component?: React.ComponentType<IOpenComponentParams<V, S>>
-  /* 渲染器组件 formItem 模式：自定义渲染内容，覆盖 itemLayout 布局  */
+  /** 只读态 component */
+  readonlyComponent?: React.ComponentType<IOpenComponentParams<V, S>>
+  /** 渲染器组件 formItem 模式：自定义渲染内容，覆盖 itemLayout 布局 */
   formItem?: React.ComponentType<IOpenFormItemParams<V, S>>
-  /* 校验器 */
+  /** 只读态 formItem */
+  readonlyFormItem?: React.ComponentType<IOpenFormItemParams<V, S>>
+  /** 校验器 */
   validator?: IRuleItem[] | IOpenFunctionValidator<V, S>
 }
 

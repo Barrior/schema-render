@@ -12,7 +12,6 @@ import type {
   IOpenFunctionValidatorResult,
   IRenderer,
 } from '../typings/core'
-import assert from '../utils/assert'
 import classNames from '../utils/classnames'
 import { stringifyPath } from '../utils/misc'
 import { get, pick } from '../utils/tinyLodash'
@@ -95,23 +94,13 @@ const RendererExecutor: FC<IProps> = ({ schema, path, renderer, gridColumn }) =>
     onChange,
   }
 
+  // 开放 formItem 参数
+  const openFormItemParams = openComponentParams
+
   // 主体内容渲染
   const renderContent = () => {
-    if (!renderer.formItem && !renderer.component) {
-      assert.fail(
-        `One of the "formItem" and "component" properties of renderer "${schema.renderType}" must exist.`
-      )
-    }
-
-    // 优先执行 formItem
-    if (renderer.formItem) {
-      // 开放 formItem 参数
-      const openFormItemParams = openComponentParams
-      return createElement(renderer.formItem, openFormItemParams)
-    }
-
-    // 开放表单项布局结构参数
-    const openLayoutParams = {
+    // 开放表单项布局结构通用参数
+    const commonOpenLayoutParams = {
       ...pick(
         openComponentParams,
         'schema',
@@ -122,10 +111,39 @@ const RendererExecutor: FC<IProps> = ({ schema, path, renderer, gridColumn }) =>
         'locale',
         'userCtx'
       ),
-      body: createElement(renderer.component!, openComponentParams),
       prefixClassNames: rootCtx.prefixClassNames,
     }
-    return createElement(rootCtx.itemLayout, openLayoutParams)
+
+    // 是否只读态
+    if (openComponentParams.readonly) {
+      // 优先 readonlyFormItem
+      if (renderer.readonlyFormItem) {
+        return createElement(renderer.readonlyFormItem, openFormItemParams)
+      }
+      // 其次 readonlyComponent
+      if (renderer.readonlyComponent) {
+        return createElement(rootCtx.itemLayout, {
+          ...commonOpenLayoutParams,
+          body: createElement(renderer.readonlyComponent, openComponentParams),
+        })
+      }
+    }
+
+    /**
+     * 常规态、无「只读态/禁用态」组件时，执行下面逻辑
+     */
+    // 优先 formItem
+    if (renderer.formItem) {
+      return createElement(renderer.formItem, openFormItemParams)
+    }
+
+    // 其次 component
+    if (renderer.component) {
+      return createElement(rootCtx.itemLayout, {
+        ...commonOpenLayoutParams,
+        body: createElement(renderer.component, openComponentParams),
+      })
+    }
   }
 
   return (
