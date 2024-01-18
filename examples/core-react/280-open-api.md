@@ -14,6 +14,8 @@ toc: content
 - `setValue`: 设置表单数据，可用于通用库封装，业务不建议使用这个 API。
 - `getValue`: 获取表单数据，可用于通用库封装，业务不建议使用这个 API。
 - `getRootElement`: 获取根节点 DOM 元素。
+- `findItem`: 查找指定表单项，返回指定表单项实例，内含暴露的开放方法。
+- `scrollTo`: 滚动到指定位置，详见[滚动到指定位置 ScrollTo](./250-scroll.md)。
 
 ## validate
 
