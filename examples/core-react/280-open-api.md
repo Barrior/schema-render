@@ -14,7 +14,8 @@ toc: content
 - `setValue`: 设置表单数据，可用于通用库封装，业务不建议使用这个 API。
 - `getValue`: 获取表单数据，可用于通用库封装，业务不建议使用这个 API。
 - `getRootElement`: 获取根节点 DOM 元素。
-- `findItem`: 查找指定表单项，返回指定表单项实例，内含暴露的开放方法。
+- `findItem`: 查找指定表单项，返回指定表单项实例，实例方法如下。
+  - `getRootElement`: 获取指定表单项的根节点 DOM 元素。
 - `scrollTo`: 滚动到指定位置，详见[滚动到指定位置 ScrollTo](./250-scroll.md)。
 
 ## validate
@@ -110,7 +111,7 @@ export default Demo
 
 重置校验错误信息（含警告信息），如数据回填时，可用此方法重置错误信息
 
-类型：`resetError: (paths?: string | string[]) => void`
+类型：`(paths?: string | string[]) => void`
 
 ### 入参
 
@@ -260,7 +261,7 @@ export default Demo
 
 获取根节点 DOM 元素。
 
-类型：`getRootElement: () => HTMLDivElement | null`
+类型：`() => HTMLDivElement | null`
 
 ### 入参
 
@@ -311,6 +312,75 @@ const Demo = () => {
         }}
       >
         获取根节点 DOM 元素，请在控制台查看
+      </Button>
+    </div>
+  )
+}
+
+export default Demo
+```
+
+## findItem
+
+查找指定表单项，返回指定表单项实例，实例会提供一些 API 方法。
+
+类型：`(paths?: string | string[]) => IRendererInstance | undefined`
+
+### 入参
+
+| **名称**  | **描述**   | **类型**               |
+| --------- | ---------- | ---------------------- |
+| **paths** | 表单项路径 | `string` \| `string[]` |
+
+### 出参
+
+表单项实例，开放 API 如下
+
+| **名称**           | **描述**                        | **类型**                    |
+| ------------------ | ------------------------------- | --------------------------- |
+| **getRootElement** | 获取指定表单项的根节点 DOM 元素 | `() => HTMLElement \| null` |
+
+### getRootElement 示例
+
+```tsx
+import { useRef } from 'react'
+import { Button } from 'antd'
+import Core from '@schema-render/core-react'
+import type { ICoreRef, IRootSchema } from '@schema-render/core-react'
+import renderers from './renderers/common'
+import Horizontal from './item-layout/Horizontal'
+
+const schema: IRootSchema = {
+  renderType: 'Root',
+  properties: {
+    title: {
+      title: '标题',
+      renderType: 'InputText',
+      required: true,
+    },
+    content: {
+      title: '内容',
+      renderType: 'TextArea',
+      required: true,
+    },
+  },
+}
+
+const Demo = () => {
+  const coreRef = useRef<ICoreRef>(null)
+
+  return (
+    <div>
+      <Core ref={coreRef} schema={schema} itemLayout={Horizontal} renderers={renderers} />
+      <Button
+        style={{ margin: '24px 15px 0 115px' }}
+        type="primary"
+        onClick={() => {
+          const formItemRootElement = coreRef.current?.findItem('title')?.getRootElement()
+          console.log('formItemRootElement:', formItemRootElement)
+        }}
+      >
+        获取【标题】根节点 DOM 元素，请在控制台查看
       </Button>
     </div>
   )
