@@ -10,7 +10,13 @@ toc: content
 
 - `component`: 注册渲染器组件，渲染主要内容，`ReactNode` 类型。
 - `formItem`: 注册渲染器组件，渲染主要内容，可独立定义布局结构（不受限于 itemLayout 布局），`ReactNode` 类型。
+- `readonlyComponent`: 只读态时，`component` 模式的可选替代方案。
+- `readonlyFormItem`: 只读态时，`formItem` 模式的可选替代方案。
 - `validator`: 渲染器内置校验器，定义与渲染器绑定的校验规则。
+
+渲染器组件注册流程如下：
+
+<img src="./images/renderer-flow.png" width="1079">
 
 ## component
 
@@ -143,6 +149,110 @@ export default Demo
 > 如果是 TypeScript 项目，可以通过 `IOpenFormItemParams` 类型了解所有的参数及其注解。
 
 目前 `formItem` 参数与 `component` 参数一致。
+
+## readonlyComponent
+
+编写只读态逻辑有 2 种方式：
+
+- 第一种，在 `component` 组件里通过 `readonly` 状态区分，这种方式会存在 `if` 语句，并且在复杂组件里会导致不必要的状态定义等逻辑。
+- 第二种，通过 `readonlyComponent` 声明，可以减少 `if` 语句使得架构更清晰，对于复杂的组件避免触发不必要的状态定义等逻辑。
+
+`readonlyComponent` 参数与 `component` 一致。
+
+```jsx
+import { useState } from 'react'
+import Core from '@schema-render/core-react'
+import Horizontal from './item-layout/Horizontal'
+import { Button, Input } from 'antd'
+
+const renderers = {
+  InputText: {
+    component: ({ schema, value, disabled, readonly, onChange }) => {
+      // 在 component 组件里写只读态逻辑
+      if (readonly) {
+        return <div>{value}</div>
+      }
+
+      return (
+        <Input
+          allowClear
+          placeholder={`请输入${schema.title ?? ''}`}
+          {...schema.renderOptions}
+          value={value ?? ''}
+          disabled={disabled}
+          onChange={(e) => onChange(e.target.value)}
+        />
+      )
+    },
+  },
+  TextArea: {
+    component: ({ schema, value, disabled, onChange }) => {
+      return (
+        <Input.TextArea
+          rows={3}
+          placeholder={`请输入${schema.title ?? ''}`}
+          {...schema.renderOptions}
+          value={value ?? ''}
+          onChange={(e) => onChange(e.target.value)}
+          disabled={disabled}
+        />
+      )
+    },
+    // 通过 readonlyComponent 声明，可以减少 if 语句，对于复杂的组件避免触发不必要的状态定义等逻辑。
+    readonlyComponent: ({ value }) => {
+      return <div>{value}</div>
+    },
+  },
+}
+
+const schema = {
+  renderType: 'Root',
+  properties: {
+    title: {
+      title: '标题',
+      renderType: 'InputText',
+    },
+    content: {
+      title: '内容',
+      renderType: 'TextArea',
+    },
+  },
+}
+
+const Demo = () => {
+  const [isReadonly, setIsReadonly] = useState(false)
+  const [value, setValue] = useState({
+    title: 'SchemaRender 是什么',
+    content: 'SchemaRender 是一套更好用的表单渲染解决方案',
+  })
+
+  return (
+    <div style={{ maxWidth: 500 }}>
+      <Core
+        schema={schema}
+        itemLayout={Horizontal}
+        renderers={renderers}
+        value={value}
+        onChange={setValue}
+        readonly={isReadonly}
+      />
+      <Button
+        style={{ margin: '20px 0 0 115px' }}
+        type="primary"
+        onClick={() => setIsReadonly(!isReadonly)}
+      >
+        {isReadonly ? '取消' : '切换到'} readonly 状态
+      </Button>
+    </div>
+  )
+}
+
+export default Demo
+```
+
+## readonlyFormItem
+
+`readonlyFormItem` 与 `readonlyComponent` 模式一致，参数与 `formItem` 一致。
 
 ## validator
 
