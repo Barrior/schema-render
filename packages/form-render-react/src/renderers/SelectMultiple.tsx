@@ -6,10 +6,14 @@ import React, { useMemo } from 'react'
 import Description from '../components/Description'
 import { getOptionsLabels } from '../utils'
 
-const SelectMultiple: React.FC<IOpenComponentParams<string[]>> = ({
+type IProps = React.FC<IOpenComponentParams<string[]>>
+
+/**
+ * 编辑与禁用态组件
+ */
+const SelectMultiple: IProps = ({
   schema,
   disabled,
-  readonly,
   value,
   onChange,
   validator,
@@ -22,12 +26,6 @@ const SelectMultiple: React.FC<IOpenComponentParams<string[]>> = ({
       }),
     [schema.title, locale.FormRender.placeholderSelect]
   )
-
-  // 只读态
-  if (readonly) {
-    const labels = getOptionsLabels(schema.renderOptions?.options, value)
-    return <Description>{labels.join(locale.FormRender?.comma)}</Description>
-  }
 
   return (
     <AntSelect
@@ -43,7 +41,15 @@ const SelectMultiple: React.FC<IOpenComponentParams<string[]>> = ({
     />
   )
 }
+/**
+ * 只读态组件
+ */
+const ReadonlySelectMultiple: IProps = ({ schema, value, locale }) => {
+  const labels = getOptionsLabels(schema.renderOptions?.options, value)
+  return <Description>{labels.join(locale.FormRender?.comma)}</Description>
+}
 
 export default {
   component: SelectMultiple,
+  readonlyComponent: ReadonlySelectMultiple,
 }

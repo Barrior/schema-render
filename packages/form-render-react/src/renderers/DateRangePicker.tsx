@@ -12,33 +12,12 @@ function toISOString(date: Dayjs | string | null) {
   return dayjs(date).toISOString()
 }
 
-const DateRangePicker: React.FC<IOpenComponentParams<[string, string]>> = ({
-  schema,
-  value,
-  onChange,
-  disabled,
-  readonly,
-  validator,
-  locale,
-}) => {
-  // 只读态
-  if (readonly) {
-    let displayText = ''
+type IProps = React.FC<IOpenComponentParams<[string, string]>>
 
-    if (utils.isArray(value) && value[0] && value[1]) {
-      const defaultFormat = schema.renderOptions?.showTime
-        ? DEFAULT_DATE_TIME_FORMAT
-        : DEFAULT_DATE_FORMAT
-      const format = schema.renderOptions?.format || defaultFormat
-      displayText = utils.templateCompiled(locale.FormRender.displayDateRange, {
-        start: dayjs(value?.[0]).format(format),
-        end: dayjs(value?.[1]).format(format),
-      })
-    }
-
-    return <Description>{displayText}</Description>
-  }
-
+/**
+ * 编辑与禁用态组件
+ */
+const DateRangePicker: IProps = ({ schema, value, onChange, disabled, validator }) => {
   return (
     <DatePicker.RangePicker
       allowClear
@@ -54,6 +33,28 @@ const DateRangePicker: React.FC<IOpenComponentParams<[string, string]>> = ({
   )
 }
 
+/**
+ * 只读态组件
+ */
+const ReadonlyDateRangePicker: IProps = ({ schema, value, locale }) => {
+  let displayText = ''
+
+  if (utils.isArray(value) && value[0] && value[1]) {
+    const defaultFormat = schema.renderOptions?.showTime
+      ? DEFAULT_DATE_TIME_FORMAT
+      : DEFAULT_DATE_FORMAT
+    const format = schema.renderOptions?.format || defaultFormat
+
+    displayText = utils.templateCompiled(locale.FormRender.displayDateRange, {
+      start: dayjs(value[0]).format(format),
+      end: dayjs(value[1]).format(format),
+    })
+  }
+
+  return <Description>{displayText}</Description>
+}
+
 export default {
   component: DateRangePicker,
+  readonlyComponent: ReadonlyDateRangePicker,
 }

@@ -1,19 +1,16 @@
 import type { IOpenComponentParams } from '@schema-render/core-react'
-import { utils } from '@schema-render/core-react'
+import { useMemoizedFn, utils } from '@schema-render/core-react'
 import { Input } from 'antd'
 import React, { useMemo } from 'react'
 
 import Description from '../components/Description'
 
-const TextArea: React.FC<IOpenComponentParams<string>> = ({
-  schema,
-  disabled,
-  readonly,
-  value,
-  onChange,
-  validator,
-  locale,
-}) => {
+type IProps = React.FC<IOpenComponentParams<string>>
+
+/**
+ * 编辑与禁用态组件
+ */
+const TextArea: IProps = ({ schema, disabled, value, onChange, validator, locale }) => {
   const placeholder = useMemo(
     () =>
       utils.templateCompiled(locale.FormRender.placeholderInput, {
@@ -22,19 +19,14 @@ const TextArea: React.FC<IOpenComponentParams<string>> = ({
     [schema.title, locale.FormRender.placeholderInput]
   )
 
-  const onInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const onInputChange = useMemoizedFn((e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const val = e.target.value
 
     /* istanbul ignore else */
     if (val !== value) {
       onChange(val)
     }
-  }
-
-  // 只读态
-  if (readonly) {
-    return <Description>{value}</Description>
-  }
+  })
 
   return (
     <Input.TextArea
@@ -49,6 +41,14 @@ const TextArea: React.FC<IOpenComponentParams<string>> = ({
   )
 }
 
+/**
+ * 只读态组件
+ */
+const ReadonlyTextArea: IProps = ({ value }) => {
+  return <Description>{value}</Description>
+}
+
 export default {
   component: TextArea,
+  readonlyComponent: ReadonlyTextArea,
 }

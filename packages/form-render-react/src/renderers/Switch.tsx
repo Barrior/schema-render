@@ -14,6 +14,7 @@ const Switch: React.FC<IOpenComponentParams<boolean>> = ({
       {...schema.renderOptions}
       checked={value}
       onChange={(val) => onChange(val)}
+      // 禁用态、只读态都表现为禁用
       disabled={disabled || readonly}
     />
   )

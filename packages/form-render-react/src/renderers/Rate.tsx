@@ -12,7 +12,8 @@ const Rate: React.FC<IOpenComponentParams<number>> = ({
     <AntRate
       {...schema.renderOptions}
       value={value ?? 0}
-      onChange={(val) => onChange(val)}
+      onChange={onChange}
+      // 禁用态、只读态都表现为禁用
       disabled={disabled || readonly}
     />
   )

@@ -1,14 +1,18 @@
 import type { IOpenComponentParams } from '@schema-render/core-react'
-import { utils } from '@schema-render/core-react'
+import { useMemoizedFn, utils } from '@schema-render/core-react'
 import { InputNumber as AntInputNumber } from 'antd'
 import React, { useMemo } from 'react'
 
 import Description from '../components/Description'
 
-const InputNumber: React.FC<IOpenComponentParams<number>> = ({
+type IProps = React.FC<IOpenComponentParams<number>>
+
+/**
+ * 编辑与禁用态组件
+ */
+const InputNumber: IProps = ({
   schema,
   disabled,
-  readonly,
   value,
   onChange,
   validator,
@@ -22,10 +26,7 @@ const InputNumber: React.FC<IOpenComponentParams<number>> = ({
     [schema.title, locale.FormRender.placeholderInput]
   )
 
-  // 只读态
-  if (readonly) {
-    return <Description>{value}</Description>
-  }
+  const handleChange = useMemoizedFn((val: number | null) => onChange(val ?? undefined))
 
   return (
     <AntInputNumber
@@ -34,12 +35,20 @@ const InputNumber: React.FC<IOpenComponentParams<number>> = ({
       {...schema.renderOptions}
       status={validator.status as never}
       value={value}
-      onChange={(val) => onChange(val ?? undefined)}
+      onChange={handleChange}
       disabled={disabled}
     />
   )
 }
 
+/**
+ * 只读态组件
+ */
+const ReadonlyInputNumber: IProps = ({ value }) => {
+  return <Description>{value}</Description>
+}
+
 export default {
   component: InputNumber,
+  readonlyComponent: ReadonlyInputNumber,
 }
