@@ -11,7 +11,7 @@ const ObjectNull: FC<IOpenFormItemParams<object, IObjectSchema>> = ({
   objectStyle,
 }) => {
   return (
-    <div className={schema.className} style={{ ...objectStyle, ...schema.style }}>
+    <div style={objectStyle}>
       <RendererIterator schema={schema} path={path} />
     </div>
   )
