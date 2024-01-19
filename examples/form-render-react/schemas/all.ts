@@ -4,7 +4,7 @@ const commonOptions = [
   { label: '成都', value: 'chengdu' },
   { label: '杭州', value: 'hangzhou' },
   { label: '深圳', value: 'shenzhen' },
-  { label: '北京', value: 'beijing' },
+  { label: '北京', value: 'beijing', disabled: true },
 ]
 
 const schema: IRootSchema = {
@@ -172,6 +172,11 @@ const schema: IRootSchema = {
     ObjectNull: {
       title: '只渲染子节点的对象容器（ObjectNull）',
       renderType: 'ObjectNull',
+      style: {
+        border: '1px solid #d9d9d9',
+        padding: 10,
+        borderRadius: 6,
+      },
       properties: {
         InputText: {
           title: '单行文本（InputText）',

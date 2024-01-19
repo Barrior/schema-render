@@ -1,7 +1,7 @@
 import { cij } from '@examples/utils/cssinjs'
 
 export const builtinRenderers = cij`
-  min-width: 550px;
+  min-width: 580px;
   font-size: 15px;
 
   .schema-render-form-actions {
