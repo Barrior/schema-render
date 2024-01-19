@@ -214,10 +214,14 @@ export interface IRenderer<V extends any = any, S extends ISchema = ISchema> {
   component?: React.ComponentType<IOpenComponentParams<V, S>>
   /** 只读态 component */
   readonlyComponent?: React.ComponentType<IOpenComponentParams<V, S>>
+  /** 禁用态 component */
+  disabledComponent?: React.ComponentType<IOpenComponentParams<V, S>>
   /** 渲染器组件 formItem 模式：自定义渲染内容，覆盖 itemLayout 布局 */
   formItem?: React.ComponentType<IOpenFormItemParams<V, S>>
   /** 只读态 formItem */
   readonlyFormItem?: React.ComponentType<IOpenFormItemParams<V, S>>
+  /** 禁用态 formItem */
+  disabledFormItem?: React.ComponentType<IOpenFormItemParams<V, S>>
   /** 校验器 */
   validator?: IRuleItem[] | IOpenFunctionValidator<V, S>
 }

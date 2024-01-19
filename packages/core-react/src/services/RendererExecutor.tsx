@@ -129,6 +129,21 @@ const RendererExecutor: FC<IProps> = ({ schema, path, renderer, gridColumn }) =>
       }
     }
 
+    // 是否禁用态
+    if (openComponentParams.disabled) {
+      // 优先 disabledFormItem
+      if (renderer.disabledFormItem) {
+        return createElement(renderer.disabledFormItem, openFormItemParams)
+      }
+      // 其次 disabledComponent
+      if (renderer.disabledComponent) {
+        return createElement(rootCtx.itemLayout, {
+          ...commonOpenLayoutParams,
+          body: createElement(renderer.disabledComponent, openComponentParams),
+        })
+      }
+    }
+
     /**
      * 常规态、无「只读态/禁用态」组件时，执行下面逻辑
      */
