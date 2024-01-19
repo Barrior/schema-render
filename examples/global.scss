@@ -41,3 +41,23 @@
     background-color: #1677ff;
   }
 }
+
+// 应用场景有：滚动到指定位置
+.focus-out {
+  animation: focusOut 1s ease-out;
+  border-radius: 6px;
+}
+
+@keyframes focusOut {
+  0% {
+    background: rgb(254 238 189);
+    padding: 20px;
+  }
+  30% {
+    background: rgb(254 238 189);
+    padding: 20px;
+  }
+  100% {
+    background: transparent;
+  }
+}

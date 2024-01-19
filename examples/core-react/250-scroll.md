@@ -480,6 +480,31 @@ const Demo = () => {
   const [value, setValue] = useState({})
   const coreRef = useRef<ICoreRef>(null)
 
+  const scrollTo = (paths: string | string[], gap: number = 0) => {
+    coreRef.current?.scrollTo(paths, {
+      // 设置滚动容器元素为 window
+      positionedElement: window,
+      // 76 是站点头部高度
+      gap: -76 + gap,
+      // 浏览器内置的 behavior 为 smooth 时，无法监听到过渡效果动画结束，这里去掉过渡效果
+      behavior: 'instant',
+    })
+
+    /**
+     * 添加一笔聚焦动画
+     */
+    // 获取指定表单项根节点元素
+    const elem = coreRef.current?.findItem(paths)?.getRootElement()
+
+    // 添加动画类名
+    elem?.classList.add('focus-out')
+
+    setTimeout(() => {
+      // 动画结束后移除类名
+      elem?.classList.remove('focus-out')
+    }, 1000)
+  }
+
   return (
     <div
       style={{
@@ -501,36 +526,11 @@ const Demo = () => {
       />
       <div>
         <Space direction="vertical">
-          <Button
-            onClick={() => {
-              coreRef.current?.scrollTo('object_basic', {
-                // 设置滚动容器元素为 window
-                positionedElement: window,
-                // 76 是站点头部高度
-                gap: -76,
-              })
-            }}
-          >
-            移动到【基础信息】
-          </Button>
-          <Button
-            onClick={() => {
-              coreRef.current?.scrollTo(['object_spec', 'title'], {
-                positionedElement: window,
-                gap: -96,
-              })
-            }}
-          >
+          <Button onClick={() => scrollTo('object_basic')}>移动到【基础信息】</Button>
+          <Button onClick={() => scrollTo(['object_spec', 'title'], -20)}>
             移动到【规格信息-规格标题-增加20px距离】
           </Button>
-          <Button
-            onClick={() => {
-              coreRef.current?.scrollTo('object_other.content', {
-                positionedElement: window,
-                gap: -76,
-              })
-            }}
-          >
+          <Button onClick={() => scrollTo('object_other.content')}>
             移动到【其他信息-其他内容】
           </Button>
         </Space>
