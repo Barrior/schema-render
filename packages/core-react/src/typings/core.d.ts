@@ -156,7 +156,7 @@ export interface IScrollToOptions {
    * 滚动过渡行为 'smooth' | 'instant' | 'auto'
    * https://developer.mozilla.org/zh-CN/docs/Web/API/Element/scrollTo#behavior
    */
-  behavior?: 'smooth' | 'instant' | 'auto'
+  behavior?: ScrollBehavior
   /**  是否触发 x 轴移动，默认 true */
   xAxis?: boolean
   /**  是否触发 y 轴移动，默认 true */
