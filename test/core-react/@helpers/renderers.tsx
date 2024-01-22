@@ -48,6 +48,28 @@ const renderers: IRenderers<any, ISchema> = {
       )
     },
   },
+  // 输出警告的 InputText 渲染器
+  WarningInputText: {
+    component: ({ schema, value, disabled, readonly, onChange }) => {
+      if (readonly) {
+        return <div className="input-text is-readonly">{value}</div>
+      }
+      return (
+        <input
+          className={classNames('input-text', { 'is-disabled': disabled })}
+          {...schema.renderOptions}
+          value={value ?? ''}
+          onChange={(e) => onChange(e.target.value)}
+        />
+      )
+    },
+    validator: () => {
+      return {
+        status: 'warning',
+        message: 'warning-message-from-WarningInputText',
+      }
+    },
+  },
 }
 
 export default renderers
