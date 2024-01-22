@@ -21,7 +21,13 @@ export type IPartRequired<T, K extends keyof T> = Omit<T, K> & Required<Pick<T, 
 /**
  * 让对象属性部分可选
  */
-export type IOptional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>
+export type IPartPartial<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>
+
+/**
+ * 让对象属性部分可选
+ * @deprecated please use IPartPartial
+ */
+export type IOptional<T, K extends keyof T> = IPartPartial<T, K>
 
 /**
  * 让对象属性去掉只读限制

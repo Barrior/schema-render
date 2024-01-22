@@ -16,6 +16,7 @@ export type {
   IMaybePromise,
   IObjectAny,
   IOptional,
+  IPartPartial,
   IPartRequired,
   IPath,
   IWriteable,

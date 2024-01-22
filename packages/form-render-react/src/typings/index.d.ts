@@ -6,7 +6,7 @@ import type {
   IMaybePromise,
   IObjectAny,
   IOpenItemLayoutParams,
-  IOptional,
+  IPartPartial,
   IPartRequired,
   IRootSchema,
 } from '@schema-render/core-react'
@@ -71,7 +71,7 @@ export type ILabelRender = (
 /**
  * FormRender 参数配置
  */
-export type IFormRenderProps = IOptional<
+export type IFormRenderProps = IPartPartial<
   Omit<ICore, 'itemLayout' | 'locale'>,
   'renderers'
 > & {
