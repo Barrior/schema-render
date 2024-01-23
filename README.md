@@ -4,6 +4,7 @@
 [![Testing](https://github.com/Barrior/schema-render/actions/workflows/testing.yml/badge.svg)](https://github.com/Barrior/schema-render/actions/workflows/testing.yml)
 [![codecov](https://codecov.io/gh/Barrior/schema-render/graph/badge.svg?token=38DB2R33FD)](https://codecov.io/gh/Barrior/schema-render)
 [![npm version](https://img.shields.io/npm/v/@schema-render/core-react)](https://www.npmjs.com/package/@schema-render/core-react)
+[![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Barrior/JParticles/blob/master/LICENSE)
 
 `SchemaRender` 是一套 `默认简单`，但又追求 `灵活`、`可高定`、`好用的` 表单渲染解决方案，旨在沉淀解决常见表单案例的渲染库，与相关的通用组件，以提升研发效率。
 
