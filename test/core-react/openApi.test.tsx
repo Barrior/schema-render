@@ -19,7 +19,7 @@ const schema = wrapRootSchema({
   },
   remark: {
     title: '备注',
-    renderType: 'WarningInputText',
+    renderType: 'InputTextWithWarning',
     className: 'cls-remark',
   },
 })
@@ -47,7 +47,7 @@ describe('validate 验证', () => {
         path: ['remark'],
         value: undefined,
         status: 'warning',
-        message: 'warning-message-from-WarningInputText',
+        message: 'warning-message-from-InputTextWithWarning',
         extra: undefined,
       },
     ])

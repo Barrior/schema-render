@@ -10,7 +10,8 @@
     "Immer",
     "Popconfirm",
     "shenzhen",
-    "stylelint"
+    "stylelint",
+    "testid"
   ],
   "stylelint.validate": ["css", "less", "postcss", "scss"],
   "editor.formatOnSave": true
