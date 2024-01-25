@@ -18,6 +18,12 @@ toc: content
 npm install @schema-render/search-react --save
 ```
 
+如果没有安装 antd，还需安装它
+
+```bash
+npm install antd --save
+```
+
 ## 使用
 
 常与表格配合用于后台管理系统数据检索与展示操作。

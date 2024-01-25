@@ -20,6 +20,12 @@ toc: content
 npm install @schema-render/form-render-react --save
 ```
 
+如果没有安装 antd，还需安装它
+
+```bash
+npm install antd --save
+```
+
 ## 使用
 
 ```jsx
