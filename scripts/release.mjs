@@ -41,6 +41,7 @@ class Release {
     await this.buildProduct()
     await this.publishToNpm()
     this.commit()
+    logger.log('🌟 命令执行完毕 🎉')
   }
 
   /**
@@ -183,11 +184,13 @@ class Release {
       .join(' ')
     execaCommandSync(`git add ${commitFiles}`)
     execaCommandSync(`git commit -m chore(release):\\ v${this.newVersion} -n`)
-    execaCommandSync(`git tag v${this.newVersion}`)
     logger.log(`文件变更提交 Git 完成`)
 
-    // execaCommandSync('git push origin --tags')
-    // logger.log(`推送 Git 到远程 origin 仓库完成`)
+    execaCommandSync(`git tag v${this.newVersion}`)
+    logger.log(`git tag 打标完成`)
+
+    execaCommandSync('git push origin --tags')
+    logger.log(`推送 Git 到远程 origin 仓库完成`)
   }
 }
 
