@@ -1,12 +1,16 @@
 import type { IOpenComponentParams } from '@schema-render/core-react'
 import { utils } from '@schema-render/core-react'
+import { useMemoizedFn } from '@schema-render/core-react'
 import { Select as AntSelect } from 'antd'
+import type { ComponentProps } from 'react'
 import React, { useMemo } from 'react'
 
 import Description from '../components/Description'
 import { getOptionsLabels } from '../utils'
 
 type IProps = React.FC<IOpenComponentParams<string[]>>
+
+type IHandleChange = ComponentProps<typeof AntSelect>['onChange']
 
 /**
  * 编辑与禁用态组件
@@ -27,6 +31,12 @@ const SelectMultiple: IProps = ({
     [schema.title, locale.FormRender.placeholderSelect]
   )
 
+  const handleChange: IHandleChange = useMemoizedFn((selectedValues, options) => {
+    onChange(selectedValues, {
+      extra: { selectedOptions: options },
+    })
+  })
+
   return (
     <AntSelect
       allowClear
@@ -36,11 +46,12 @@ const SelectMultiple: IProps = ({
       status={validator.status as never}
       mode="multiple"
       value={value}
-      onChange={(val) => onChange(val)}
+      onChange={handleChange}
       disabled={disabled}
     />
   )
 }
+
 /**
  * 只读态组件
  */
