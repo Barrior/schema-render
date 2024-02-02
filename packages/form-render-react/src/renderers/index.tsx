@@ -14,6 +14,7 @@ import Rate from './Rate'
 import Select from './Select'
 import SelectMultiple from './SelectMultiple'
 import Switch from './Switch'
+import SwitchBox from './SwitchBox'
 import TextArea from './TextArea'
 
 const renderers = {
@@ -35,6 +36,7 @@ const renderers = {
   Radio,
   Checkbox,
   Switch,
+  SwitchBox,
   DatePicker,
   DateRangePicker,
   Description,
