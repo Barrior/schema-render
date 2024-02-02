@@ -7,7 +7,7 @@ toc: content
 
 # 联动 - SelectMultiple 选中值
 
-与 Checkbox 渲染器一样，不过名称为字段名是 `selectedOptions`。
+与 Checkbox 渲染器一样，不过字段名是 `selectedOptions`。
 
 ## Schema 方式实现
 

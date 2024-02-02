@@ -12,10 +12,6 @@ toc: content
 - 通过 `自定义渲染器` + `userCtx` 实现
 - 通过修改 `Schema` 的 `renderOptions` 属性实现
 
-:::info{title=温馨提示}
-`FormRender v3.4.0` 起 `Checkbox` 才支持 `extra.checkedOptions` 参数
-:::
-
 ## 自定义渲染器实现
 
 【可选城市】依赖【可选城市范围】的数据

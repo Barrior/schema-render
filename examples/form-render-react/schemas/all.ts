@@ -28,6 +28,13 @@ const schema: IRootSchema = {
       title: '开关（Switch）',
       renderType: 'Switch',
     },
+    SwitchBox: {
+      title: '开关（SwitchBox）',
+      renderType: 'SwitchBox',
+      renderOptions: {
+        text: '同意平台用户内容协议',
+      },
+    },
     TextArea: {
       title: '多行文本（TextArea）',
       renderType: 'TextArea',
