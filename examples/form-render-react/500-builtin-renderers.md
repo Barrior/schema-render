@@ -84,6 +84,14 @@ export default Demo
 
 只读态时，文案展示可以通过配置 `locale` 的 [FormRender.displayDateRange](https://github.com/Barrior/schema-render/blob/main/packages/form-render-react/src/locale/zh_CN.ts#L11) 来自定义。
 
+## Checkbox
+
+FormRender v3.4.0 开始 Checkbox 的 onChange 事件支持 `extra.checkedOptions` 参数，表示当前选中的 `options` 数据。案例见[Checkbox 选中值联动](./880-relation-checkbox)。
+
+## SelectMultiple
+
+FormRender v3.4.0 开始 SelectMultiple 在 onChange 事件支持 `extra.selectedOptions` 参数，表示当前选中的 `options` 数据。
+
 ## Object
 
 - `renderOptions.headerOptions` 可以配置对象容器头部的参数，对应 Antd [Collapse](https://ant-design.antgroup.com/components/collapse-cn#collapse) 组件参数。
