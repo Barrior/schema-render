@@ -18,6 +18,8 @@
 
 更多详情请移步至官网：[schema-render.js.org](https://schema-render.js.org)
 
+<img src="./public/wechat-praise.jpg" width="266" />
+
 ---
 
 `SchemaRender` is a set of `simple by default`, but also pursues `flexible`, `highly customizable` and `easy to use` form rendering solutions. It aims to precipitate a rendering library to solve common form cases, and related common components , to improve development efficiency.
