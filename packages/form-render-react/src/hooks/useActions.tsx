@@ -56,6 +56,7 @@ export default function useActions({ props, coreRef }: IUseActionsParams) {
   // Form onSubmit 事件提交处理
   const handleFormSubmit = useMemoizedFn((event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
+    event.stopPropagation()
     handleSubmit()
   })
 
