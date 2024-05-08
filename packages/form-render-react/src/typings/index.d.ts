@@ -205,6 +205,6 @@ export type IFormRenderContext = Pick<
 /**
  * FormRender Root Schema 类型，含内置渲染器提示
  */
-export type IFormRenderRootSchema<T extends string = string> = IRootSchema<
+export type IFormRenderRootSchema<T extends string = ''> = IRootSchema<
   T | IBuiltinRenderers
 >
