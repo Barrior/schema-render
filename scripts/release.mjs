@@ -23,6 +23,9 @@ const projectMap = {
   'search-react': {
     dependencies: ['@schema-render/form-render-react'],
   },
+  'search-table-react': {
+    dependencies: ['@schema-render/search-react'],
+  },
 }
 
 class Release {

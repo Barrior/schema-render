@@ -17,7 +17,7 @@ export default defineConfig({
       { title: '💎 Core', link: '/core-react/001-intro' },
       { title: '🚀 FormRender', link: '/form-render-react/001-intro' },
       { title: '⛵️ Search', link: '/search-react/001-intro' },
-      // { title: '🛳 SearchTable', link: '/search-table-react/001-intro' },
+      { title: '🛳 SearchTable', link: '/search-table-react/001-intro' },
     ],
     socialLinks: {
       github: 'https://github.com/Barrior/schema-render',
@@ -36,11 +36,15 @@ export default defineConfig({
       'packages/form-render-react/src'
     ),
     '@schema-render/search-react/dist/esm': path.resolve('packages/search-react/src'),
+    '@schema-render/search-table-react/dist/esm': path.resolve(
+      'packages/search-table-react/src'
+    ),
 
     '@examples': path.resolve('examples'),
     '@schema-render/core-react': path.resolve('packages/core-react/src'),
     '@schema-render/form-render-react': path.resolve('packages/form-render-react/src'),
     '@schema-render/search-react': path.resolve('packages/search-react/src'),
+    '@schema-render/search-table-react': path.resolve('packages/search-table-react/src'),
   },
   mfsu: false,
   analytics: {
