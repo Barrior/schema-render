@@ -40,6 +40,10 @@ export interface IRequestResult {
 
 export interface ISearchTableProps<S extends IObjectAny = IObjectAny> {
   /**
+   * 类名前缀，默认 search-table
+   */
+  prefixCls?: string
+  /**
    * 根节点类名
    */
   className?: string

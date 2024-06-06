@@ -3,8 +3,11 @@ import type { ButtonProps, PopconfirmProps, Table } from 'antd'
 import type { ColumnType } from 'antd/es/table'
 import type { ComponentProps, MouseEvent, ReactNode } from 'react'
 
-export type IColumnType = Omit<ColumnType<IObjectAny>, 'width'> & {
-  width?: number
+export type IColumnType = ColumnType<IObjectAny> & {
+  /**
+   * 子节点
+   */
+  children?: IColumnType[]
   /**
    * 是否可以复制
    */

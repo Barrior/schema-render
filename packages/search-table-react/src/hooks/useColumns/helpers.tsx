@@ -6,10 +6,10 @@ import type { ReactNode } from 'react'
 
 import ButtonLoading from '../../components/ButtonLoading'
 import type { ISearchTableProps } from '../../typings'
-import type { IActionItem } from '../../typings/table.d'
+import type { IActionItem, IColumnType } from '../../typings/table.d'
 import { isEmpty } from '../../utils/common'
 
-const { get, isArray } = utils
+const { get, isArray, isString } = utils
 
 /**
  * 创建「操作栏」按钮
@@ -112,29 +112,33 @@ export function createActions({
  * 1、减少 key 字段声明，用 dataIndex 作为唯一字段
  * 2、统一处理无数据列以中横线 “-” 显示
  * 3、统一居中展示
+ * 4、以上内容，子节点一并同样处理
  *
  * @param rawColumns 原始 columns
  */
-export const processRawColumns = (rawColumns: IObjectAny[]) => {
-  return rawColumns.map((item: IObjectAny) => {
+export function processRawColumns(rawColumns: IColumnType[]): IColumnType[] {
+  return rawColumns.map(({ dataIndex, children, title, ...restItem }) => {
     // 遍历子节点
-    if (isArray(item.children)) {
-      item.children = processRawColumns(item.children)
+    if (isArray(children)) {
+      children = processRawColumns(children)
     }
 
-    const strDataIndex = isArray(item.dataIndex)
-      ? item.dataIndex.join('.')
-      : item.dataIndex
+    const strDataIndex = isArray(dataIndex) ? dataIndex.join('.') : (dataIndex as string)
+    const arrDataIndex = isArray(dataIndex) ? dataIndex : [dataIndex]
 
     return {
       align: 'center',
       key: strDataIndex,
+      width: isString(title) ? title.length * 16 + 30 : undefined,
       render: (_value: string, record: IObjectAny) => {
-        const text = get(record, item.dataIndex)
+        const text = get(record, arrDataIndex)
         return isEmpty(text) ? '-' : text
       },
+      title,
+      dataIndex,
+      children,
       // 配置覆盖
-      ...item,
+      ...restItem,
     }
   })
 }

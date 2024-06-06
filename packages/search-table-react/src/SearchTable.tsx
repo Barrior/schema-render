@@ -13,10 +13,9 @@ import type { ISearchTableProps, ISearchTableRef } from './typings/index.d'
 
 const { classNames, isPlainObject } = utils
 
-const styles: any = {}
-
 const SearchTable = (
   {
+    prefixCls = 'search-table',
     className,
     style,
     request,
@@ -84,19 +83,19 @@ const SearchTable = (
   return (
     <div
       ref={rootElemRef}
-      className={classNames(styles.searchTable, className, 'st-root')}
-      style={style}
+      className={classNames(className, `${prefixCls}-root`)}
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        rowGap: 10,
+        ...style,
+      }}
     >
-      {header && (
-        <div className={classNames(styles.header, 'st-header')}>
-          {header(comRenderParams)}
-        </div>
-      )}
+      {header?.(comRenderParams)}
 
       <SchemaSearch
         {...search}
         ref={searchRef}
-        rootClassName={classNames(search?.rootClassName, 'st-search')}
         disabled={search?.disabled || loading}
         value={searchValueRef.current}
         onChange={handleSearchChange}
@@ -104,26 +103,17 @@ const SearchTable = (
         onSubmit={handleSearchSubmit}
       />
 
-      {titleTop && (
-        <div className={classNames(styles.titleTop, 'st-title-top')}>
-          {titleTop(comRenderParams)}
-        </div>
-      )}
+      {titleTop?.(comRenderParams)}
 
-      <div className={classNames(styles.title, 'st-title')}>
+      <div className={`${prefixCls}-title`}>
         <div>{title?.tabsRightContent?.(comRenderParams)}</div>
       </div>
 
-      {titleBottom && (
-        <div className={classNames(styles.titleBottom, 'st-title-bottom')}>
-          {titleBottom(comRenderParams)}
-        </div>
-      )}
+      {titleBottom?.(comRenderParams)}
 
       <Table
         tableLayout="fixed"
         {...table}
-        className={classNames(styles.table, table?.className, 'st-table')}
         columns={finalColumns}
         dataSource={dataSource}
         loading={{
@@ -137,11 +127,7 @@ const SearchTable = (
         }}
       />
 
-      {footer && (
-        <div className={classNames(styles.footer, 'st-footer')}>
-          {footer(comRenderParams)}
-        </div>
-      )}
+      {footer?.(comRenderParams)}
     </div>
   )
 }
