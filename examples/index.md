@@ -26,7 +26,7 @@ features:
   - title: SearchTable
     emoji: 🛳
     description: 基于 Search + Antd Table 封装的条件搜素表格组件（后台系统常用，建设中）
-    # link: /search-table-react/001-intro
+    link: /search-table-react/001-intro
 ---
 
 ### Core 样例
@@ -272,6 +272,51 @@ const Demo = () => {
   }
 
   return <Search schema={schema} onSubmit={handleSearch} onReset={handleSearch} />
+}
+
+export default Demo
+```
+
+### SearchTable 样例
+
+```tsx
+/**
+ * background: '#fff'
+ */
+import { sleep } from '@examples/utils'
+import schema from './search-table-react/helpers/schema'
+import columns from './search-table-react/helpers/columns'
+import createDataSource from './search-table-react/helpers/createDataSource'
+
+// 引入 Search
+import SearchTable from '@schema-render/search-table-react'
+
+const Demo = () => {
+  return (
+    <SearchTable
+      search={{ schema }}
+      table={{
+        columns,
+        showRowNumber: true,
+      }}
+      request={async (searchParams) => {
+        // 打印搜索条件
+        console.log('searchParams:', searchParams)
+
+        // 模拟请求接口获取表格数据
+        await sleep()
+        const data = createDataSource()
+
+        // 返回表格数据渲染
+        return {
+          // 表格数据
+          data,
+          // 数据总数，用于分页
+          total: 100,
+        }
+      }}
+    />
+  )
 }
 
 export default Demo
