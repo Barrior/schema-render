@@ -48,7 +48,7 @@ export default function useColumns({ table }: IUseColumnsParams) {
         align: 'center',
         width: 60,
         fixed: 'left',
-        render: (_t: string, _r: string, index: number) => index + 1,
+        render: (_t: string, _r: object, index: number) => index + 1,
         key: EColumnsKeys.rowNumber,
         ...rowNumberColumnData,
       } as never)
