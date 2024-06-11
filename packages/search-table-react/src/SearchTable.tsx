@@ -123,6 +123,7 @@ const SearchTable = (
         pagination={innerPagination}
         scroll={{
           scrollToFirstRowOnChange: true,
+          x: 'max-content',
           ...table?.scroll,
         }}
       />

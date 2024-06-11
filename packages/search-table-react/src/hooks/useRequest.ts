@@ -106,6 +106,7 @@ export default function useRequest({ request, table, searchValueRef }: IUseReque
 
   if (table?.pagination !== false) {
     innerPagination = {
+      style: { marginBottom: 0 },
       showQuickJumper: true,
       showSizeChanger: true,
       ...table?.pagination,
