@@ -33,6 +33,10 @@ export interface IRequestResult {
    */
   total?: number
   /**
+   * 合计栏数据
+   */
+  summaryData?: IObjectAny
+  /**
    * 其他数据
    */
   [key: string]: any
