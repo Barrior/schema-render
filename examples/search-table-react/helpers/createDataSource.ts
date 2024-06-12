@@ -7,9 +7,11 @@ export default function createDataSource(count = 10) {
     const random = String(Math.random()).slice(2, 6)
     const goods_category = Math.random() > 0.5 ? 1 : 2
     const date = dayjs().format('YYYY-MM-DD HH:mm:ss')
+    const id = `id_${i}`
 
     dataSource.push({
-      key: Math.random(),
+      key: id,
+      id,
       supplier_name: `${random}有限公司`,
       supplier_code: random,
       bill_no: `B${Date.now()}`,
