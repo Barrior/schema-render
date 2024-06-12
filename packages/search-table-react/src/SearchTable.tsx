@@ -1,5 +1,5 @@
 import type { IObjectAny } from '@schema-render/core-react'
-import { utils } from '@schema-render/core-react'
+import { useForceUpdate, utils } from '@schema-render/core-react'
 import type { ISearchRef } from '@schema-render/search-react'
 import SchemaSearch from '@schema-render/search-react'
 import { Table } from 'antd'
@@ -33,6 +33,7 @@ const SearchTable = (
   const rootElemRef = useRef<HTMLDivElement>(null)
   const searchRef = useRef<ISearchRef>(null)
   const searchValueRef = useRef<IObjectAny>(search.defaultValue ?? {})
+  const { forceUpdate } = useForceUpdate()
 
   // 表格列配置数据处理
   const { finalColumns } = useColumns({
@@ -40,12 +41,18 @@ const SearchTable = (
   })
 
   // 数据请求处理
-  const { loading, dataSource, innerPagination, runRequest, requestParamsRef } =
-    useRequest({
-      searchValueRef,
-      table,
-      request,
-    })
+  const {
+    loading,
+    dataSource,
+    setDataSource,
+    innerPagination,
+    runRequest,
+    requestParamsRef,
+  } = useRequest({
+    searchValueRef,
+    table,
+    request,
+  })
 
   // 搜索栏
   const { handleSearchChange, handleSearchReset, handleSearchSubmit } = useSearch({
@@ -76,6 +83,10 @@ const SearchTable = (
     },
     clearSearchValue: () => searchRef.current?.resetValue(),
     getTableData: () => dataSource,
+    setTableDataAndRender: (data) => {
+      setDataSource(data)
+      forceUpdate()
+    },
   }))
 
   const comRenderParams = { loading }

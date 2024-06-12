@@ -1,4 +1,4 @@
-import type { IObjectAny } from '@schema-render/core-react'
+import type { IObjectAny, IPartRequired } from '@schema-render/core-react'
 import type { ISearchProps } from '@schema-render/search-react'
 import type { TabsProps } from 'antd'
 import type { CSSProperties, ReactNode } from 'react'
@@ -141,11 +141,15 @@ export interface ISearchTableRef {
   refresh: (
     params?: IRequestParams,
     options?: IRequestOptions
-  ) => Promise<Required<IRequestResult>>
+  ) => Promise<IPartRequired<IRequestResult, 'data' | 'total'>>
   /**
    * 获取表格列表数据
    */
   getTableData: () => IRequestResult['data']
+  /**
+   * 设置表格列表数据
+   */
+  setTableDataAndRender: (dataSource: IObjectAny[]) => void
   /**
    * 获取搜索参数
    */

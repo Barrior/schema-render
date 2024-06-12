@@ -1,5 +1,5 @@
 import type { IMaybePromise, IObjectAny } from '@schema-render/core-react'
-import type { ButtonProps, PopconfirmProps, Table } from 'antd'
+import type { ButtonProps, DropDownProps, PopconfirmProps, Table } from 'antd'
 import type { ColumnType } from 'antd/es/table'
 import type { ComponentProps, MouseEvent, ReactNode } from 'react'
 
@@ -40,6 +40,10 @@ export type ITableProps = IAntdTableProps & {
    */
   actionItemsCount?: number
   /**
+   * 操作按钮下拉菜单属性
+   */
+  actionItemsDropdownProps?: DropDownProps
+  /**
    * 操作列 Antd 配置数据，可配置操作列宽度等
    */
   actionItemsColumnData?: Partial<ColumnType<IObjectAny>>
@@ -56,7 +60,7 @@ export interface IActionItem extends Omit<Partial<ButtonProps>, 'onClick' | 'loa
   /**
    * 操作文案
    */
-  text?: string
+  text?: string | ReactNode
   /**
    * 是否展示
    */
@@ -77,10 +81,5 @@ export interface IActionItem extends Omit<Partial<ButtonProps>, 'onClick' | 'loa
    * 按钮点击事件，二次确认时，则是二次确认后的事件
    * 返回 Promise 类型，则增加 loading 效果
    */
-  onClick?: (event: MouseEvent<HTMLElement, MouseEvent>) => IMaybePromise<void>
-  /**
-   * 自定义渲染
-   * @param record 当前行数据
-   */
-  render?: () => ReactNode
+  onClick?: (event: MouseEvent<HTMLElement, MouseEvent>) => IMaybePromise<unknown>
 }

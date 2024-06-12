@@ -1,4 +1,4 @@
-import type { IObjectAny } from '@schema-render/core-react'
+import type { IObjectAny, IPartRequired } from '@schema-render/core-react'
 import { useMemoizedFn, utils } from '@schema-render/core-react'
 import type { TablePaginationConfig } from 'antd'
 import type { MutableRefObject } from 'react'
@@ -41,7 +41,10 @@ export default function useRequest({ request, table, searchValueRef }: IUseReque
   const runRequest = useMemoizedFn(
     async (params?: IRequestParams, options?: IRequestOptions) => {
       // 结果数据
-      let result: Required<IRequestResult> = { data: [], total: 0 }
+      let result: IPartRequired<IRequestResult, 'data' | 'total'> = {
+        data: [],
+        total: 0,
+      }
 
       // 防止重复请求
       if (loading) {
@@ -122,9 +125,14 @@ export default function useRequest({ request, table, searchValueRef }: IUseReque
     }
   }
 
+  const setDataSource = useMemoizedFn((data: IObjectAny[]) => {
+    dataSourceRef.current = data
+  })
+
   return {
     loading,
     dataSource: dataSourceRef.current,
+    setDataSource,
     innerPagination,
     requestParamsRef,
     runRequest,

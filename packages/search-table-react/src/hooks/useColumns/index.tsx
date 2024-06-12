@@ -4,7 +4,6 @@ import { useMemo } from 'react'
 
 import { EColumnsKeys } from '../../constants'
 import type { ISearchTableProps } from '../../typings/index.d'
-import type { IColumnType } from '../../typings/table'
 import { createActions, processRawColumns } from './helpers'
 
 interface IUseColumnsParams {
@@ -24,6 +23,8 @@ export default function useColumns({ table }: IUseColumnsParams) {
     actionItemsCount = 2,
     // 操作栏 Antd 配置数据，如宽度，类名等
     actionItemsColumnData = {},
+    // 操作栏下拉菜单配置
+    actionItemsDropdownProps,
   } = table
 
   // 原始列数据
@@ -34,7 +35,13 @@ export default function useColumns({ table }: IUseColumnsParams) {
    */
   const actionsRender = useMemoizedFn(
     (_text: string, record: IObjectAny, index: number) => {
-      return createActions({ record, index, actionItems, actionItemsCount })
+      return createActions({
+        record,
+        index,
+        actionItems,
+        actionItemsCount,
+        actionItemsDropdownProps,
+      })
     }
   )
 
@@ -51,7 +58,7 @@ export default function useColumns({ table }: IUseColumnsParams) {
         render: (_t: string, _r: object, index: number) => index + 1,
         key: EColumnsKeys.rowNumber,
         ...rowNumberColumnData,
-      } as never)
+      })
     }
 
     // 添加操作栏
@@ -60,14 +67,14 @@ export default function useColumns({ table }: IUseColumnsParams) {
         title: '操作',
         align: 'center',
         fixed: 'right',
-        width: 120,
+        width: 140,
         render: actionsRender,
         key: EColumnsKeys.actions,
         ...actionItemsColumnData,
-      } as never)
+      })
     }
 
-    return columns as IColumnType[]
+    return columns
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rawColumns])
 

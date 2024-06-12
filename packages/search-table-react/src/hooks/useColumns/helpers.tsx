@@ -1,10 +1,12 @@
-import { DoubleRightOutlined } from '@ant-design/icons'
+import { DownOutlined } from '@ant-design/icons'
 import type { IObjectAny } from '@schema-render/core-react'
 import { utils } from '@schema-render/core-react'
-import { Dropdown, Popconfirm, Space } from 'antd'
+import type { MenuProps } from 'antd'
+import { Button, Dropdown, Popconfirm } from 'antd'
 import type { ReactNode } from 'react'
 
 import ButtonLoading from '../../components/ButtonLoading'
+import { STYLE_ICON_MORE } from '../../constants/style'
 import type { ISearchTableProps } from '../../typings'
 import type { IActionItem, IColumnType } from '../../typings/table.d'
 import { isEmpty } from '../../utils/common'
@@ -21,6 +23,7 @@ export function createActionItem(item: IActionItem, index: number) {
     <ButtonLoading
       key={index}
       type="link"
+      size="small"
       {...item}
       onClick={(e) => !item.confirmAgain && handleClick?.(e)}
     >
@@ -54,11 +57,13 @@ export function createActions({
   index,
   actionItems,
   actionItemsCount,
+  actionItemsDropdownProps,
 }: {
   record: IObjectAny
   index: number
   actionItems: ISearchTableProps['table']['actionItems']
   actionItemsCount: number
+  actionItemsDropdownProps: ISearchTableProps['table']['actionItemsDropdownProps']
 }) {
   const items = actionItems?.(record, index)
 
@@ -76,14 +81,16 @@ export function createActions({
 
   if (displayableItems.length > actionItemsCount) {
     const displayedItems: IActionItem[] = []
-    const dropdownItems: any[] = []
+    const dropdownItems: MenuProps['items'] = []
 
     displayableItems.forEach((item, i) => {
-      if (i < actionItemsCount) {
+      /**
+       * 显示个数减一，以保证“更多”按钮对齐
+       */
+      if (i < actionItemsCount - 1) {
         displayedItems.push(item)
       } else {
         dropdownItems.push({
-          ...item,
           key: i,
           label: createActionItem(item, i),
         })
@@ -93,10 +100,14 @@ export function createActions({
     return (
       <>
         {displayedItems.map((item, i) => createActionItem(item, i))}
-        <Dropdown menu={{ items: dropdownItems }} placement="bottomRight">
-          <Space>
-            更多 <DoubleRightOutlined />
-          </Space>
+        <Dropdown
+          placement="bottomRight"
+          {...actionItemsDropdownProps}
+          menu={{ items: dropdownItems }}
+        >
+          <Button type="link" size="small">
+            更多 <DownOutlined style={STYLE_ICON_MORE} />
+          </Button>
         </Dropdown>
       </>
     )
