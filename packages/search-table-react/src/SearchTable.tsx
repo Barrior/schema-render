@@ -82,8 +82,8 @@ const SearchTable = (
       searchRef.current?.setValue(nextValue)
     },
     clearSearchValue: () => searchRef.current?.resetValue(),
-    getTableData: () => dataSource,
-    setTableDataAndRender: (data) => {
+    getDataSource: () => dataSource,
+    setDataSourceAndRender: (data) => {
       setDataSource(data)
       forceUpdate()
     },

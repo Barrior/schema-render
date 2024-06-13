@@ -145,11 +145,11 @@ export interface ISearchTableRef {
   /**
    * 获取表格列表数据
    */
-  getTableData: () => IRequestResult['data']
+  getDataSource: () => IRequestResult['data']
   /**
    * 设置表格列表数据
    */
-  setTableDataAndRender: (dataSource: IObjectAny[]) => void
+  setDataSourceAndRender: (dataSource: IObjectAny[]) => void
   /**
    * 获取搜索参数
    */
