@@ -6,8 +6,10 @@ import { Table } from 'antd'
 import type { Ref } from 'react'
 import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react'
 
+import { EClassNames } from './constants'
 import useColumns from './hooks/useColumns'
 import useRequest from './hooks/useRequest'
+import useScrollY from './hooks/useScrollY'
 import useSearch from './hooks/useSearch'
 import type { ISearchTableProps, ISearchTableRef } from './typings/index.d'
 
@@ -25,7 +27,7 @@ const SearchTable = (
     titleTop,
     title,
     titleBottom,
-    table,
+    table = {},
     footer,
   }: ISearchTableProps,
   ref: Ref<ISearchTableRef>
@@ -40,6 +42,9 @@ const SearchTable = (
     table,
   })
 
+  // 表格高度计算：“一屏显示”效果
+  const { scrollY, updateScrollY } = useScrollY({ table, rootElemRef })
+
   // 数据请求处理
   const {
     loading,
@@ -52,13 +57,20 @@ const SearchTable = (
     searchValueRef,
     table,
     request,
+    updateScrollY,
   })
 
   // 搜索栏
-  const { handleSearchChange, handleSearchReset, handleSearchSubmit } = useSearch({
+  const {
+    handleSearchChange,
+    handleSearchReset,
+    handleSearchSubmit,
+    handleToggleCollapsed,
+  } = useSearch({
     searchValueRef,
     search,
     runRequest,
+    updateScrollY,
   })
 
   // 组件加载完毕请求一次数据
@@ -87,6 +99,7 @@ const SearchTable = (
       setDataSource(data)
       forceUpdate()
     },
+    updateScrollY,
   }))
 
   const comRenderParams = { loading }
@@ -98,7 +111,7 @@ const SearchTable = (
       style={{
         display: 'flex',
         flexDirection: 'column',
-        rowGap: 10,
+        rowGap: 20,
         ...style,
       }}
     >
@@ -112,19 +125,23 @@ const SearchTable = (
         onChange={handleSearchChange}
         onReset={handleSearchReset}
         onSubmit={handleSearchSubmit}
+        onToggleCollapsed={handleToggleCollapsed}
       />
 
       {titleTop?.(comRenderParams)}
 
-      <div className={`${prefixCls}-title`}>
-        <div>{title?.tabsRightContent?.(comRenderParams)}</div>
-      </div>
+      {title?.tabs && (
+        <div className={`${prefixCls}-title`}>
+          <div>{title?.tabsRightContent?.(comRenderParams)}</div>
+        </div>
+      )}
 
       {titleBottom?.(comRenderParams)}
 
       <Table
         tableLayout="fixed"
         {...table}
+        className={classNames(table.className, EClassNames.table)}
         columns={finalColumns}
         dataSource={dataSource}
         loading={{
@@ -135,6 +152,7 @@ const SearchTable = (
         scroll={{
           scrollToFirstRowOnChange: true,
           x: 'max-content',
+          y: scrollY,
           ...table?.scroll,
         }}
       />

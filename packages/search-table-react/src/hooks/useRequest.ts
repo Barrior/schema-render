@@ -4,17 +4,20 @@ import type { TablePaginationConfig } from 'antd'
 import type { MutableRefObject } from 'react'
 import { useRef, useState } from 'react'
 
+import { EClassNames } from '../constants'
 import type {
   IRequestOptions,
   IRequestParams,
   IRequestResult,
   ISearchTableProps,
+  ISearchTableRef,
 } from '../typings/index.d'
 
-const { logger, pick } = utils
+const { logger, pick, classNames } = utils
 
 interface IUseRequest {
   request: ISearchTableProps['request']
+  updateScrollY: ISearchTableRef['updateScrollY']
   table: ISearchTableProps['table']
   searchValueRef: MutableRefObject<IObjectAny>
 }
@@ -22,7 +25,12 @@ interface IUseRequest {
 /**
  * 数据请求模块
  */
-export default function useRequest({ request, table, searchValueRef }: IUseRequest) {
+export default function useRequest({
+  request,
+  updateScrollY,
+  table,
+  searchValueRef,
+}: IUseRequest) {
   // 分页参数
   const paginationRef = useRef({ current: 1, pageSize: 10, total: 0 })
   // 请求参数
@@ -100,6 +108,11 @@ export default function useRequest({ request, table, searchValueRef }: IUseReque
 
       setLoading(false)
 
+      // 请求完毕后，更新表格高度，即 scrollY 值
+      if (table.autoScrollY) {
+        updateScrollY()
+      }
+
       // 返回数据
       return result
     }
@@ -107,21 +120,24 @@ export default function useRequest({ request, table, searchValueRef }: IUseReque
 
   let innerPagination: ISearchTableProps['table']['pagination'] = false as const
 
-  if (table?.pagination !== false) {
+  if (table.pagination !== false) {
     innerPagination = {
       style: { marginBottom: 0 },
       showQuickJumper: true,
       showSizeChanger: true,
-      ...table?.pagination,
+      ...table.pagination,
       ...paginationRef.current,
       onChange: (current: number, pageSize: number) => {
         // 触发外部事件
-        ;(table?.pagination as TablePaginationConfig)?.onChange?.(current, pageSize)
+        ;(table.pagination as TablePaginationConfig)?.onChange?.(current, pageSize)
         // 设置分页数据
         Object.assign(paginationRef.current, { current, pageSize })
         // 重新拉取数据
         runRequest()
       },
+
+      // 添加特有类名，用于 scrollY 计算
+      className: classNames(table.pagination?.className, EClassNames.pagination),
     }
   }
 

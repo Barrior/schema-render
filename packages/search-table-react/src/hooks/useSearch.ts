@@ -9,6 +9,7 @@ interface IUseSearchParams {
   search: ISearchProps
   searchValueRef: MutableRefObject<IObjectAny>
   runRequest: ISearchTableRef['refresh']
+  updateScrollY: ISearchTableRef['updateScrollY']
 }
 
 const { hasOwnProperty } = utils
@@ -20,6 +21,7 @@ export default function useSearch({
   searchValueRef,
   search,
   runRequest,
+  updateScrollY,
 }: IUseSearchParams) {
   const { forceUpdate } = useForceUpdate()
 
@@ -60,9 +62,17 @@ export default function useSearch({
     await runRequest()
   })
 
+  // 收起、展开事件
+  const handleToggleCollapsed = useMemoizedFn((isCollapsed: boolean) => {
+    search.onToggleCollapsed?.(isCollapsed)
+    // 更新表格高度
+    updateScrollY()
+  })
+
   return {
     handleSearchChange,
     handleSearchReset,
     handleSearchSubmit,
+    handleToggleCollapsed,
   }
 }

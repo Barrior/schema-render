@@ -164,4 +164,9 @@ export interface ISearchTableRef {
    * 清除搜索
    */
   clearSearchValue: () => void
+  /**
+   * 更新表格高度以达到“一屏显示”效果
+   * @param delay 延迟计算时间
+   */
+  updateScrollY: (delay?: number) => void
 }
