@@ -17,7 +17,6 @@ const { classNames, isPlainObject } = utils
 
 const SearchTable = (
   {
-    prefixCls = 'search-table',
     className,
     style,
     request,
@@ -25,7 +24,7 @@ const SearchTable = (
     header,
     search,
     titleTop,
-    title,
+    title = {},
     titleBottom,
     table = {},
     footer,
@@ -105,16 +104,7 @@ const SearchTable = (
   const comRenderParams = { loading }
 
   return (
-    <div
-      ref={rootElemRef}
-      className={classNames(className, `${prefixCls}-root`)}
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        rowGap: 20,
-        ...style,
-      }}
-    >
+    <div ref={rootElemRef} className={className} style={style}>
       {header?.(comRenderParams)}
 
       <SchemaSearch
@@ -130,8 +120,8 @@ const SearchTable = (
 
       {titleTop?.(comRenderParams)}
 
-      {title?.tabs && (
-        <div className={`${prefixCls}-title`}>
+      {title.tabs && (
+        <div className={title.className} style={{ marginTop: 16, ...title.style }}>
           <div>{title?.tabsRightContent?.(comRenderParams)}</div>
         </div>
       )}
@@ -142,6 +132,10 @@ const SearchTable = (
         tableLayout="fixed"
         {...table}
         className={classNames(table.className, EClassNames.table)}
+        style={{
+          marginTop: 16,
+          ...table.style,
+        }}
         columns={finalColumns}
         dataSource={dataSource}
         loading={{

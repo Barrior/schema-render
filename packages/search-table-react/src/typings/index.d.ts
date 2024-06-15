@@ -44,10 +44,6 @@ export interface IRequestResult {
 
 export interface ISearchTableProps<S extends IObjectAny = IObjectAny> {
   /**
-   * 类名前缀，默认 search-table
-   */
-  prefixCls?: string
-  /**
    * 根节点类名
    */
   className?: string
@@ -79,6 +75,14 @@ export interface ISearchTableProps<S extends IObjectAny = IObjectAny> {
    * 标题栏
    */
   title?: {
+    /**
+     * 标题栏类名
+     */
+    className?: string
+    /**
+     * 标题栏样式
+     */
+    style?: CSSProperties
     /**
      * 是否展示“列配置”功能
      */

@@ -40,15 +40,14 @@ export default function useScrollY({ table, rootElemRef }: IUseScrollYParams) {
       }
     })
 
+    // 加上表格的 marginTop
+    elementsHeight += getNumericStyleValue(tableElem as HTMLElement, 'marginTop')
+
     // 加上表头高度
     elementsHeight += calcOuterHeight(theadElem)
 
     // 加上分页高度
     elementsHeight += calcOuterHeight(paginationElem as HTMLElement)
-
-    // 加上 rowGap 的高度
-    const rowGap = getNumericStyleValue(rootElemRef.current, 'rowGap')
-    elementsHeight += rowGap * (rootElemRef.current.children.length - 1)
 
     // 设置 scrollY 的值
     setScrollY(rootElemRef.current.clientHeight - elementsHeight)
