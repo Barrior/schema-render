@@ -18,7 +18,9 @@ interface IUseScrollYParams {
  * 表格高度自动适配计算方案：“一屏显示”
  */
 export default function useScrollY({ table, rootElemRef }: IUseScrollYParams) {
-  const [scrollY, setScrollY] = useState<number | undefined>(undefined)
+  const [scrollY, setScrollY] = useState<number | undefined>(
+    table.virtual ? 0 : undefined
+  )
   const timerRef = useRef<ReturnType<typeof setTimeout>>()
 
   const calcScrollY = useMemoizedFn(() => {
