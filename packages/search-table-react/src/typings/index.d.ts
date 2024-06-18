@@ -155,6 +155,10 @@ export interface ISearchTableRef {
    */
   setDataSourceAndRender: (dataSource: IObjectAny[]) => void
   /**
+   * 设置合计栏数据
+   */
+  setSummaryDataAndRender: (data: IObjectAny) => void
+  /**
    * 获取搜索参数
    */
   getSearchValue: () => IObjectAny

@@ -51,6 +51,15 @@ export type ITableProps = IAntdTableProps & {
    * 自动计算表格 scrollY 属性，达到自动适配屏幕高度的效果
    */
   autoScrollY?: boolean
+  /**
+   * 合计栏
+   */
+  summaryText?: ReactNode
+
+  // 注册 valueType
+  // registerValueType?: {
+  //   [type: string]: (text: string, record: IObjectAny, index: number) => ReactNode
+  // }
 }
 
 /**

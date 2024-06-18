@@ -53,7 +53,7 @@ export default function useColumns({ table }: IUseColumnsParams) {
       columns.unshift({
         title: '序号',
         align: 'center',
-        width: 60,
+        width: 70,
         fixed: 'left',
         render: (_t: string, _r: object, index: number) => index + 1,
         key: EColumnsKeys.rowNumber,

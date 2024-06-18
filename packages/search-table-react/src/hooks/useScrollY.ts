@@ -30,11 +30,14 @@ export default function useScrollY({ table, rootElemRef }: IUseScrollYParams) {
 
     const tableElem = rootElemRef.current.querySelector(`.${EClassNames.table}`)
     const theadElem = tableElem?.querySelector('thead')
+    const tfootElem = tableElem?.querySelector('tfoot')
     const paginationElem = tableElem?.querySelector(`.${EClassNames.pagination}`)
+    const tableElements = [theadElem, tfootElem, paginationElem]
 
     // 内容元素的总高度
     let elementsHeight = 0
 
+    // 累加子节点高度，排除 table
     forEach(rootElemRef.current.children, (child) => {
       // 表格元素的内容高度这里排除，需要单独计算
       if (child !== tableElem) {
@@ -45,11 +48,10 @@ export default function useScrollY({ table, rootElemRef }: IUseScrollYParams) {
     // 加上表格的 marginTop
     elementsHeight += getNumericStyleValue(tableElem as HTMLElement, 'marginTop')
 
-    // 加上表头高度
-    elementsHeight += calcOuterHeight(theadElem)
-
-    // 加上分页高度
-    elementsHeight += calcOuterHeight(paginationElem as HTMLElement)
+    // 累加表格内元素
+    forEach(tableElements, (elem) => {
+      elementsHeight += calcOuterHeight(elem as HTMLElement)
+    })
 
     // 设置 scrollY 的值
     setScrollY(rootElemRef.current.clientHeight - elementsHeight)

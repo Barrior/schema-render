@@ -11,6 +11,7 @@ import useColumns from './hooks/useColumns'
 import useRequest from './hooks/useRequest'
 import useScrollY from './hooks/useScrollY'
 import useSearch from './hooks/useSearch'
+import useSummary from './hooks/useSummary'
 import type { ISearchTableProps, ISearchTableRef } from './typings/index.d'
 
 const { classNames, isPlainObject } = utils
@@ -49,6 +50,8 @@ const SearchTable = (
     loading,
     dataSource,
     setDataSource,
+    summaryData,
+    setSummaryData,
     innerPagination,
     runRequest,
     requestParamsRef,
@@ -58,6 +61,9 @@ const SearchTable = (
     request,
     updateScrollY,
   })
+
+  // 总结栏处理
+  const { finalSummary } = useSummary({ table, finalColumns, summaryData })
 
   // 搜索栏
   const {
@@ -96,6 +102,10 @@ const SearchTable = (
     getDataSource: () => dataSource,
     setDataSourceAndRender: (data) => {
       setDataSource(data)
+      forceUpdate()
+    },
+    setSummaryDataAndRender: (data) => {
+      setSummaryData(data)
       forceUpdate()
     },
     updateScrollY,
@@ -149,6 +159,7 @@ const SearchTable = (
           y: scrollY,
           ...table?.scroll,
         }}
+        summary={finalSummary}
       />
 
       {footer?.(comRenderParams)}

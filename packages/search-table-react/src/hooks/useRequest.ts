@@ -32,11 +32,17 @@ export default function useRequest({
   searchValueRef,
 }: IUseRequest) {
   // 分页参数
-  const paginationRef = useRef({ current: 1, pageSize: 10, total: 0 })
+  const paginationRef = useRef({
+    current: 1,
+    pageSize: (table.pagination !== false ? table.pagination?.defaultPageSize : 10) || 10,
+    total: 0,
+  })
   // 请求参数
   const requestParamsRef = useRef({})
   // 表格数据源
   const dataSourceRef = useRef<IObjectAny[]>([])
+  // 合计栏数据
+  const summaryDataRef = useRef<IObjectAny>({})
   // 是否加载表格数据中
   const [loading, setLoading] = useState(false)
 
@@ -95,6 +101,9 @@ export default function useRequest({
           // 存储数据源
           dataSourceRef.current = res.data || []
 
+          // 存储合计栏数据
+          summaryDataRef.current = res.summaryData || {}
+
           // 成功返回数据
           result = {
             ...res,
@@ -145,10 +154,16 @@ export default function useRequest({
     dataSourceRef.current = data
   })
 
+  const setSummaryData = useMemoizedFn((data: IObjectAny) => {
+    summaryDataRef.current = data
+  })
+
   return {
     loading,
     dataSource: dataSourceRef.current,
     setDataSource,
+    summaryData: summaryDataRef.current,
+    setSummaryData,
     innerPagination,
     requestParamsRef,
     runRequest,
