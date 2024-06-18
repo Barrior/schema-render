@@ -38,6 +38,10 @@ const columns: ISearchTableProps['table']['columns'] = [
     width: 130,
   },
   {
+    title: '商品价格(元)',
+    dataIndex: 'goods_price',
+  },
+  {
     title: '商品编码',
     dataIndex: 'goods_code',
     width: 130,

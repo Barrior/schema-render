@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 
 export default function createDataSource(count = 10) {
-  const dataSource: object[] = []
+  const dataSource = []
 
   for (let i = 0; i < count; i++) {
     const random = String(Math.random()).slice(2, 6)
@@ -23,6 +23,7 @@ export default function createDataSource(count = 10) {
       goods_code: `G${Date.now()}`,
       goods_category: goods_category === 1 ? '水果鲜花' : '海鲜水产',
       goods_date: date,
+      goods_price: goods_category === 1 ? 19.9 : 22.8,
     })
   }
 
