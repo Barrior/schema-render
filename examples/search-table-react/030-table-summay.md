@@ -285,3 +285,55 @@ const Demo = () => {
 
 export default Demo
 ```
+
+## 嵌套表头
+
+```jsx
+import { Tag } from 'antd'
+import { sleep } from '@examples/utils'
+import schema from './helpers/schema'
+import treeColumns from './helpers/columns-tree'
+import createDataSource from './helpers/createDataSource'
+import SearchTable from '@schema-render/search-table-react'
+
+const Demo = () => {
+  const actionItems = () => [{ text: '编辑' }, { text: '删除' }]
+
+  return (
+    <SearchTable
+      search={{ schema }}
+      table={{
+        columns: treeColumns,
+        scroll: { y: 300 },
+        showRowNumber: true,
+        bordered: true,
+        actionItems,
+      }}
+      request={async (searchParams) => {
+        await sleep()
+        const data = createDataSource(searchParams.pageSize)
+
+        // 计算商品合计总价
+        const totalPrice = data
+          .reduce((total, item) => total + item.goods_price, 0)
+          .toFixed(2)
+
+        // 返回表格数据渲染
+        return {
+          // 表格数据
+          data,
+          // 数据总数，用于分页
+          total: 100,
+          // 合计栏数据
+          summaryData: {
+            supplier_code: <Tag color="blue">自定义内容</Tag>,
+            goods_price: totalPrice,
+          },
+        }
+      }}
+    />
+  )
+}
+
+export default Demo
+```
