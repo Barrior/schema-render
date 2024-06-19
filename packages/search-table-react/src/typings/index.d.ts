@@ -175,6 +175,7 @@ export interface ISearchTableRef {
   /**
    * 更新表格高度以达到“一屏显示”效果
    * @param delay 延迟计算时间
+   * @param checkEnabled 检查 autoScrollY 属性是否开启
    */
-  updateScrollY: (delay?: number) => void
+  updateScrollY: (delay?: number, checkEnabled?: boolean) => void
 }

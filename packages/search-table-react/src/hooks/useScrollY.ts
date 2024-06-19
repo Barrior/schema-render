@@ -59,8 +59,13 @@ export default function useScrollY({ table, rootElemRef }: IUseScrollYParams) {
 
   /**
    * 更新 scrollY
+   * @param delay 延迟执行时间
+   * @param checkEnabled 检查 autoScrollY 属性是否开启
    */
-  const updateScrollY = useMemoizedFn((delay = 0) => {
+  const updateScrollY = useMemoizedFn((delay = 0, checkEnabled = false) => {
+    if (checkEnabled && !table.autoScrollY) {
+      return
+    }
     clearTimeout(timerRef.current)
     timerRef.current = setTimeout(calcScrollY, delay)
   })

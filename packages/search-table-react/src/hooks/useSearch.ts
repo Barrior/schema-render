@@ -66,7 +66,7 @@ export default function useSearch({
   const handleToggleCollapsed = useMemoizedFn((isCollapsed: boolean) => {
     search.onToggleCollapsed?.(isCollapsed)
     // 更新表格高度
-    updateScrollY()
+    updateScrollY(0, true)
   })
 
   return {
