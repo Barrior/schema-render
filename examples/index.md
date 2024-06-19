@@ -17,7 +17,7 @@ features:
     link: /core-react/001-intro
   - title: FormRender
     emoji: 🚀
-    description: 基于 Core + Antd 封装的<b>开箱即用</b>的表单渲染库
+    description: 基于 Core + Antd 封装的开箱即用的表单渲染库
     link: /form-render-react/001-intro
   - title: Search
     emoji: ⛵️
@@ -25,7 +25,7 @@ features:
     link: /search-react/001-intro
   - title: SearchTable
     emoji: 🛳
-    description: 基于 Search + Antd Table 封装的条件搜素表格组件（后台系统常用，建设中）
+    description: 基于 Search + Antd Table 封装的条件搜素表格组件
     link: /search-table-react/001-intro
 ---
 
