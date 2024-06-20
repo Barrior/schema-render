@@ -74,7 +74,7 @@ export interface ISearchTableProps<S extends IObjectAny = IObjectAny> {
   /**
    * 搜索栏
    */
-  search: ISearchProps
+  search: ISearchProps | false
   /**
    * 标题栏顶部区域
    */

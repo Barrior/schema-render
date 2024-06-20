@@ -1,6 +1,7 @@
 import type { IObjectAny } from '@schema-render/core-react'
 import { useForceUpdate, useMemoizedFn, utils } from '@schema-render/core-react'
 import type { ISearchRef } from '@schema-render/search-react'
+import type { ISearchProps } from '@schema-render/search-react'
 import SchemaSearch from '@schema-render/search-react'
 import { Table } from 'antd'
 import type { Ref } from 'react'
@@ -33,9 +34,10 @@ const SearchTable = (
   }: ISearchTableProps,
   ref: Ref<ISearchTableRef>
 ) => {
+  const searchProps = (search === false ? {} : search) as ISearchProps
   const rootElemRef = useRef<HTMLDivElement>(null)
   const searchRef = useRef<ISearchRef>(null)
-  const searchValueRef = useRef<IObjectAny>(search.defaultValue ?? {})
+  const searchValueRef = useRef<IObjectAny>(searchProps.defaultValue ?? {})
   const { forceUpdate } = useForceUpdate()
 
   // 表格列配置数据处理
@@ -75,7 +77,7 @@ const SearchTable = (
     handleToggleCollapsed,
   } = useSearch({
     searchValueRef,
-    search,
+    search: searchProps,
     runRequest,
     updateScrollY,
   })
@@ -131,21 +133,27 @@ const SearchTable = (
     <div ref={rootElemRef} className={className} style={style}>
       {header?.(comRenderParams)}
 
-      <SchemaSearch
-        {...search}
-        ref={searchRef}
-        disabled={search?.disabled || loading}
-        value={searchValueRef.current}
-        onChange={handleSearchChange}
-        onReset={handleSearchReset}
-        onSubmit={handleSearchSubmit}
-        onToggleCollapsed={handleToggleCollapsed}
-      />
+      {search && (
+        <SchemaSearch
+          {...searchProps}
+          rootStyle={{
+            marginBottom: 16,
+            ...searchProps.rootStyle,
+          }}
+          ref={searchRef}
+          disabled={searchProps?.disabled || loading}
+          value={searchValueRef.current}
+          onChange={handleSearchChange}
+          onReset={handleSearchReset}
+          onSubmit={handleSearchSubmit}
+          onToggleCollapsed={handleToggleCollapsed}
+        />
+      )}
 
       {titleTop?.(comRenderParams)}
 
       {title.tabs && (
-        <div className={title.className} style={{ marginTop: 16, ...title.style }}>
+        <div className={title.className} style={{ marginBottom: 16, ...title.style }}>
           <div>{title?.tabsRightContent?.(comRenderParams)}</div>
         </div>
       )}
@@ -156,10 +164,6 @@ const SearchTable = (
         tableLayout="fixed"
         {...table}
         className={classNames(table.className, EClassNames.table)}
-        style={{
-          marginTop: 16,
-          ...table.style,
-        }}
         columns={finalColumns}
         dataSource={dataSource}
         loading={{
