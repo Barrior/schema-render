@@ -104,6 +104,9 @@ importers:
       ora:
         specifier: ^6.3.0
         version: 6.3.0
+      pinyin-pro:
+        specifier: ^3.22.2
+        version: 3.22.2
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -12780,6 +12783,10 @@ packages:
       safe-stable-stringify: 2.4.3
       sonic-boom: 2.8.0
       thread-stream: 0.15.2
+    dev: true
+
+  /pinyin-pro@3.22.2:
+    resolution: {integrity: sha512-GzFpjBKrgKLo1Y2OWjHdMMp8bzHJsH7tOhYN8TPcYHaVsChaPZWDrWfrVaJJ3XeRA40NPiw6d2v2O+Zfou6Xyw==}
     dev: true
 
   /pirates@4.0.6:

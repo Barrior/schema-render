@@ -63,6 +63,7 @@
     "lodash": "^4.17.21",
     "lodash-es": "^4.17.21",
     "ora": "^6.3.0",
+    "pinyin-pro": "^3.22.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-syntax-highlighter": "^15.5.0",

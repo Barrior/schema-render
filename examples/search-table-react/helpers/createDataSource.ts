@@ -1,6 +1,9 @@
 import dayjs from 'dayjs'
 
-export default function createDataSource(count = 10) {
+export default function createDataSource(
+  count = 10,
+  sorter?: { sort_field: string; sort_order: 'ascend' | 'descend' | null }
+) {
   const dataSource = []
 
   for (let i = 0; i < count; i++) {
@@ -24,6 +27,16 @@ export default function createDataSource(count = 10) {
       goods_category: goods_category === 1 ? '水果鲜花' : '海鲜水产',
       goods_date: date,
       goods_price: goods_category === 1 ? 19.9 : 22.8,
+    })
+  }
+
+  if (sorter) {
+    dataSource.sort((a: any, b: any) => {
+      const aValue = String(a[sorter.sort_field])
+      const bValue = String(b[sorter.sort_field])
+      return sorter.sort_order === 'ascend'
+        ? aValue.localeCompare(bValue)
+        : bValue.localeCompare(aValue)
     })
   }
 
