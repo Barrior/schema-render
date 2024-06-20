@@ -1,5 +1,5 @@
 import type { IObjectAny } from '@schema-render/core-react'
-import { useForceUpdate, utils } from '@schema-render/core-react'
+import { useForceUpdate, useMemoizedFn, utils } from '@schema-render/core-react'
 import type { ISearchRef } from '@schema-render/search-react'
 import SchemaSearch from '@schema-render/search-react'
 import { Table } from 'antd'
@@ -13,6 +13,7 @@ import useScrollY from './hooks/useScrollY'
 import useSearch from './hooks/useSearch'
 import useSummary from './hooks/useSummary'
 import type { ISearchTableProps, ISearchTableRef } from './typings/index.d'
+import type { ITableProps } from './typings/table'
 
 const { classNames, isPlainObject } = utils
 
@@ -55,6 +56,7 @@ const SearchTable = (
     innerPagination,
     runRequest,
     requestParamsRef,
+    setRequestExtraParams,
   } = useRequest({
     searchValueRef,
     table,
@@ -113,6 +115,18 @@ const SearchTable = (
 
   const comRenderParams = { loading }
 
+  // 表格 onChange 事件处理
+  const handleTableChange: ITableProps['onChange'] = useMemoizedFn(
+    (_p, filter, sorter, _e) => {
+      // 服务端排序发送请求
+      if (table.sortMode === 'service' || table.sortMode === 'service-all') {
+        setRequestExtraParams({ filter, sorter })
+        runRequest()
+      }
+      table.onChange?.(_p, filter, sorter, _e)
+    }
+  )
+
   return (
     <div ref={rootElemRef} className={className} style={style}>
       {header?.(comRenderParams)}
@@ -152,7 +166,6 @@ const SearchTable = (
           spinning: loading,
           ...(isPlainObject(table?.loading) ? table.loading : undefined),
         }}
-        pagination={innerPagination}
         scroll={{
           scrollToFirstRowOnChange: true,
           x: 'max-content',
@@ -160,6 +173,8 @@ const SearchTable = (
           ...table?.scroll,
         }}
         summary={finalSummary}
+        pagination={innerPagination}
+        onChange={handleTableChange}
       />
 
       {footer?.(comRenderParams)}

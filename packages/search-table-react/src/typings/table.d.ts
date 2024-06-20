@@ -3,11 +3,24 @@ import type { ButtonProps, DropDownProps, PopconfirmProps, Table } from 'antd'
 import type { ColumnType } from 'antd/es/table'
 import type { ComponentProps, MouseEvent, ReactNode } from 'react'
 
+/**
+ * 增强版列配置
+ */
 export type IColumnType = ColumnType<IObjectAny> & {
   /**
    * 子节点
    */
   children?: IColumnType[]
+  /**
+   * 排序类型
+   */
+  sortType?: 'string' | 'number' | 'date'
+  /**
+   * 排序数据取值函数
+   * @param record 数据行
+   * @returns 排序数据值
+   */
+  sortDataExtractor?: (record: IObjectAny) => string | number | void
   /**
    * 是否可以复制
    */
@@ -21,6 +34,10 @@ export type IColumnType = ColumnType<IObjectAny> & {
 export type IAntdTableProps = ComponentProps<typeof Table>
 
 export type ITableProps = IAntdTableProps & {
+  /**
+   * 增强版列配置
+   */
+  columns: IColumnType[]
   /**
    * 是否展示序号列（行号）
    */
@@ -60,7 +77,26 @@ export type ITableProps = IAntdTableProps & {
   // registerValueType?: {
   //   [type: string]: (text: string, record: IObjectAny, index: number) => ReactNode
   // }
+
+  /**
+   * 排序方案
+   * - local：前端排序
+   * - local-all：前端排序，所有字段都排序
+   * - service：后端排序
+   * - service-all：后端排序，所有字段都排序
+   */
+  sortMode?: 'local' | 'local-all' | 'service' | 'service-all'
+  /**
+   * 排序字符串数据转换方案
+   * @param value 字符串数据值
+   */
+  sortStringValueTransform?: (value: string) => string
 }
+
+/**
+ * 表格 onChange 事件函数参数
+ */
+export type ITableOnChangeParams = Parameters<Required<ITableProps>['onChange']>
 
 /**
  * 操作栏按钮配置项

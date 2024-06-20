@@ -4,7 +4,8 @@ import { useMemo } from 'react'
 
 import { EColumnsKeys } from '../../constants'
 import type { ISearchTableProps } from '../../typings/index.d'
-import { createActions, processRawColumns } from './helpers'
+import { createActions } from './helpers/actions'
+import { processRawColumns } from './helpers/traverse'
 
 interface IUseColumnsParams {
   table: ISearchTableProps['table']
@@ -46,7 +47,7 @@ export default function useColumns({ table }: IUseColumnsParams) {
   )
 
   const finalColumns = useMemo(() => {
-    const columns = processRawColumns(rawColumns)
+    const columns = processRawColumns(rawColumns, table)
 
     // 添加序号栏
     if (showRowNumber) {

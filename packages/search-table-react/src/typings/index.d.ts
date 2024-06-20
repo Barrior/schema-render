@@ -3,7 +3,7 @@ import type { ISearchProps } from '@schema-render/search-react'
 import type { TabsProps } from 'antd'
 import type { CSSProperties, ReactNode } from 'react'
 
-import type { ITableProps } from './table.d'
+import type { ITableOnChangeParams, ITableProps } from './table.d'
 
 export interface IRenderParams {
   /**
@@ -42,6 +42,11 @@ export interface IRequestResult {
   [key: string]: any
 }
 
+export interface IRequestExtraParams {
+  sorter?: ITableOnChangeParams[2]
+  filter?: ITableOnChangeParams[1]
+}
+
 export interface ISearchTableProps<S extends IObjectAny = IObjectAny> {
   /**
    * 根节点类名
@@ -54,7 +59,10 @@ export interface ISearchTableProps<S extends IObjectAny = IObjectAny> {
   /**
    * 表格数据接口请求
    */
-  request?: (params: Partial<S & IPagination>) => Promise<IRequestResult>
+  request?: (
+    params: Partial<S & IPagination>,
+    ep: IRequestExtraParams
+  ) => Promise<IRequestResult>
   /**
    * 主要加载完成，是否立即发一次请求
    */

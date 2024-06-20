@@ -6,6 +6,7 @@ import { useRef, useState } from 'react'
 
 import { EClassNames } from '../constants'
 import type {
+  IRequestExtraParams,
   IRequestOptions,
   IRequestParams,
   IRequestResult,
@@ -39,6 +40,8 @@ export default function useRequest({
   })
   // 请求参数
   const requestParamsRef = useRef({})
+  // 请求额外的参数，如 Antd 排序、过滤数据
+  const requestExtraParamsRef = useRef<IRequestExtraParams>({})
   // 表格数据源
   const dataSourceRef = useRef<IObjectAny[]>([])
   // 合计栏数据
@@ -84,7 +87,7 @@ export default function useRequest({
           }
 
           // 发送请求
-          const res = await request(requestParams)
+          const res = await request(requestParams, requestExtraParamsRef.current)
 
           // 储存请求参数，可用于“导出”功能获取同样的参数
           requestParamsRef.current = requestParams
@@ -158,12 +161,17 @@ export default function useRequest({
     summaryDataRef.current = data
   })
 
+  const setRequestExtraParams = useMemoizedFn((data: IRequestExtraParams) => {
+    requestExtraParamsRef.current = data
+  })
+
   return {
     loading,
     dataSource: dataSourceRef.current,
     setDataSource,
     summaryData: summaryDataRef.current,
     setSummaryData,
+    setRequestExtraParams,
     innerPagination,
     requestParamsRef,
     runRequest,
