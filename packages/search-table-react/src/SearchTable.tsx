@@ -13,6 +13,7 @@ import useRequest from './hooks/useRequest'
 import useScrollY from './hooks/useScrollY'
 import useSearch from './hooks/useSearch'
 import useSummary from './hooks/useSummary'
+import useTitle from './hooks/useTitle'
 import type { ISearchTableProps, ISearchTableRef } from './typings/index.d'
 import type { ITableProps } from './typings/table'
 
@@ -80,6 +81,13 @@ const SearchTable = (
     search: searchProps,
     runRequest,
     updateScrollY,
+  })
+
+  // 标题栏
+  const { titleNodeHolder } = useTitle({
+    title,
+    loading,
+    runRequest,
   })
 
   // 组件加载完毕请求一次数据
@@ -152,11 +160,7 @@ const SearchTable = (
 
       {titleTop?.(comRenderParams)}
 
-      {title.tabs && (
-        <div className={title.className} style={{ marginBottom: 16, ...title.style }}>
-          <div>{title?.tabsRightContent?.(comRenderParams)}</div>
-        </div>
-      )}
+      {titleNodeHolder}
 
       {titleBottom?.(comRenderParams)}
 

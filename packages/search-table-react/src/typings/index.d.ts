@@ -94,7 +94,7 @@ export interface ISearchTableProps<S extends IObjectAny = IObjectAny> {
     /**
      * 是否展示“列配置”功能
      */
-    showSettings?: boolean
+    showSetting?: boolean
     /**
      * 标签页
      */
