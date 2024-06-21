@@ -49,9 +49,6 @@ npm install antd --save
     - `summary`: 合计栏数据。
 
 ```tsx
-/**
- * defaultShowCode: true
- */
 import { sleep } from '@examples/utils'
 import schema from './helpers/schema'
 import columns from './helpers/columns'
@@ -82,6 +79,144 @@ const Demo = () => {
         }
       }}
     />
+  )
+}
+
+export default Demo
+```
+
+## 全功能一览
+
+```tsx
+import { sleep } from '@examples/utils'
+import schema from './helpers/schema'
+import columns from './helpers/columns'
+import createDataSource from './helpers/createDataSource'
+import SearchTable from '@schema-render/search-table-react'
+import type { ISearchTableRef } from '@schema-render/search-table-react'
+import { useState, useRef } from 'react'
+import { ConfigProvider, message, Button, Tag } from 'antd'
+import zhCN from 'antd/locale/zh_CN'
+import { pinyin } from 'pinyin-pro'
+
+// 检查是否为中文的正则
+const REG_CHINESE = /[\u4e00-\u9fa5]/
+
+const items = [
+  {
+    key: '1',
+    label: '已提交',
+  },
+  {
+    key: '2',
+    label: '待提交',
+  },
+  {
+    key: '3',
+    label: '待审核',
+  },
+]
+
+// 模拟删除接口
+const postDeleteBill = (_id: string) => sleep()
+
+const Demo = () => {
+  const [activeKey, setActiveKey] = useState('1')
+  const STableRef = useRef<ISearchTableRef>(null)
+
+  const actionItems = (record: Record<string, any>, index: number) => {
+    return [
+      {
+        text: '编辑',
+        onClick: () => {
+          message.success(`点击了第 ${index} 个编辑`)
+        },
+      },
+      {
+        text: '详情',
+        href: 'https://schema-render.js.org/',
+        target: '_blank',
+      },
+
+      {
+        text: '删除',
+        danger: true,
+        // 增加二次确认
+        confirmAgain: true,
+        onClick: async () => {
+          // 调用删除接口
+          await postDeleteBill(record.id)
+          // 刷新表格数据
+          STableRef.current?.refresh()
+        },
+      },
+    ]
+  }
+
+  const tabBarExtraContent = {
+    left: <Button style={{ marginRight: 16 }}>自定义左侧内容</Button>,
+    right: <Button>自定义右侧内容</Button>,
+  }
+
+  return (
+    <ConfigProvider locale={zhCN}>
+      <SearchTable
+        ref={STableRef}
+        search={{ schema, labelWidth: 80 }}
+        title={{
+          // 显示列设置
+          showSetting: true,
+          // 标签页
+          tabs: {
+            activeKey,
+            items,
+            onChange: setActiveKey,
+            tabBarExtraContent,
+          },
+        }}
+        table={{
+          columns,
+          // 显示序号栏
+          showRowNumber: true,
+          // 添加操作列与配置个数、宽度
+          actionItems,
+          actionItemsCount: 3,
+          actionItemsColumnData: {
+            width: 180,
+          },
+          // 前端排序所有字段
+          sortMode: 'local-all',
+          sortStringValueTransform: (value) => {
+            return REG_CHINESE.test(value) ? pinyin(value, { toneType: 'none' }) : value
+          },
+        }}
+        request={async (searchParams) => {
+          // 打印 activeKey 值
+          console.log('activeKey:', activeKey)
+
+          // 模拟请求接口获取表格数据
+          await sleep()
+          const data = createDataSource(searchParams.pageSize)
+
+          // 计算商品合计总价
+          const totalPrice = data
+            .reduce((total, item) => total + item.goods_price, 0)
+            .toFixed(2)
+
+          return {
+            data,
+            total: 100,
+            // 合计栏数据
+            summaryData: {
+              // 对应「供应商编码」
+              supplier_code: <Tag color="blue">自定义内容</Tag>,
+              // 对应「商品价格」
+              goods_price: totalPrice,
+            },
+          }
+        }}
+      />
+    </ConfigProvider>
   )
 }
 
