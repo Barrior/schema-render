@@ -3,10 +3,20 @@ import type { ButtonProps, DropDownProps, PopconfirmProps, Table } from 'antd'
 import type { ColumnType } from 'antd/es/table'
 import type { ComponentProps, MouseEvent, ReactNode } from 'react'
 
+type IValueType<T extends string = ''> =
+  | 'code'
+  | 'rate'
+  | 'comma-number'
+  | 'switch'
+  | 'percent'
+  | 'images'
+  | 'tags'
+  | T
+
 /**
  * 增强版列配置
  */
-export type IColumnType = ColumnType<IObjectAny> & {
+export type IColumnType<VT extends string = ''> = ColumnType<IObjectAny> & {
   /**
    * 子节点
    */
@@ -22,13 +32,18 @@ export type IColumnType = ColumnType<IObjectAny> & {
    */
   sortDataExtractor?: (record: IObjectAny) => string | number | void
   /**
-   * 是否可以复制
+   * 是否开启复制功能，会增加复制 icon
    */
-  // copyable?: boolean
+  // copyable?: boolean | 'icon' | 'click' | 'double-click'
   /**
-   * 数据类型/格式，标记以特定类型 UI 渲染改数据, dataFormat
+   * 数据显示类别，标记以特定类型 UI 渲染该数据
    */
-  // valueType?: 'code' | 'tags' | 'comma-number' | 'image' | 'status'
+  valueType?:
+    | IValueType<VT>
+    | ((record: IObjectAny) => {
+        type: IValueType<VT>
+        [attr: string]: any
+      })
 }
 
 export type IAntdTableProps = ComponentProps<typeof Table>
@@ -72,11 +87,17 @@ export type ITableProps = IAntdTableProps & {
    * 合计栏
    */
   summaryText?: ReactNode
-
-  // 注册 valueType
-  // registerValueType?: {
-  //   [type: string]: (text: string, record: IObjectAny, index: number) => ReactNode
-  // }
+  /**
+   * 注册 valueType, 同名将覆盖
+   */
+  registerValueType?: {
+    [type: string]: (data: {
+      value: any
+      record: IObjectAny
+      options: IObjectAny
+      index: number
+    }) => ReactNode
+  }
 
   /**
    * 排序方案

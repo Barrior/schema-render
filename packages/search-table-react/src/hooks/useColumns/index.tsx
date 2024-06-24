@@ -4,6 +4,7 @@ import { useMemo } from 'react'
 
 import { EColumnsKeys } from '../../constants'
 import type { ISearchTableProps } from '../../typings/index.d'
+import { BUILT_IN_VALUE_TYPES } from '../../valueTypes'
 import { createActions } from './helpers/actions'
 import { processRawColumns } from './helpers/traverse'
 
@@ -46,8 +47,16 @@ export default function useColumns({ table }: IUseColumnsParams) {
     }
   )
 
+  // 合并 valueType
+  const finalValueTypeProcessors = useMemo(() => {
+    return {
+      ...BUILT_IN_VALUE_TYPES,
+      ...table.registerValueType,
+    }
+  }, [table.registerValueType])
+
   const finalColumns = useMemo(() => {
-    const columns = processRawColumns(rawColumns, table)
+    const columns = processRawColumns(rawColumns, table, finalValueTypeProcessors)
 
     // 添加序号栏
     if (showRowNumber) {

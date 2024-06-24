@@ -6,7 +6,7 @@ import type { IColumnType } from '../../../typings/table.d'
 import { isEmpty } from '../../../utils/common'
 import { localSorter } from './sort'
 
-const { get, isArray, isString } = utils
+const { get, isArray, isString, isFunction } = utils
 
 /**
  * 处理原始 columns 数据
@@ -17,15 +17,17 @@ const { get, isArray, isString } = utils
  *
  * @param rawColumns 原始 columns
  * @param table table 属性
+ * @param finalValueTypeProcessors valueType 处理器
  */
 export function processRawColumns(
   rawColumns: IColumnType[],
-  table: ISearchTableProps['table']
+  table: ISearchTableProps['table'],
+  finalValueTypeProcessors: Required<ISearchTableProps['table']>['registerValueType']
 ): IColumnType[] {
-  return rawColumns.map(({ title, dataIndex, children, ...restItem }) => {
+  return rawColumns.map(({ title, dataIndex, children, valueType, ...restItem }) => {
     // 遍历子节点
     if (isArray(children)) {
-      children = processRawColumns(children, table)
+      children = processRawColumns(children, table, finalValueTypeProcessors)
     }
 
     const strDataIndex = isArray(dataIndex) ? dataIndex.join('.') : (dataIndex as string)
@@ -59,14 +61,41 @@ export function processRawColumns(
       }
     }
 
+    // 内部渲染函数
+    const render = (_val: string, record: IObjectAny, index: number) => {
+      const value = get(record, arrDataIndex)
+
+      let innerValueType = ''
+      let innerValueTypeOptions: IObjectAny | undefined = undefined
+
+      if (valueType) {
+        if (isFunction(valueType)) {
+          const { type, ...options } = valueType(record)
+          innerValueType = type
+          innerValueTypeOptions = options
+        } else {
+          innerValueType = valueType
+        }
+      }
+
+      const valueTypeProcessor = finalValueTypeProcessors[innerValueType]
+      if (valueTypeProcessor) {
+        return valueTypeProcessor({
+          value,
+          record,
+          options: innerValueTypeOptions || {},
+          index,
+        })
+      }
+
+      return isEmpty(value) ? '-' : value
+    }
+
     return {
       align: 'center',
       key: strDataIndex,
       width: isString(title) ? title.length * 16 + (hasSorter ? 50 : 30) : undefined,
-      render: (_value: string, record: IObjectAny) => {
-        const text = get(record, arrDataIndex)
-        return isEmpty(text) ? '-' : text
-      },
+      render,
       // 配置覆盖
       ...restItem,
       title,
