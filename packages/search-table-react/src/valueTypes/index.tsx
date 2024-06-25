@@ -1,16 +1,13 @@
 import { utils } from '@schema-render/core-react'
 import { Rate, Switch, Tag } from 'antd'
 
+import ImagesPreview from '../components/ImagesPreview'
+import { REG_COMMA_NUMBER } from '../constants/regexp'
+import { STYLE_CODE } from '../constants/style'
 import type { ITableProps } from '../typings/table'
+import { isEmpty } from '../utils/common'
 
 const { isArray } = utils
-
-const codeStyle = {
-  backgroundColor: '#ececec',
-  padding: 16,
-  borderRadius: 6,
-  textAlign: 'left',
-}
 
 export const BUILT_IN_VALUE_TYPES: ITableProps['registerValueType'] = {
   /**
@@ -18,7 +15,7 @@ export const BUILT_IN_VALUE_TYPES: ITableProps['registerValueType'] = {
    */
   code: ({ value, options }) => {
     return (
-      <pre style={{ ...codeStyle, ...options.style }}>
+      <pre style={{ ...STYLE_CODE, ...options.style }}>
         <code>{value}</code>
       </pre>
     )
@@ -26,7 +23,7 @@ export const BUILT_IN_VALUE_TYPES: ITableProps['registerValueType'] = {
   /**
    * 百分比
    */
-  percent: ({ value }) => <>{value}%</>,
+  percent: ({ value }) => (isEmpty(value) ? '-' : `${value}%`),
   /**
    * 状态开关
    */
@@ -44,4 +41,30 @@ export const BUILT_IN_VALUE_TYPES: ITableProps['registerValueType'] = {
   rate: ({ value, options }) => (
     <Rate style={{ width: 134 }} {...options} disabled value={value} />
   ),
+  /**
+   * 数字千分位
+   */
+  'comma-number': ({ value }) => {
+    // 排除空数据
+    if (isEmpty(value)) {
+      return '-'
+    }
+
+    const numValue = Number(value)
+
+    // 排除 NaN
+    if (isNaN(numValue)) {
+      return value
+    }
+
+    // 千分位处理
+    return String(value).replace(REG_COMMA_NUMBER, ',')
+  },
+  /**
+   * 图片显示
+   */
+  images: ({ value, options }) => {
+    const imgList = isArray(value) ? value : [value]
+    return <ImagesPreview imgList={imgList} options={options} />
+  },
 }

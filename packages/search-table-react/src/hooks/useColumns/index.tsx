@@ -1,5 +1,5 @@
 import type { IObjectAny } from '@schema-render/core-react'
-import { useMemoizedFn } from '@schema-render/core-react'
+import { useMemoizedFn, utils } from '@schema-render/core-react'
 import { useMemo } from 'react'
 
 import { EColumnsKeys } from '../../constants'
@@ -7,6 +7,8 @@ import type { ISearchTableProps } from '../../typings/index.d'
 import { BUILT_IN_VALUE_TYPES } from '../../valueTypes'
 import { createActions } from './helpers/actions'
 import { processRawColumns } from './helpers/traverse'
+
+const { mapKeys } = utils
 
 interface IUseColumnsParams {
   table: ISearchTableProps['table']
@@ -49,10 +51,12 @@ export default function useColumns({ table }: IUseColumnsParams) {
 
   // 合并 valueType
   const finalValueTypeProcessors = useMemo(() => {
-    return {
+    const processors = {
       ...BUILT_IN_VALUE_TYPES,
       ...table.registerValueType,
     }
+    // 统一小写化
+    return mapKeys(processors, (_, key) => key.toLowerCase())
   }, [table.registerValueType])
 
   const finalColumns = useMemo(() => {
