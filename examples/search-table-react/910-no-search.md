@@ -1,8 +1,8 @@
 ---
 group:
-  title: 仅开发调试
+  title: 案例集锦
+  order: 910
 toc: content
-debug: true
 ---
 
 # 隐藏搜索区域
