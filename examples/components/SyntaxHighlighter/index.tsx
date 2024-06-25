@@ -6,20 +6,20 @@ import SyntaxHighlighter from 'react-syntax-highlighter'
 import { stackoverflowLight } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 
 interface IProps {
-  value: object
+  value: object | string
   language?: string
   style?: CSSProperties
 }
 
-const ESyntaxHighlighter: React.FC<IProps> = ({ value, language, style }) => {
+const ESyntaxHighlighter: React.FC<IProps> = ({ value, language = 'json', style }) => {
   return (
     <div style={style}>
       <SyntaxHighlighter
         className="example-hl"
-        language={language ?? 'json'}
+        language={language}
         style={stackoverflowLight}
       >
-        {JSON.stringify(value, null, 2)}
+        {language === 'json' ? JSON.stringify(value, null, 2) : (value as string)}
       </SyntaxHighlighter>
     </div>
   )

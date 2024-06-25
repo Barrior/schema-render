@@ -4,7 +4,6 @@ const columns: IColumnType[] = [
   {
     title: '常规标题',
     dataIndex: 'title',
-    width: 100,
   },
   {
     title: '评级',
@@ -17,7 +16,7 @@ const columns: IColumnType[] = [
     valueType: 'code',
   },
   {
-    title: '千分位数字(金额显示)',
+    title: '千分位数字',
     dataIndex: 'comma_number',
     valueType: 'comma-number',
   },
@@ -41,15 +40,6 @@ const columns: IColumnType[] = [
     title: '图片',
     dataIndex: 'image_list',
     valueType: 'images',
-  },
-  {
-    title: '部署状态',
-    dataIndex: 'status',
-    // valueType: (item) => ({
-    //   type: 'status',
-    //   value: 1,
-    //   text: '已发布',
-    // }),
   },
 ]
 
