@@ -52,7 +52,7 @@ export type ITableProps = IAntdTableProps & {
   /**
    * 增强版列配置
    */
-  columns?: IColumnType[]
+  columns?: IColumnType<string>[]
   /**
    * 是否展示序号列（行号）
    */
