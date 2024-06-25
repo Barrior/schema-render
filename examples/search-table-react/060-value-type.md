@@ -42,6 +42,56 @@ const Demo = () => {
 export default Demo
 ```
 
+函数方式，可以用来传递参数，如下示例，彩色标签。
+
+```tsx
+import { sleep } from '@examples/utils'
+import schema from './helpers/schema'
+import createDataSource from './helpers/createDataSource-vt'
+import SearchTable from '@schema-render/search-table-react'
+import type { IColumnType } from '@schema-render/search-table-react'
+
+const columns: IColumnType[] = [
+  {
+    title: '常规标题',
+    dataIndex: 'title',
+  },
+  {
+    title: '彩色标签',
+    dataIndex: 'tags',
+    // 函数格式，接收当前行数据 record
+    valueType: (record: Record<string, any>) => {
+      return {
+        // 必须返回 type 字段，对应数据显示类型
+        type: 'tags',
+        // 其他参数，将透传给类型渲染组件，对应 options 字段
+        color: Array.isArray(record.tags) ? 'blue' : 'green',
+      }
+    },
+  },
+]
+
+const Demo = () => {
+  return (
+    <SearchTable
+      search={{ schema }}
+      table={{
+        columns,
+        sortMode: 'local-all',
+      }}
+      request={async (searchParams) => {
+        // 模拟请求接口获取表格数据
+        await sleep()
+        const data = createDataSource(searchParams.pageSize)
+        return { data, total: 100 }
+      }}
+    />
+  )
+}
+
+export default Demo
+```
+
 ## 内置数据显示类型参数详解
 
 | **参数**         | **描述**           | **数据值类型**       |
@@ -110,9 +160,13 @@ const DEPLOY_STATUS_MAP = {
 
 // 注册数据显示类型
 const registerValueType: ITableProps['registerValueType'] = {
-  // 自定义代码块显示，覆盖内置方案
+  /**
+   * 自定义代码块显示，覆盖内置方案
+   */
   code: ({ value }) => <SyntaxHighlighter value={value} language="js" />,
-  // 自定义部署状态类型
+  /**
+   * 自定义部署状态类型
+   */
   'deploy-status': ({ value }) => {
     const status = DEPLOY_STATUS_MAP[value as keyof typeof DEPLOY_STATUS_MAP]
     return (
@@ -131,7 +185,9 @@ const registerValueType: ITableProps['registerValueType'] = {
       </div>
     )
   },
-  // 自定义部署状态 Tag 方案
+  /**
+   * 自定义部署状态 Tag 方案
+   */
   'deploy-status-tag': ({ record }) => {
     // 因为数据中没有 deploy-status-tag 字段，所以从 deploy_status 字段取值。实际上最好一一对应。
     const value = record.deploy_status
