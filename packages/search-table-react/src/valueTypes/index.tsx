@@ -33,7 +33,11 @@ export const BUILT_IN_VALUE_TYPES: ITableProps['registerValueType'] = {
    */
   tags: ({ value, options }) => {
     const data = isArray(value) ? value : [value]
-    return data.map((text) => <Tag {...options}>{text}</Tag>)
+    return data.map((text, i) => (
+      <Tag {...options} key={i}>
+        {text}
+      </Tag>
+    ))
   },
   /**
    * 评分

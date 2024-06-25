@@ -1,12 +1,14 @@
 import type { IItemChangeEvent, IObjectAny } from '@schema-render/core-react'
 import { useForceUpdate, useMemoizedFn, utils } from '@schema-render/core-react'
-import type { ISearchProps } from '@schema-render/search-react'
-import type { MutableRefObject } from 'react'
+import type { ISearchProps, ISearchRef } from '@schema-render/search-react'
+import SchemaSearch from '@schema-render/search-react'
+import { type MutableRefObject, useRef } from 'react'
 
-import type { ISearchTableRef } from '../typings'
+import type { ISearchTableProps, ISearchTableRef } from '../typings'
 
 interface IUseSearchParams {
-  search: ISearchProps
+  loading: boolean
+  search: ISearchTableProps['search']
   searchValueRef: MutableRefObject<IObjectAny>
   runRequest: ISearchTableRef['refresh']
   updateScrollY: ISearchTableRef['updateScrollY']
@@ -18,18 +20,21 @@ const { hasOwnProperty } = utils
  * 搜索栏数据处理
  */
 export default function useSearch({
-  searchValueRef,
+  loading,
   search,
+  searchValueRef,
   runRequest,
   updateScrollY,
 }: IUseSearchParams) {
+  const searchProps = (search === false ? {} : search) as ISearchProps
+  const searchRef = useRef<ISearchRef>(null)
   const { forceUpdate } = useForceUpdate()
 
   // 是否受控模式，存在 value 字段即为受控模式
-  const isControlled = hasOwnProperty(search, 'value')
+  const isControlled = hasOwnProperty(searchProps, 'value')
 
   if (isControlled) {
-    searchValueRef.current = search.value ?? {}
+    searchValueRef.current = searchProps.value ?? {}
   }
 
   // 搜索数据变化事件
@@ -42,7 +47,7 @@ export default function useSearch({
       forceUpdate()
     }
 
-    search.onChange?.(value, e)
+    searchProps.onChange?.(value, e)
   })
 
   // 重置事件
@@ -50,7 +55,7 @@ export default function useSearch({
     searchValueRef.current = { ...value }
 
     // 除非外部事件
-    await search.onReset?.(value)
+    await searchProps.onReset?.(value)
 
     // 发送请求，重置时，分页重置为第一页
     await runRequest({ page: 1 })
@@ -58,21 +63,36 @@ export default function useSearch({
 
   // 提交事件
   const handleSearchSubmit = useMemoizedFn(async (value: IObjectAny) => {
-    await search.onSubmit?.(value)
+    await searchProps.onSubmit?.(value)
     await runRequest()
   })
 
   // 收起、展开事件
   const handleToggleCollapsed = useMemoizedFn((isCollapsed: boolean) => {
-    search.onToggleCollapsed?.(isCollapsed)
+    searchProps.onToggleCollapsed?.(isCollapsed)
     // 更新表格高度
     updateScrollY(0, true)
   })
 
+  const searchNodeHolder = search ? (
+    <SchemaSearch
+      {...search}
+      rootStyle={{
+        marginBottom: 16,
+        ...search.rootStyle,
+      }}
+      ref={searchRef}
+      disabled={search.disabled || loading}
+      value={searchValueRef.current}
+      onChange={handleSearchChange}
+      onReset={handleSearchReset}
+      onSubmit={handleSearchSubmit}
+      onToggleCollapsed={handleToggleCollapsed}
+    />
+  ) : null
+
   return {
-    handleSearchChange,
-    handleSearchReset,
-    handleSearchSubmit,
-    handleToggleCollapsed,
+    searchNodeHolder,
+    searchRef,
   }
 }

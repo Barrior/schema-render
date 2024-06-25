@@ -1,8 +1,5 @@
 import type { IObjectAny } from '@schema-render/core-react'
 import { useForceUpdate, useMemoizedFn, utils } from '@schema-render/core-react'
-import type { ISearchRef } from '@schema-render/search-react'
-import type { ISearchProps } from '@schema-render/search-react'
-import SchemaSearch from '@schema-render/search-react'
 import { Table } from 'antd'
 import type { Ref } from 'react'
 import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react'
@@ -35,10 +32,10 @@ const SearchTable = (
   }: ISearchTableProps,
   ref: Ref<ISearchTableRef>
 ) => {
-  const searchProps = (search === false ? {} : search) as ISearchProps
   const rootElemRef = useRef<HTMLDivElement>(null)
-  const searchRef = useRef<ISearchRef>(null)
-  const searchValueRef = useRef<IObjectAny>(searchProps.defaultValue ?? {})
+  const searchValueRef = useRef<IObjectAny>(
+    search === false ? {} : search.defaultValue || {}
+  )
   const { forceUpdate } = useForceUpdate()
 
   // 表格列配置数据处理
@@ -71,14 +68,10 @@ const SearchTable = (
   const { finalSummary } = useSummary({ table, finalColumns, summaryData })
 
   // 搜索栏
-  const {
-    handleSearchChange,
-    handleSearchReset,
-    handleSearchSubmit,
-    handleToggleCollapsed,
-  } = useSearch({
+  const { searchNodeHolder, searchRef } = useSearch({
+    loading,
+    search,
     searchValueRef,
-    search: searchProps,
     runRequest,
     updateScrollY,
   })
@@ -141,22 +134,7 @@ const SearchTable = (
     <div ref={rootElemRef} className={className} style={style}>
       {header?.(comRenderParams)}
 
-      {search && (
-        <SchemaSearch
-          {...searchProps}
-          rootStyle={{
-            marginBottom: 16,
-            ...searchProps.rootStyle,
-          }}
-          ref={searchRef}
-          disabled={searchProps?.disabled || loading}
-          value={searchValueRef.current}
-          onChange={handleSearchChange}
-          onReset={handleSearchReset}
-          onSubmit={handleSearchSubmit}
-          onToggleCollapsed={handleToggleCollapsed}
-        />
-      )}
+      {searchNodeHolder}
 
       {titleTop?.(comRenderParams)}
 
