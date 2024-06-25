@@ -56,7 +56,7 @@ const SearchTable = (
     setDataSource,
     summaryData,
     setSummaryData,
-    innerPagination,
+    finalPagination,
     runRequest,
     requestParamsRef,
     setRequestExtraParams,
@@ -181,7 +181,7 @@ const SearchTable = (
           ...table?.scroll,
         }}
         summary={finalSummary}
-        pagination={innerPagination}
+        pagination={finalPagination}
         onChange={handleTableChange}
       />
 

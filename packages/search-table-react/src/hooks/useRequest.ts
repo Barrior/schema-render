@@ -130,10 +130,10 @@ export default function useRequest({
     }
   )
 
-  let innerPagination: ISearchTableProps['table']['pagination'] = false as const
+  let finalPagination: ISearchTableProps['table']['pagination'] = false as const
 
   if (table.pagination !== false) {
-    innerPagination = {
+    finalPagination = {
       style: { marginBottom: 0 },
       showQuickJumper: true,
       showSizeChanger: true,
@@ -172,7 +172,7 @@ export default function useRequest({
     summaryData: summaryDataRef.current,
     setSummaryData,
     setRequestExtraParams,
-    innerPagination,
+    finalPagination,
     requestParamsRef,
     runRequest,
   }
