@@ -22,8 +22,8 @@ const dropdownCls = cij`
   > * {
     display: block;
     width: 100%;
-    height: auto;
-    padding: 3px 6px;
+    height: auto !important;
+    padding: 3px 6px !important;
 
     &:hover {
       background: #f6f6f6 !important;
@@ -126,8 +126,12 @@ export function createActions({
             </div>
           )}
         >
-          <Button type="link" size="small" style={{ gap: 2 }}>
-            更多 <DownOutlined />
+          <Button
+            type="link"
+            size="small"
+            style={{ gap: 2, display: 'inline-flex', alignItems: 'center' }}
+          >
+            更多 <DownOutlined style={{ margin: 0 }} />
           </Button>
         </Dropdown>
       </>
