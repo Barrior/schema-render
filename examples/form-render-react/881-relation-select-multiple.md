@@ -18,31 +18,37 @@ import { useState } from 'react'
 import SyntaxHighlighter from '@examples/components/SyntaxHighlighter'
 import FormRender from '@schema-render/form-render-react'
 
-const schema = {
-  renderType: 'Root',
-  properties: {
-    cities: {
-      title: '设置可选城市范围',
-      renderType: 'SelectMultiple',
-      renderOptions: {
-        options: [
-          { label: '成都', value: 'chengdu' },
-          { label: '杭州', value: 'hangzhou' },
-          { label: '深圳', value: 'shenzhen' },
-          { label: '北京', value: 'beijing' },
-        ],
+function createSchema(available_cities_options = []) {
+  const schema = {
+    renderType: 'Root',
+    properties: {
+      cities: {
+        title: '设置可选城市范围',
+        renderType: 'SelectMultiple',
+        renderOptions: {
+          options: [
+            { label: '成都', value: 'chengdu' },
+            { label: '杭州', value: 'hangzhou' },
+            { label: '深圳', value: 'shenzhen' },
+            { label: '北京', value: 'beijing' },
+          ],
+        },
+      },
+      available_cities: {
+        title: '设置可选城市',
+        renderType: 'Checkbox',
+        renderOptions: {
+          options: available_cities_options,
+        },
       },
     },
-    available_cities: {
-      title: '设置可选城市',
-      renderType: 'Checkbox',
-      renderOptions: {},
-    },
-  },
+  }
+  return schema
 }
 
 const Demo = () => {
   const [value, setValue] = useState({})
+  const [schema, setSchema] = useState(() => createSchema())
 
   return (
     <div className="example-layout-cols-2">
@@ -54,12 +60,10 @@ const Demo = () => {
         onChange={setValue}
         watch={{
           cities: (formData, event) => {
-            console.log(event)
-            // 修改 schema 参数，重新渲染的时候会被应用
-            schema.properties.available_cities.renderOptions.options =
-              event.extra.selectedOptions
+            // 基于下拉选中项，重新创建 schema 渲染
+            setSchema(createSchema(event.extra.selectedOptions))
 
-            // 已选中的值不在范围内，则清楚
+            // 已选中的值不在范围内，则清除
             if (!event.value.includes(formData.available_cities)) {
               formData.available_cities = undefined
             }

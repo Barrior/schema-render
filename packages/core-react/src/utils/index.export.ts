@@ -1,4 +1,4 @@
-export { classNamesWithPrefix, templateCompiled } from './base'
+export { classNamesWithPrefix, hasOwnProperty, templateCompiled } from './base'
 export * from './checking'
 export { default as classNames } from './classnames'
 export { positionedOffset } from './dom'

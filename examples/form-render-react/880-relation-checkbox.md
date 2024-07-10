@@ -88,7 +88,7 @@ const Demo = () => {
             // 将可选城市范围数据赋值给 userCtx
             userCtx.current.cityList = event.extra.checkedOptions
 
-            // 已选中的值不在范围内，则清楚
+            // 已选中的值不在范围内，则清除
             if (!event.value.includes(formData.available_cities)) {
               formData.available_cities = undefined
             }
@@ -154,7 +154,7 @@ const Demo = () => {
             schema.properties.available_cities.renderOptions.options =
               event.extra.checkedOptions
 
-            // 已选中的值不在范围内，则清楚
+            // 已选中的值不在范围内，则清除
             if (!event.value.includes(formData.available_cities)) {
               formData.available_cities = undefined
             }

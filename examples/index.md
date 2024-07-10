@@ -17,7 +17,7 @@ features:
     link: /core-react/001-intro
   - title: FormRender
     emoji: 🚀
-    description: 基于 Core + Antd 封装的<b>开箱即用</b>的表单渲染库
+    description: 基于 Core + Antd 封装的开箱即用的表单渲染库
     link: /form-render-react/001-intro
   - title: Search
     emoji: ⛵️
@@ -25,8 +25,8 @@ features:
     link: /search-react/001-intro
   - title: SearchTable
     emoji: 🛳
-    description: 基于 Search + Antd Table 封装的条件搜素表格组件（后台系统常用，建设中）
-    # link: /search-table-react/001-intro
+    description: 基于 Search + Antd Table 封装的条件搜素表格组件
+    link: /search-table-react/001-intro
 ---
 
 ### Core 样例
@@ -272,6 +272,51 @@ const Demo = () => {
   }
 
   return <Search schema={schema} onSubmit={handleSearch} onReset={handleSearch} />
+}
+
+export default Demo
+```
+
+### SearchTable 样例
+
+```tsx
+/**
+ * background: '#fff'
+ */
+import { sleep } from '@examples/utils'
+import schema from './search-table-react/helpers/schema'
+import columns from './search-table-react/helpers/columns'
+import createDataSource from './search-table-react/helpers/createDataSource'
+
+// 引入 Search
+import SearchTable from '@schema-render/search-table-react'
+
+const Demo = () => {
+  return (
+    <SearchTable
+      search={{ schema }}
+      table={{
+        columns,
+        showRowNumber: true,
+      }}
+      request={async (searchParams) => {
+        // 打印搜索条件
+        console.log('searchParams:', searchParams)
+
+        // 模拟请求接口获取表格数据
+        await sleep()
+        const data = createDataSource()
+
+        // 返回表格数据渲染
+        return {
+          // 表格数据
+          data,
+          // 数据总数，用于分页
+          total: 100,
+        }
+      }}
+    />
+  )
 }
 
 export default Demo

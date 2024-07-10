@@ -48,7 +48,11 @@
       "@schema-render/form-render-react": ["packages/form-render-react/src/index"],
       "@schema-render/form-render-react/dist/esm/*": ["packages/form-render-react/src/*"],
       "@schema-render/search-react": ["packages/search-react/src/index"],
-      "@schema-render/search-react/dist/esm/*": ["packages/search-react/src/*"]
+      "@schema-render/search-react/dist/esm/*": ["packages/search-react/src/*"],
+      "@schema-render/search-table-react": ["packages/search-table-react/src/index"],
+      "@schema-render/search-table-react/dist/esm/*": [
+        "packages/search-table-react/src/*"
+      ]
     }
   },
   "compileOnSave": true
