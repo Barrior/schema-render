@@ -14,7 +14,7 @@
   - 特点：协议驱动、简洁易用、高可定制、轻量级。
 - `FormRender`: 基于 Core + [Antd](https://ant.design) 封装的开箱即用的表单渲染库。
 - `Search`：基于 FormRender 封装的开箱即用的条件搜索组件。
-- `SearchTable`：基于 Search + Antd Table 封装的条件搜索表格（建设中）。
+- `SearchTable`：基于 Search + Antd Table 封装的条件搜索表格组件。
 
 更多详情请移步至官网：[schema-render.js.org](https://schema-render.js.org)
 
@@ -30,6 +30,6 @@ Table of Contents:
   - Features: Protocol driven, easy to use, highly customizable, lightweight.
 - `FormRender`: An out-of-the-box form rendering library based on Core + [Antd](https://ant.design).
 - `Search`: out-of-the-box conditional search component based on FormRender.
-- `SearchTable`: A conditional search table based on Search + Antd Table (under construction).
+- `SearchTable`: A conditional search table component based on Search + Antd Table.
 
 For more details, please go to the official website: [schema-render.js.org](https://schema-render.js.org)
