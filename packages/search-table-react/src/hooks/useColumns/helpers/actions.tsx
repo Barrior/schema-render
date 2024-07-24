@@ -10,7 +10,7 @@ import ButtonLoading from '../../../components/ButtonLoading'
 import type { ISearchTableProps } from '../../../typings'
 import type { IActionItem } from '../../../typings/table.d'
 
-const { isArray } = utils
+const { isArray, isString } = utils
 
 const dropdownCls = cij`
   background-color: #fff;
@@ -37,7 +37,7 @@ const dropdownCls = cij`
 export function createActionItem(item: IActionItem, index: number) {
   const { text, confirmAgain, confirmProps, onClick, ...restItem } = item
 
-  const content = (
+  const content = isString(text) ? (
     <ButtonLoading
       key={index}
       type="link"
@@ -47,6 +47,8 @@ export function createActionItem(item: IActionItem, index: number) {
     >
       {text}
     </ButtonLoading>
+  ) : (
+    text
   )
 
   // 增加二次确认
