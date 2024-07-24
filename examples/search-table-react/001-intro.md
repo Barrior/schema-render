@@ -122,6 +122,15 @@ const fixedColumns = columns.map((col, index) => {
   return newCol
 })
 
+const titleSectionStyle = {
+  height: 50,
+  lineHeight: '50px',
+  marginBottom: 16,
+  borderRadius: 10,
+  textAlign: 'center',
+  background: '#b6e0fa',
+}
+
 // 模拟删除接口
 const postDeleteBill = (_id: string) => sleep()
 
@@ -179,6 +188,8 @@ const Demo = () => {
             tabBarExtraContent,
           },
         }}
+        titleTop={() => <div style={titleSectionStyle}>Title Top 内容自定义</div>}
+        titleBottom={() => <div style={titleSectionStyle}>Title Bottom 内容自定义</div>}
         table={{
           columns: fixedColumns,
           // 显示序号栏

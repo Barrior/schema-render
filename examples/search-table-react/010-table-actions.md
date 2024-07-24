@@ -259,11 +259,17 @@ const postDeleteBill = (_id: string) => sleep()
 const Demo = () => {
   const STableRef = useRef<ISearchTableRef>(null)
 
-  const actionItems = (record: Record<string, any>, index: number) => {
+  const actionItems = (record: Record<string, any>) => {
     return [
       {
-        text: '编辑',
-        onClick: () => message.success(`点击第 ${index} 编辑了`),
+        text: (
+          <a
+            href="https://schema-render.js.org/"
+            style={{ color: 'green', padding: '0 7px' }}
+          >
+            编辑
+          </a>
+        ),
       },
       {
         text: '详情',
