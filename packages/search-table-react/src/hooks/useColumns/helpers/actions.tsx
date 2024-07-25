@@ -10,7 +10,7 @@ import ButtonLoading from '../../../components/ButtonLoading'
 import type { ISearchTableProps } from '../../../typings'
 import type { IActionItem } from '../../../typings/table.d'
 
-const { isArray, isString } = utils
+const { isArray, isString, omit } = utils
 
 const dropdownCls = cij`
   background-color: #fff;
@@ -42,7 +42,7 @@ export function createActionItem(item: IActionItem, index: number) {
       key={index}
       type="link"
       size="small"
-      {...restItem}
+      {...omit(restItem, 'isShow')}
       onClick={(e) => !confirmAgain && onClick?.(e)}
     >
       {text}
