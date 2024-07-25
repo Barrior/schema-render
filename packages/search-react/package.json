@@ -6,7 +6,7 @@
     "FormRender",
     "Search"
   ],
-  "version": "1.5.2",
+  "version": "1.5.3",
   "license": "MIT",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -33,6 +33,6 @@
     "@ant-design/icons": "^5.0.0"
   },
   "dependencies": {
-    "@schema-render/form-render-react": "^1.5.2"
+    "@schema-render/form-render-react": "^1.5.3"
   }
 }

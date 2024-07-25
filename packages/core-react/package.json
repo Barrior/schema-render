@@ -1,6 +1,6 @@
 {
   "name": "@schema-render/core-react",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "description": "Through a set of simple JSON Schema, efficiently build a set of forms.",
   "keywords": [
     "SchemaRender",
