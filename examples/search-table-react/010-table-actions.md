@@ -259,13 +259,14 @@ const postDeleteBill = (_id: string) => sleep()
 const Demo = () => {
   const STableRef = useRef<ISearchTableRef>(null)
 
-  const actionItems = (record: Record<string, any>) => {
+  const actionItems = (record: Record<string, any>, index: number) => {
     return [
       {
         text: (
           <a
             href="https://schema-render.js.org/"
             style={{ color: 'green', padding: '0 7px' }}
+            key={`link-${index}`}
           >
             编辑
           </a>
