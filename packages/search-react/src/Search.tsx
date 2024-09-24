@@ -1,5 +1,7 @@
-import type { IFormRenderRef } from '@schema-render/form-render-react'
+import { DeleteOutlined, SearchOutlined } from '@ant-design/icons'
+import type { IFormRenderRef, IRegisterActions } from '@schema-render/form-render-react'
 import FormRender from '@schema-render/form-render-react'
+import { Button } from 'antd'
 import type { Ref } from 'react'
 import { forwardRef, useImperativeHandle, useMemo, useRef } from 'react'
 
@@ -8,6 +10,31 @@ import useCollapse from './hooks/useCollapse'
 import zh_CN from './locale/zh_CN'
 import type { ISearchProps, ISearchRef } from './typings'
 import { createActionsResetSchema } from './utils/actions'
+
+/**
+ * 覆盖 submit、reset 操作，添加图标样式
+ */
+const overrideDefaultActions: IRegisterActions = {
+  submit: ({ loading }) => {
+    return (
+      <Button
+        loading={loading.submit}
+        htmlType="submit"
+        type="primary"
+        icon={<SearchOutlined />}
+      >
+        搜索
+      </Button>
+    )
+  },
+  reset: ({ loading, handleReset }) => {
+    return (
+      <Button loading={loading.reset} onClick={handleReset} icon={<DeleteOutlined />}>
+        重置
+      </Button>
+    )
+  },
+}
 
 const Search = (searchProps: ISearchProps, ref?: Ref<ISearchRef>) => {
   const props = {
@@ -39,7 +66,10 @@ const Search = (searchProps: ISearchProps, ref?: Ref<ISearchRef>) => {
       ref={formRenderRef}
       locale={locale}
       schema={schema}
-      registerActions={registerActions as never}
+      registerActions={{
+        ...overrideDefaultActions,
+        ...(registerActions as IRegisterActions),
+      }}
       actionsRestSchema={actionsRestSchema}
       actionsRenderMode="formItem"
     />
