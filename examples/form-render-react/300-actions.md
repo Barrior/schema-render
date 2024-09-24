@@ -361,11 +361,12 @@ export default Demo
 
 ### 覆盖默认操作
 
-如果操作名称是 `submit`、`reset`，将覆盖原有行为，如覆盖提交按钮，增加【二次确认】的操作。
+操作名称是 `submit`、`reset`，将覆盖原有行为，如覆盖提交按钮，增加【二次确认】的操作，以及添加图标。
 
 ```tsx
 import { useState, useRef } from 'react'
 import { message, Button, Popconfirm } from 'antd'
+import { DeleteOutlined, UploadOutlined } from '@ant-design/icons'
 import { sleep } from '@examples/utils'
 import SyntaxHighlighter from '@examples/components/SyntaxHighlighter'
 import FormRender from '@schema-render/form-render-react'
@@ -394,10 +395,17 @@ const registerActions: IRegisterActions = {
   submit: ({ handleSubmit, loading }) => {
     return (
       <Popconfirm title="温馨提示" description="确定要提交吗？" onConfirm={handleSubmit}>
-        <Button loading={loading.submit} htmlType="submit" type="primary">
+        <Button loading={loading.submit} type="primary" icon={<UploadOutlined />}>
           提交
         </Button>
       </Popconfirm>
+    )
+  },
+  reset: ({ handleReset, loading }) => {
+    return (
+      <Button loading={loading.reset} onClick={handleReset} icon={<DeleteOutlined />}>
+        重置
+      </Button>
     )
   },
 }
