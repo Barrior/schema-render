@@ -5,10 +5,11 @@ import { useState } from 'react'
 
 interface IProps {
   imgList: string[]
-  options: IObjectAny
+  imgProps?: IObjectAny
+  groupProps?: IObjectAny
 }
 
-const ImagesPreview: FC<IProps> = ({ imgList, options }) => {
+const ImagesPreview: FC<IProps> = ({ imgList, imgProps, groupProps }) => {
   const [visible, setVisible] = useState(false)
   const [current, setCurrent] = useState(0)
 
@@ -19,6 +20,7 @@ const ImagesPreview: FC<IProps> = ({ imgList, options }) => {
 
   return (
     <Image.PreviewGroup
+      {...groupProps}
       items={imgList}
       preview={{
         visible,
@@ -31,7 +33,7 @@ const ImagesPreview: FC<IProps> = ({ imgList, options }) => {
         {imgList.map((imgUrl, i) => (
           <Image
             width={60}
-            {...options}
+            {...imgProps}
             src={imgUrl}
             key={i}
             onClick={() => openPreview(i)}

@@ -64,7 +64,7 @@ const columns: IColumnType[] = [
       return {
         // 必须返回 type 字段，对应数据显示类型
         type: 'tags',
-        // 其他参数，将透传给类型渲染组件，对应 options 字段
+        // 其他参数，将透传给类型渲染组件，对应组件接收的 options 字段
         color: Array.isArray(record.tags) ? 'blue' : 'green',
       }
     },
@@ -94,15 +94,17 @@ export default Demo
 
 ## 内置数据显示类型参数详解
 
-| **参数**         | **描述**           | **数据值类型**       |
-| ---------------- | ------------------ | -------------------- |
-| **code**         | 代码块形式显示     | `string`             |
-| **rate**         | 评分形式显示       | `number`             |
-| **switch**       | 开关形式显示       | `boolean \| 1 \| 0`  |
-| **images**       | 图片预览形式显示   | `string \| string[]` |
-| **tags**         | 标签形式           | `string \| string[]` |
-| **comma-number** | 数字千分位处理显示 | `number \| string`   |
-| **percent**      | 数字加百分号显示   | `number \| string`   |
+| **参数**            | **描述**            | **数据值类型**       | **传参说明**                                                       |
+| ------------------- | ------------------- | -------------------- | ------------------------------------------------------------------ |
+| **code**            | 代码块形式显示      | `string`             | -                                                                  |
+| **rate**            | 评分形式显示        | `number`             | Antd Rate 组件参数                                                 |
+| **switch**          | 开关形式显示        | `boolean \| 1 \| 0`  | Antd Switch 组件参数                                               |
+| **images**          | 图片预览形式显示    | `string \| string[]` | Antd Image 组件参数                                                |
+| **tags**            | 标签形式            | `string \| string[]` | Antd Tag 组件参数                                                  |
+| **comma-number**    | 数字千分位处理显示  | `number \| string`   | -                                                                  |
+| **percent**         | 数字加百分号显示    | `number \| string`   | -                                                                  |
+| **long-text**       | 长文案 tooltip 显示 | `number \| string`   | `maxLength:` 溢出省略长度，默认为 10，其他为 Antd Tooltip 组件参数 |
+| **long-text-modal** | 长文案点击弹窗显示  | `number \| string`   | `maxLength:` 溢出省略长度，默认为 10，其他为 Antd Modal 组件参数   |
 
 ## 注册数据显示类型
 

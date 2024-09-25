@@ -2,10 +2,12 @@ import { utils } from '@schema-render/core-react'
 import { Rate, Switch, Tag } from 'antd'
 
 import ImagesPreview from '../components/ImagesPreview'
-import { REG_COMMA_NUMBER } from '../constants/regexp'
 import { STYLE_CODE } from '../constants/style'
 import type { ITableProps } from '../typings/table'
 import { isEmpty } from '../utils/common'
+import CommaNumber from './CommaNumber'
+import LongText from './LongText'
+import LongTextModal from './LongTextModal'
 
 const { isArray } = utils
 
@@ -48,22 +50,7 @@ export const BUILT_IN_VALUE_TYPES: ITableProps['registerValueType'] = {
   /**
    * 数字千分位
    */
-  'comma-number': ({ value }) => {
-    // 排除空数据
-    if (isEmpty(value)) {
-      return '-'
-    }
-
-    const numValue = Number(value)
-
-    // 排除 NaN
-    if (isNaN(numValue)) {
-      return value
-    }
-
-    // 千分位处理
-    return String(value).replace(REG_COMMA_NUMBER, ',')
-  },
+  'comma-number': (props) => <CommaNumber {...props} />,
   /**
    * 图片显示
    */
@@ -73,6 +60,15 @@ export const BUILT_IN_VALUE_TYPES: ITableProps['registerValueType'] = {
       return '-'
     }
     const imgList = isArray(value) ? value : [value]
-    return <ImagesPreview imgList={imgList} options={options} />
+    const { groupProps, ...imgProps } = options
+    return <ImagesPreview imgList={imgList} imgProps={imgProps} groupProps={groupProps} />
   },
+  /**
+   * 长文案 Tooltips 方式显示
+   */
+  'long-text': (props) => <LongText {...props} />,
+  /**
+   * 长文案点击弹窗方式显示
+   */
+  'long-text-modal': (props) => <LongTextModal {...props} />,
 }

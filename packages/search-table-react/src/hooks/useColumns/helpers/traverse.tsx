@@ -70,7 +70,7 @@ export function processRawColumns(
 
       if (valueType) {
         if (isFunction(valueType)) {
-          const { type, ...options } = valueType(record)
+          const { type, ...options } = valueType(record, index)
           innerValueType = type
           innerValueTypeOptions = options
         } else {

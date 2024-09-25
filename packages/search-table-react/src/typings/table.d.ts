@@ -11,6 +11,8 @@ type IValueType<T extends string = ''> =
   | 'percent'
   | 'images'
   | 'tags'
+  | 'long-text'
+  | 'long-text-modal'
   | T
 
 /**
@@ -40,7 +42,10 @@ export type IColumnType<VT extends string = ''> = ColumnType<IObjectAny> & {
    */
   valueType?:
     | IValueType<VT>
-    | ((record: IObjectAny) => {
+    | ((
+        record: IObjectAny,
+        index: number
+      ) => {
         type: IValueType<VT>
         [attr: string]: any
       })

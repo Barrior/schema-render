@@ -31,6 +31,10 @@ function rangeNumber(min, max) {
               'https://raw.githubusercontent.com/Barrior/assets/main/gift.png',
             ],
       deploy_status: rangeNumber(0, 3),
+      long_text:
+        'SearchTable 是基于 Search + Antd Table 封装的条件搜索表格组件；常用于后台管理系统数据检索、显示与操作。',
+      long_text_modal:
+        'SearchTable 是基于 Search + Antd Table 封装的条件搜索表格组件；常用于后台管理系统数据检索、显示与操作。',
     })
   }
 
