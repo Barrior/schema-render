@@ -137,6 +137,7 @@ export default function useRequest({
       style: { marginBottom: 0 },
       showQuickJumper: true,
       showSizeChanger: true,
+      showTotal: (total: number) => `共 ${total} 条数据`,
       ...table.pagination,
       ...paginationRef.current,
       onChange: (current: number, pageSize: number) => {
