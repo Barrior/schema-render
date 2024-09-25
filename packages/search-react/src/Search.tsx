@@ -15,7 +15,7 @@ import { createActionsResetSchema } from './utils/actions'
  * 覆盖 submit、reset 操作，添加图标样式
  */
 const overrideDefaultActions: IRegisterActions = {
-  submit: ({ loading }) => {
+  submit: ({ loading, locale }) => {
     return (
       <Button
         loading={loading.submit}
@@ -23,14 +23,14 @@ const overrideDefaultActions: IRegisterActions = {
         type="primary"
         icon={<SearchOutlined />}
       >
-        搜索
+        {locale.FormRender.submit}
       </Button>
     )
   },
-  reset: ({ loading, handleReset }) => {
+  reset: ({ loading, locale, handleReset }) => {
     return (
       <Button loading={loading.reset} onClick={handleReset} icon={<DeleteOutlined />}>
-        重置
+        {locale.FormRender.reset}
       </Button>
     )
   },
