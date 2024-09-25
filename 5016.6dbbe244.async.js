@@ -1,5 +1,0 @@
-"use strict";(self.webpackChunkroot=self.webpackChunkroot||[]).push([[5016],{35016:function(m,u,o){o.r(u),o.d(u,{default:function(){return s}});function t(r,e){var n=arguments.length>2&&arguments[2]!==void 0?arguments[2]:!0,a=Math.random()*(e-r)+r;return n?Math.floor(a):a}function s(){for(var r=arguments.length>0&&arguments[0]!==void 0?arguments[0]:10,e=[],n=0;n<r;n++){var a="id_".concat(n);e.push({key:a,id:a,title:"".concat(String(Math.random()).slice(2,6),"\u6807\u9898"),rate:t(0,5),code:`
-function rangeNumber(min, max) {
-  return Math.random() * (max - min) + min
-}
-      `.trim(),comma_number:Math.random()>.4?t(1e3,1e5):t(0,1e3),percent:t(0,100).toFixed(2),switch_status:Math.random()>.5,tags:Math.random()>.5?"\u5F20\u4E09":["\u674E\u56DB","\u738B\u4E94"],image_list:Math.random()>.5?"https://raw.githubusercontent.com/Barrior/assets/main/chrome-logo.svg":["https://raw.githubusercontent.com/Barrior/assets/main/smiling-face.gif","https://raw.githubusercontent.com/Barrior/assets/main/gift.png"],deploy_status:t(0,3)})}return e}}}]);
