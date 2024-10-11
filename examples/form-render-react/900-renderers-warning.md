@@ -6,7 +6,11 @@ toc: content
 debug: true
 ---
 
-# 渲染器校验状态样式
+# 渲染器校验
+
+## 校验状态样式
+
+支持 `warning`、`error` 样式
 
 ```tsx
 import { useState } from 'react'
