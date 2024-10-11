@@ -74,6 +74,11 @@ const RendererExecutor: FC<IProps> = ({ schema, path, renderer, gridColumn }) =>
       // 校验
       if (options.triggerValidator !== false) {
         runValidation(value)
+      } else {
+        // 重置校验状态
+        setValidatorState({
+          status: EValidationStatus.success,
+        })
       }
     }
   )
