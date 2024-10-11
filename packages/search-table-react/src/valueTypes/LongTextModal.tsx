@@ -3,13 +3,15 @@ import { Button, Modal } from 'antd'
 import type { FC } from 'react'
 import { useState } from 'react'
 
+import { isEmpty } from '../utils/common'
+
 interface ILongTextModalProps {
   value?: string
   options?: IObjectAny
 }
 
 const LongTextModal: FC<ILongTextModalProps> = ({ value, options = {} }) => {
-  const text = value ? String(value) : '-'
+  const text = isEmpty(value) ? '-' : String(value)
   const { maxLength = 10, ...modalProps } = options
   const [isOpen, setIsOpen] = useState(false)
 

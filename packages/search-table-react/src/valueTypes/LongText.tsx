@@ -2,13 +2,15 @@ import type { IObjectAny } from '@schema-render/core-react'
 import { Tooltip } from 'antd'
 import type { FC } from 'react'
 
+import { isEmpty } from '../utils/common'
+
 interface ILongTextProps {
   value?: string
   options?: IObjectAny
 }
 
 const LongText: FC<ILongTextProps> = ({ value, options = {} }) => {
-  const text = value ? String(value) : '-'
+  const text = isEmpty(value) ? '-' : String(value)
   const { maxLength = 10, ...tooltipProps } = options
 
   return text.length > maxLength ? (
