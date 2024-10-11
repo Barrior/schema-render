@@ -42,8 +42,8 @@ class Release {
     await this.askReleaseVersion()
     this.bumpVersion()
     await this.buildProduct()
-    await this.publishToNpm()
     this.commit()
+    await this.publishToNpm()
     logger.log('🌟 命令执行完毕 🎉')
   }
 
