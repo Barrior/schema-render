@@ -89,7 +89,7 @@ function createTableSummaryItems({
 
   forEach(flattenedColumns, ({ key, dataIndex }) => {
     const strDataIndex = (isArray(dataIndex) ? dataIndex.join('.') : dataIndex) as string
-    const dataKey = key || strDataIndex
+    const dataKey = String(key || strDataIndex)
     const content = summaryData[dataKey]
 
     index++

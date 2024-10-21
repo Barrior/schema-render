@@ -1,4 +1,4 @@
-import type { IRootSchema } from '@schema-render/core-react'
+import type { IFormRenderRootSchema } from '@schema-render/form-render-react'
 
 /**
  * 创建折叠的 Schema
@@ -7,10 +7,10 @@ import type { IRootSchema } from '@schema-render/core-react'
  * @returns 折叠的 Schema
  */
 function createCollapsedSchema(
-  rawSchema: IRootSchema,
+  rawSchema: IFormRenderRootSchema,
   collapsedNumber: number
-): IRootSchema {
-  const collapsedProps: IRootSchema['properties'] = {}
+): IFormRenderRootSchema {
+  const collapsedProps: IFormRenderRootSchema['properties'] = {}
 
   const displayedKeys = Object.keys(rawSchema.properties).slice(0, collapsedNumber)
   for (const key of displayedKeys) {
@@ -31,7 +31,7 @@ interface ICreateSearchSchema {
   /**
    * 原始 Schema
    */
-  rawSchema: IRootSchema
+  rawSchema: IFormRenderRootSchema
   /**
    * 折叠的个数
    */
@@ -45,6 +45,6 @@ export default function createDisplayedSchema({
   isCollapsed,
   rawSchema,
   collapsedNumber,
-}: ICreateSearchSchema): IRootSchema {
+}: ICreateSearchSchema) {
   return isCollapsed ? createCollapsedSchema(rawSchema, collapsedNumber) : rawSchema
 }

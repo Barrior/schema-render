@@ -160,7 +160,7 @@ const SearchTable = (
         tableLayout="fixed"
         {...table}
         className={classNames(table.className, EClassNames.table)}
-        columns={finalColumns}
+        columns={finalColumns as never}
         dataSource={dataSource}
         loading={{
           spinning: loading,

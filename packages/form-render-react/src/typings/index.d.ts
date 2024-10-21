@@ -78,7 +78,7 @@ export type IFormRenderProps = IPartPartial<
   /**
    * 表单描述协议，带内置渲染器类型提示
    */
-  schema?: IFormRenderRootSchema
+  schema: IFormRenderRootSchema
 
   /**
    * FormRender 根节点样式名
