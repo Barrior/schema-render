@@ -72,9 +72,14 @@ export type ILabelRender = (
  * FormRender 参数配置
  */
 export type IFormRenderProps = IPartPartial<
-  Omit<ICore, 'itemLayout' | 'locale'>,
+  Omit<ICore, 'itemLayout' | 'locale' | 'schema'>,
   'renderers'
 > & {
+  /**
+   * 表单描述协议，带内置渲染器类型提示
+   */
+  schema?: IFormRenderRootSchema
+
   /**
    * FormRender 根节点样式名
    */
