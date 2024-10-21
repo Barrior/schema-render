@@ -91,7 +91,7 @@ const renderers: IRenderers = {
       if (value?.type === 2 && !value.failReason) {
         return {
           status: 'error',
-          message: '请输出失败原因',
+          message: '请输入失败原因',
         }
       }
     },
