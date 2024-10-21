@@ -11,6 +11,8 @@ type IProps = React.FC<IOpenComponentParams<string>>
  * 编辑与禁用态组件
  */
 const TextArea: IProps = ({ schema, disabled, value, onChange, validator, locale }) => {
+  const { validateOnBlur, ...restProps } = schema.renderOptions || {}
+
   const placeholder = useMemo(
     () =>
       utils.templateCompiled(locale.FormRender.placeholderInput, {
@@ -19,23 +21,28 @@ const TextArea: IProps = ({ schema, disabled, value, onChange, validator, locale
     [schema.title, locale.FormRender.placeholderInput]
   )
 
-  const onInputChange = useMemoizedFn((e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleChange = useMemoizedFn((e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const val = e.target.value
 
     /* istanbul ignore else */
     if (val !== value) {
-      onChange(val)
+      onChange(val, { triggerValidator: !validateOnBlur })
     }
+  })
+
+  const handleBlur = useMemoizedFn(() => {
+    onChange(value, { triggerValidator: true })
   })
 
   return (
     <Input.TextArea
       rows={3}
       placeholder={placeholder}
-      {...schema.renderOptions}
+      {...restProps}
       status={validator.status as never}
       value={value ?? ''}
-      onChange={onInputChange}
+      onChange={handleChange}
+      onBlur={validateOnBlur ? handleBlur : undefined}
       disabled={disabled}
     />
   )

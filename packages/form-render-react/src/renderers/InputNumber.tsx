@@ -18,6 +18,8 @@ const InputNumber: IProps = ({
   validator,
   locale,
 }) => {
+  const { validateOnBlur, ...restProps } = schema.renderOptions || {}
+
   const placeholder = useMemo(
     () =>
       utils.templateCompiled(locale.FormRender.placeholderInput, {
@@ -26,16 +28,23 @@ const InputNumber: IProps = ({
     [schema.title, locale.FormRender.placeholderInput]
   )
 
-  const handleChange = useMemoizedFn((val: number | null) => onChange(val ?? undefined))
+  const handleChange = useMemoizedFn((val: number | null) => {
+    onChange(val ?? undefined, { triggerValidator: !validateOnBlur })
+  })
+
+  const handleBlur = useMemoizedFn(() => {
+    onChange(value, { triggerValidator: true })
+  })
 
   return (
     <AntInputNumber
       style={{ width: '100%' }}
       placeholder={placeholder}
-      {...schema.renderOptions}
+      {...restProps}
       status={validator.status as never}
       value={value}
       onChange={handleChange}
+      onBlur={validateOnBlur ? handleBlur : undefined}
       disabled={disabled}
     />
   )
