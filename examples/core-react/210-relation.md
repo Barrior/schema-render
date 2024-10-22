@@ -176,7 +176,7 @@ const renderers = {
         padding: '4px 10px',
         marginRight: 10,
         border: '1px solid #ececec',
-        borderRadius: 6
+        borderRadius: 6,
       }
 
       return (
@@ -206,7 +206,7 @@ const schema = {
       renderType: 'BankSelect',
     },
   },
-} as const
+}
 
 // 联动逻辑处理
 const bankRelation = (formData, event) => {
@@ -229,7 +229,7 @@ const Demo = () => {
         watch={{
           bank_account: bankRelation,
           bank_name: bankRelation,
-          bank_branch_name: bankRelation
+          bank_branch_name: bankRelation,
         }}
         value={value}
         onChange={setValue}
