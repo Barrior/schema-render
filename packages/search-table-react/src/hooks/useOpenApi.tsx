@@ -17,7 +17,7 @@ interface IParams {
   updateDataSource: (data: IObjectAny[]) => void
   updateSummaryData: (data: IObjectAny) => void
   updateScrollY: ISearchTableRef['updateScrollY']
-  openSortModal: ISearchTableRef['openSortModal']
+  openSettingModal: ISearchTableRef['openSettingModal']
   runRequest: ISearchTableRef['refresh']
 }
 
@@ -32,7 +32,7 @@ export default function useOpenApi({
   updateDataSource,
   updateSummaryData,
   updateScrollY,
-  openSortModal,
+  openSettingModal,
   runRequest,
 }: IParams) {
   const { forceUpdate } = useForceUpdate()
@@ -62,7 +62,7 @@ export default function useOpenApi({
       forceUpdate()
     },
     updateScrollY,
-    openSortModal,
+    openSettingModal,
     rerender: forceUpdate,
   }))
 }

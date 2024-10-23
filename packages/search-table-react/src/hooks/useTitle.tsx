@@ -11,7 +11,7 @@ interface IUseTitleParams {
   loading: boolean
   globalStateRef: IGlobalStateRef
   runRequest: ISearchTableRef['refresh']
-  openSortModal: () => void
+  openSettingModal: ISearchTableRef['openSettingModal']
 }
 
 export default function useTitle({
@@ -19,7 +19,7 @@ export default function useTitle({
   loading,
   globalStateRef,
   runRequest,
-  openSortModal,
+  openSettingModal,
 }: IUseTitleParams) {
   // Tab Change 事件处理
   const handleTabChange = useMemoizedFn((activeKey: string) => {
@@ -55,7 +55,7 @@ export default function useTitle({
         icon={<SettingOutlined />}
         disabled={loading}
         style={{ marginLeft: 10 }}
-        onClick={openSortModal}
+        onClick={openSettingModal}
       />
     </Tooltip>
   ) : null

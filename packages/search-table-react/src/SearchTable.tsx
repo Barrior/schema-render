@@ -59,7 +59,7 @@ const SearchTable = (
 
   // 表格列配置数据处理
   const { baseColumns } = useBaseColumns({ table, globalStateRef })
-  const { sortColumns, sortModalHolder, openSortModal } = useSortColumns({
+  const { sortColumns, sortModalHolder, openSettingModal } = useSortColumns({
     table,
     baseColumns,
     globalStateRef,
@@ -103,7 +103,7 @@ const SearchTable = (
     loading,
     globalStateRef,
     runRequest,
-    openSortModal,
+    openSettingModal,
   })
 
   // 总结栏处理
@@ -141,7 +141,7 @@ const SearchTable = (
     updateDataSource,
     updateSummaryData,
     updateScrollY,
-    openSortModal,
+    openSettingModal,
     runRequest,
   })
 

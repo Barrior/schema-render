@@ -202,9 +202,9 @@ export interface ISearchTableRef {
    */
   updateScrollY: (delay?: number, checkEnabled?: boolean) => void
   /**
-   * 打开列配置弹窗
+   * 打开列设置弹窗
    */
-  openSortModal: () => void
+  openSettingModal: () => void
   /**
    * 重新渲染
    */

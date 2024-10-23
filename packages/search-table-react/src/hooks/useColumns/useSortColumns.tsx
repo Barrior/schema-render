@@ -38,19 +38,19 @@ export default function useSortColumns({ baseColumns, table, globalStateRef }: I
   }, [baseColumns, settingColumns])
 
   // 打开列设置弹窗
-  const openSortModal = useMemoizedFn(() => {
+  const openSettingModal = useMemoizedFn(() => {
     setModalVisible(true)
   })
 
   // 关闭列设置弹窗
-  const closeSortModal = useMemoizedFn(() => {
+  const closeSettingModal = useMemoizedFn(() => {
     setModalVisible(false)
   })
 
   // 保存排序数据
   const handleOk = useMemoizedFn((newSortColumns: IColumnType<any>[]) => {
     sortColumnsRef.current = newSortColumns
-    closeSortModal()
+    closeSettingModal()
 
     // 触发设置改变事件
     const storeColumns = newSortColumns.map((col) =>
@@ -64,7 +64,7 @@ export default function useSortColumns({ baseColumns, table, globalStateRef }: I
       open={modalVisible}
       sortColumns={sortColumnsRef.current}
       defaultColumns={baseColumns}
-      onCancel={closeSortModal}
+      onCancel={closeSettingModal}
       onOk={handleOk}
     />
   )
@@ -80,7 +80,7 @@ export default function useSortColumns({ baseColumns, table, globalStateRef }: I
   return {
     sortColumns: sortColumnsRef.current,
     sortModalHolder,
-    openSortModal,
-    closeSortModal,
+    openSettingModal,
+    closeSettingModal,
   }
 }

@@ -156,7 +156,7 @@ const Demo = () => {
   const STableRef = useRef<ISearchTableRef>(null)
 
   const handleClick = () => {
-    STableRef.current?.openSortModal()
+    STableRef.current?.openSettingModal()
   }
 
   return (
