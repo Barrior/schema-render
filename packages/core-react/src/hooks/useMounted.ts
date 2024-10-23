@@ -1,10 +1,9 @@
+import type { EffectCallback } from 'react'
 import { useEffect } from 'react'
 
-const useMounted = (fn: () => void) => {
+const useMounted = (effect: EffectCallback) => {
   useEffect(
-    () => {
-      fn()
-    },
+    () => effect(),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   )
