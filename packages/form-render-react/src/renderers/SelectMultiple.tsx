@@ -1,6 +1,5 @@
 import type { IOpenComponentParams } from '@schema-render/core-react'
-import { utils } from '@schema-render/core-react'
-import { useMemoizedFn } from '@schema-render/core-react'
+import { useMemoizedFn, utils } from '@schema-render/core-react'
 import { Select as AntSelect } from 'antd'
 import type { ComponentProps } from 'react'
 import React, { useMemo } from 'react'
