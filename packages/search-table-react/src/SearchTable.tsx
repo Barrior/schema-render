@@ -1,8 +1,8 @@
 import type { IObjectAny } from '@schema-render/core-react'
-import { useMemoizedFn, utils } from '@schema-render/core-react'
+import { useMemoizedFn, useMounted, utils } from '@schema-render/core-react'
 import { Table } from 'antd'
 import type { Ref } from 'react'
-import { forwardRef, useEffect, useRef } from 'react'
+import { forwardRef, useRef } from 'react'
 
 import { EClassNames } from './constants'
 import { useBaseColumns, useFinalColumns, useSortColumns } from './hooks/useColumns'
@@ -59,7 +59,11 @@ const SearchTable = (
 
   // 表格列配置数据处理
   const { baseColumns } = useBaseColumns({ table, globalStateRef })
-  const { sortColumns, sortModalHolder, openSortModal } = useSortColumns({ baseColumns })
+  const { sortColumns, sortModalHolder, openSortModal } = useSortColumns({
+    table,
+    baseColumns,
+    globalStateRef,
+  })
   const { finalColumns } = useFinalColumns({ table, sortColumns })
 
   // 表格高度计算：“一屏显示”效果
@@ -106,12 +110,9 @@ const SearchTable = (
   const { finalSummary } = useSummary({ table, finalColumns, summaryData })
 
   // 组件加载完毕请求一次数据
-  useEffect(() => {
-    if (requestOnMounted) {
-      runRequest()
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  useMounted(() => {
+    requestOnMounted && runRequest()
+  })
 
   // 公共插槽参数
   const comRenderParams = { loading }

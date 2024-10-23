@@ -53,6 +53,13 @@ export type IColumnType<VT extends string = ''> = ColumnType<IObjectAny> & {
 
 export type IAntdTableProps = ComponentProps<typeof Table>
 
+/**
+ * 列设置存储数据结构
+ */
+export interface IStoreSetting {
+  columns: Pick<IColumnType, 'title' | 'dataIndex' | 'width' | 'hidden' | 'fixed'>[]
+}
+
 export type ITableProps = Omit<IAntdTableProps, 'columns'> & {
   /**
    * 增强版列配置
@@ -117,6 +124,29 @@ export type ITableProps = Omit<IAntdTableProps, 'columns'> & {
    * @param value 字符串数据值
    */
   sortStringValueTransform?: (value: string) => string
+
+  /**
+   * 列设置改变事件，可用于持久化列配置
+   */
+  onSettingChanged?: (data: IStoreSetting, settingId?: string) => IMaybePromise<void>
+  /**
+   * 列设置唯一ID，控制 getSetting 发起时机，每次 ID 变化时触发一次 getSetting 方法，
+   * 主要用于在 Tabs 场景下，切换标签需要再次发起 getSetting 方法获取不同的列设置数据。
+   */
+  settingId?: string
+  /**
+   * 获取存储的列设置
+   */
+  getSetting?: (settingId?: string) => IMaybePromise<IStoreSetting>
+  /**
+   * 列设置数据与基础列的合并算法
+   * @param baseColumns 基础列数据
+   * @param storedColumns 存储的列数据
+   */
+  settingColumnsMergeAlgo?: (
+    baseColumns: IColumnType[],
+    storedColumns: IStoreSetting['columns']
+  ) => IColumnType[]
 }
 
 /**

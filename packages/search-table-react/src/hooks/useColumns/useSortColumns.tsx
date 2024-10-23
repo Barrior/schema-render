@@ -1,28 +1,41 @@
-import { useMemoizedFn } from '@schema-render/core-react'
+import { useAsyncEffect, useMemoizedFn, utils } from '@schema-render/core-react'
 import { useMemo, useRef, useState } from 'react'
 
 import ColumnSettingModal from '../../components/ColumnSettingModal'
-import type { IColumnType } from '../../typings/table.d'
+import type { IGlobalStateRef } from '../../typings'
+import type { IColumnType, ITableProps } from '../../typings/table.d'
+import { defaultColumnsMergeAlgo } from './helpers/setting'
+
+const { pick } = utils
 
 interface IParams {
   baseColumns: IColumnType<any>[]
+  table: ITableProps
+  globalStateRef: IGlobalStateRef
 }
 
-/**
- * 浅复制第一层列数据，避免基础列数据被污染修改
- */
-function initSortColumns(baseColumns: IColumnType<any>[]): IColumnType<any>[] {
-  return baseColumns.map((col) => ({ ...col }))
-}
-
-export default function useSortColumns({ baseColumns }: IParams) {
+export default function useSortColumns({ baseColumns, table, globalStateRef }: IParams) {
   const sortColumnsRef = useRef<IColumnType<any>[]>([])
   const [modalVisible, setModalVisible] = useState(false)
+  const [settingColumns, setSettingColumns] = useState<IColumnType<any>[]>([])
+  const { isTabChanging } = globalStateRef.current
 
-  // 「第一次」以及「基础列变换时」，排序列重新生成
+  // 「基础列」、「设置列」变换时，排序列重新生成
   useMemo(() => {
-    sortColumnsRef.current = initSortColumns(baseColumns)
-  }, [baseColumns])
+    // Tab 切换中不需要执行
+    if (isTabChanging) {
+      return
+    }
+
+    if (settingColumns.length) {
+      const mergeAlgo = table.settingColumnsMergeAlgo || defaultColumnsMergeAlgo
+      sortColumnsRef.current = mergeAlgo(baseColumns, settingColumns)
+    } else {
+      // 浅复制一层，避免基础列数据被污染
+      sortColumnsRef.current = [...baseColumns]
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [baseColumns, settingColumns])
 
   // 打开列设置弹窗
   const openSortModal = useMemoizedFn(() => {
@@ -35,9 +48,15 @@ export default function useSortColumns({ baseColumns }: IParams) {
   })
 
   // 保存排序数据
-  const handleOk = useMemoizedFn((newSortColumns) => {
+  const handleOk = useMemoizedFn((newSortColumns: IColumnType<any>[]) => {
     sortColumnsRef.current = newSortColumns
     closeSortModal()
+
+    // 触发设置改变事件
+    const storeColumns = newSortColumns.map((col) =>
+      pick(col, 'title', 'dataIndex', 'width', 'hidden', 'fixed')
+    )
+    table.onSettingChanged?.({ columns: storeColumns }, table.settingId)
   })
 
   const sortModalHolder = (
@@ -49,6 +68,14 @@ export default function useSortColumns({ baseColumns }: IParams) {
       onOk={handleOk}
     />
   )
+
+  // 组件加载完毕、settingId 变化时，重新获取存储数据
+  useAsyncEffect(async () => {
+    const data = await table.getSetting?.(table.settingId)
+    if (data?.columns?.length) {
+      setSettingColumns(data.columns)
+    }
+  }, [table.settingId])
 
   return {
     sortColumns: sortColumnsRef.current,
