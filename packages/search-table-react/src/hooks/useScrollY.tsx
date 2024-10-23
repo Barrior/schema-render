@@ -1,6 +1,6 @@
-import { useMemoizedFn, utils } from '@schema-render/core-react'
+import { useMemoizedFn, useMounted, utils } from '@schema-render/core-react'
 import type { RefObject } from 'react'
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 
 import { EClassNames } from '../constants'
 import type { ISearchTableProps } from '../typings/index.d'
@@ -73,14 +73,11 @@ export default function useScrollY({ table, rootElemRef }: IUseScrollYParams) {
   /**
    * 窗口变化，表格高度重新计算
    */
-  useEffect(() => {
-    if (!table.autoScrollY) {
-      return
-    }
-    const handleResize = () => updateScrollY()
+  useMounted(() => {
+    const handleResize = () => updateScrollY(0, true)
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
-  }, [])
+  })
 
   return {
     scrollY,
