@@ -23,7 +23,7 @@ toc: content
 - `getRequestParams`: 获取请求的参数，“导出”时常用。
 - `getRequestExtraParams`: 获取请求额外参数，如排序参数等。
 - `updateScrollY`: 更新表格高度以达到“一屏显示”效果。
-- `openSortModal`: 打开列设置弹窗。
+- `openSettingModal`: 打开列设置弹窗。
 
 ## refresh
 
