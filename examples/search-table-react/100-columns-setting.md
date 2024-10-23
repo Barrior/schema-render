@@ -252,7 +252,7 @@ const Demo = () => {
 export default Demo
 ```
 
-## 持久化存储-Tabs
+## 持久化存储-标签页
 
 业务场景
 
@@ -330,4 +330,86 @@ const Demo = () => {
 export default Demo
 ```
 
-## 持久化存储-异步 Columns
+## 持久化存储-异步
+
+数据复杂繁多的情况，表头可以由后端返回，减少前后端字段对齐的成本。
+
+```tsx
+import { useState } from 'react'
+import { sleep } from '@examples/utils'
+import schema from './helpers/schema'
+import columnsA from './helpers/columns'
+import columnsVT from './helpers/columns-value-type'
+import createDataSource from './helpers/createDataSource'
+import createDataSourceVT from './helpers/createDataSource-vt'
+import SearchTable from '@schema-render/search-table-react'
+import type { IColumnType } from '@schema-render/search-table-react'
+
+const items = [
+  { key: '1', label: '异步表头 ✅ 分类一' },
+  { key: '2', label: '异步表头 ✅ 分类二' },
+]
+
+const Demo = () => {
+  const [activeKey, setActiveKey] = useState('1')
+  const [columns, setColumns] = useState<IColumnType[]>([])
+
+  // 存储列设置（列数据）
+  const onSettingChanged = async (data: any, settingId?: string) => {
+    await sleep()
+    // 存储的时候直接使用唯一的 settingId
+    localStorage.setItem(settingId!, JSON.stringify(data))
+  }
+
+  // 获取保存的设置
+  const getSetting = async (settingId?: string) => {
+    await sleep()
+    const data = localStorage.getItem(settingId!)
+    if (data) {
+      return JSON.parse(data)
+    }
+  }
+
+  // 异步获取表格 columns
+  const getColumns = async () => {
+    await sleep(500)
+    return activeKey === '1' ? columnsA : columnsVT
+  }
+
+  return (
+    <SearchTable
+      search={{ schema }}
+      title={{
+        showSetting: true,
+        tabs: {
+          activeKey,
+          items,
+          onChange: setActiveKey,
+        },
+      }}
+      table={{
+        columns,
+        showRowNumber: true,
+        actionItems: () => [{ text: '编辑' }, { text: '详情' }],
+        settingId: `save-setting-unique-id-async-${activeKey}`,
+        onSettingChanged,
+        getSetting,
+      }}
+      request={async (searchParams) => {
+        // 模拟请求接口获取表格数据
+        await sleep()
+        const fetchData = activeKey === '1' ? createDataSource : createDataSourceVT
+        const data = fetchData(searchParams.pageSize)
+
+        // 异步获取表格头
+        const cols = await getColumns()
+        setColumns(cols)
+
+        return { data, total: 100 }
+      }}
+    />
+  )
+}
+
+export default Demo
+```
