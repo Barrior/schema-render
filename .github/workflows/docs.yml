@@ -25,21 +25,16 @@ jobs:
         with:
           node: 18
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8.6
-
       - name: Restore node_modules
         id: restore-node-modules
         uses: actions/cache/restore@v3
         with:
           path: node_modules
-          key: cache-${{ hashFiles('pnpm-lock.yaml') }}
+          key: cache-${{ hashFiles('yarn.lock') }}
 
       - name: Install dependencies
         if: steps.restore-node-modules.outputs.cache-hit != 'true'
-        run: pnpm install
+        run: yarn install
 
       - name: Cache node_modules
         if: steps.restore-node-modules.outputs.cache-hit != 'true'
@@ -49,7 +44,7 @@ jobs:
           key: ${{ steps.restore-node-modules.outputs.cache-primary-key }}
 
       - name: Build docs
-        run: pnpm docs:build
+        run: yarn docs:build
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
