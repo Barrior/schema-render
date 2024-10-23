@@ -3,6 +3,8 @@ import en_US from '@schema-render/search-react/dist/esm/locale/en_US'
 export default {
   ...en_US,
   SearchTable: {
+    serialColumnName: 'Rank',
+    actionColumnName: 'Actions',
     more: 'more',
     settingTips: 'Columns Setting',
     settingModalTitle: 'Columns Setting',

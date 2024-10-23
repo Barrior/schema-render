@@ -3,6 +3,8 @@ import zh_CN from '@schema-render/search-react/dist/esm/locale/zh_CN'
 export default {
   ...zh_CN,
   SearchTable: {
+    serialColumnName: '序号',
+    actionColumnName: '操作',
     more: '更多',
     settingTips: '列设置',
     settingModalTitle: '列设置',
