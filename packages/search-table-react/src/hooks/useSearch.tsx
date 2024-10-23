@@ -2,7 +2,8 @@ import type { IItemChangeEvent, IObjectAny } from '@schema-render/core-react'
 import { useForceUpdate, useMemoizedFn, utils } from '@schema-render/core-react'
 import type { ISearchProps, ISearchRef } from '@schema-render/search-react'
 import SchemaSearch from '@schema-render/search-react'
-import { type MutableRefObject, useRef } from 'react'
+import type { MutableRefObject } from 'react'
+import { useRef } from 'react'
 
 import type { ISearchTableProps, ISearchTableRef } from '../typings'
 
