@@ -2,6 +2,7 @@ import Core from './Core'
 
 export default Core
 
+export { default as useAsyncEffect } from './hooks/useAsyncEffect'
 export { default as useCoreValue } from './hooks/useCoreValue'
 export { default as useDebounceFn } from './hooks/useDebounceFn'
 export { default as useForceUpdate } from './hooks/useForceUpdate'
