@@ -16,7 +16,7 @@ const ColumnSettingModal: FC<IColumnSettingModalProps> = ({
   return (
     <Modal
       title="列设置"
-      width={660}
+      width={680}
       centered
       destroyOnClose
       footer={null}

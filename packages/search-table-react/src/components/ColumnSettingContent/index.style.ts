@@ -59,6 +59,7 @@ export const col = cij`
   align-items: center;
   padding: 0 12px;
   word-break: break-all;
+  flex-shrink: 0;
 `
 
 export const footer = cij`

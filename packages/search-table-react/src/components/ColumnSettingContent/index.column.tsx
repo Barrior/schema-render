@@ -17,11 +17,11 @@ const columns: IColumn[] = [
     width: 200,
   },
   {
-    title: '隐藏列',
+    title: '显示列',
     dataIndex: 'hidden',
     width: 90,
     render: (value: boolean, onChange) => {
-      return <Switch checked={value} onChange={onChange} />
+      return <Switch checked={!value} onChange={(val) => onChange(!val)} />
     },
   },
   {

@@ -34,8 +34,9 @@ const ColumnSettingContent: FC<IColumnSettingContentProps> = ({
   // 配置数据变更事件
   const handleChange = useMemoizedFn(
     (index: number, dataKey: keyof (typeof dataSource)[0], newValue: any) => {
-      ;(dataSource as any)[index][dataKey] = newValue
-      setDataSource([...dataSource])
+      const newDataSource: any[] = [...dataSource]
+      newDataSource[index][dataKey] = newValue
+      setDataSource(newDataSource)
     }
   )
 
@@ -107,7 +108,7 @@ const ColumnSettingContent: FC<IColumnSettingContentProps> = ({
                       {...listeners}
                     >
                       {col.render
-                        ? col.render(val as never, (newValue) =>
+                        ? col.render(val, (newValue) =>
                             handleChange(rowIndex, col.dataIndex as never, newValue)
                           )
                         : val}
