@@ -1,4 +1,4 @@
-@import './dumi';
+@use './dumi';
 
 .example-layout-cols-2 {
   display: flex;
@@ -28,8 +28,8 @@
 .section-title {
   display: flex;
   align-items: center;
-  line-height: 1;
   margin: 10px 0 15px;
+  line-height: 1;
   font-weight: bold;
 
   &::before {
@@ -44,17 +44,18 @@
 
 // 应用场景有：滚动到指定位置
 .focus-out {
-  animation: focusOut 1s ease-out;
+  animation: focus-out 1s ease-out;
   border-radius: 6px;
 }
 
-@keyframes focusOut {
+@keyframes focus-out {
   0% {
-    background: rgb(254 238 189);
     padding: 20px;
+    background: rgb(254 238 189);
   }
+
   100% {
-    background: transparent;
     padding: 0;
+    background: transparent;
   }
 }

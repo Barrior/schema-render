@@ -16,7 +16,7 @@ toc: false
 - `Core`: 表单渲染库内核，通过一套简易的 [JSON Schema](./003-schema.md) 构建出一套表单，内核主要处理 Schema 协议、渲染器编排、逻辑联动、校验能力等，支持 SSR(Server-Side Rendering)。
 - `FormRender`: 基于 Core + [Antd](https://ant.design) 封装的开箱即用的表单渲染库。
 - `Search`：基于 FormRender 封装的开箱即用的条件搜索组件。
-- `SearchTable`：基于 Search + Antd Table 封装的条件搜索表格（建设中）。
+- `SearchTable`：基于 Search + Antd Table 封装的条件搜索表格。
 
 :::info{title=温馨提示}
 目前项目是基于 React 技术栈实现的，所以后缀都加了 `-react` 字眼，后续可能会将 Core 抽离成不依赖于技术栈的纯 JavaScript 项目，以便支持任何技术框架。
