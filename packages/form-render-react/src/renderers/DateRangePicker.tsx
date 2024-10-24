@@ -44,8 +44,10 @@ const ReadonlyDateRangePicker: IProps = ({ schema, value, locale }) => {
       ? DEFAULT_DATE_TIME_FORMAT
       : DEFAULT_DATE_FORMAT
     const format = schema.renderOptions?.format || defaultFormat
+    const displayTextTemplate =
+      schema.renderOptions?.displayTextTemplate || locale.FormRender.displayDateRange
 
-    displayText = utils.templateCompiled(locale.FormRender.displayDateRange, {
+    displayText = utils.templateCompiled(displayTextTemplate, {
       start: dayjs(value[0]).format(format),
       end: dayjs(value[1]).format(format),
     })
