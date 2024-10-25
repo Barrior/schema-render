@@ -8,7 +8,7 @@ import React from 'react'
 import Description from '../components/Description'
 import { DEFAULT_DATE_FORMAT, DEFAULT_DATE_TIME_FORMAT } from '../constants'
 
-function toISOString(date: Dayjs | string | null) {
+function toISOString(date: Dayjs | string | null | undefined) {
   return dayjs(date).toISOString()
 }
 
@@ -18,6 +18,7 @@ type IProps = React.FC<IOpenComponentParams<[string, string]>>
  * 编辑与禁用态组件
  */
 const DateRangePicker: IProps = ({ schema, value, onChange, disabled, validator }) => {
+  const { showTime } = schema.renderOptions || {}
   return (
     <DatePicker.RangePicker
       allowClear
@@ -25,9 +26,16 @@ const DateRangePicker: IProps = ({ schema, value, onChange, disabled, validator 
       {...schema.renderOptions}
       status={validator.status as never}
       value={value ? [dayjs(value[0]), dayjs(value[1])] : null}
-      onChange={(val) =>
-        onChange(val ? [toISOString(val[0]), toISOString(val[1])] : undefined)
-      }
+      onChange={(val) => {
+        if (val) {
+          // 不是 showTime 的情况，endTime 时分秒设置到当日结束时间
+          const startTime = showTime ? val[0] : val[0]?.startOf('day')
+          const endTime = showTime ? val[1] : val[1]?.endOf('day')
+          onChange([toISOString(startTime), toISOString(endTime)])
+        } else {
+          onChange(undefined)
+        }
+      }}
       disabled={disabled}
     />
   )
