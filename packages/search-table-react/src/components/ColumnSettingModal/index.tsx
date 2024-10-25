@@ -2,6 +2,7 @@ import type { ModalProps } from 'antd'
 import { Modal } from 'antd'
 import type { FC } from 'react'
 
+import useRootContext from '../../hooks/useRootContext'
 import type { IColumnSettingContentProps } from '../ColumnSettingContent'
 import ColumnSettingContent from '../ColumnSettingContent'
 
@@ -13,9 +14,10 @@ const ColumnSettingModal: FC<IColumnSettingModalProps> = ({
   onOk,
   ...modalProps
 }) => {
+  const rootCtx = useRootContext()
   return (
     <Modal
-      title="列设置"
+      title={rootCtx.locale.SearchTable.settingModalTitle}
       width={680}
       centered
       destroyOnClose

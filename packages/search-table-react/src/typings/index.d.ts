@@ -3,7 +3,10 @@ import type { ISearchProps, ISearchRef } from '@schema-render/search-react'
 import type { TabsProps } from 'antd'
 import type { CSSProperties, MutableRefObject, ReactNode } from 'react'
 
+import type zh_CN from '../locale/zh_CN'
 import type { ITableOnChangeParams, ITableProps } from './table.d'
+
+export type ILocale = typeof zh_CN
 
 /**
  * 全局数据
@@ -68,6 +71,10 @@ export interface ISearchTableProps<S extends IObjectAny = IObjectAny> {
    * 根节点样式
    */
   style?: CSSProperties
+  /**
+   * 国际化
+   */
+  locale?: ILocale
   /**
    * 表格数据接口请求
    */

@@ -6,6 +6,7 @@ import { useRef, useState } from 'react'
 
 import { EClassNames } from '../constants'
 import type {
+  ILocale,
   IRequestExtraParams,
   IRequestOptions,
   IRequestParams,
@@ -14,13 +15,14 @@ import type {
   ISearchTableRef,
 } from '../typings/index.d'
 
-const { logger, pick, classNames } = utils
+const { logger, pick, classNames, templateCompiled } = utils
 
 interface IUseRequest {
   request: ISearchTableProps['request']
   updateScrollY: ISearchTableRef['updateScrollY']
   table: ISearchTableProps['table']
   searchValueRef: MutableRefObject<IObjectAny>
+  locale: ILocale
 }
 
 /**
@@ -31,6 +33,7 @@ export default function useRequest({
   updateScrollY,
   table,
   searchValueRef,
+  locale,
 }: IUseRequest) {
   // 分页参数
   const paginationRef = useRef({
@@ -137,7 +140,17 @@ export default function useRequest({
       style: { marginBottom: 0 },
       showQuickJumper: true,
       showSizeChanger: true,
-      showTotal: (total: number) => `共 ${total} 条数据`,
+      showTotal: (total: number) => {
+        const { current, pageSize } = paginationRef.current
+        const start = (current - 1) * pageSize
+        const end = start + dataSourceRef.current.length
+        return templateCompiled(locale.SearchTable.paginationTotal, {
+          // 当分页是第一页时，start 为 0，此时取值到 1
+          start: start || 1,
+          end,
+          total,
+        })
+      },
       ...table.pagination,
       ...paginationRef.current,
       onChange: (current: number, pageSize: number) => {

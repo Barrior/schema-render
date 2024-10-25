@@ -1,11 +1,12 @@
 import { useMemoizedFn } from '@schema-render/core-react'
 import { Button, Space } from 'antd'
 import type { FC } from 'react'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 
+import useRootContext from '../../hooks/useRootContext'
 import type { IColumnType } from '../../typings/table'
 import Sortable from '../Sortable'
-import columns from './index.column'
+import { createColumns } from './index.column'
 import * as styles from './index.style'
 
 export interface IColumnSettingContentProps {
@@ -29,7 +30,12 @@ const ColumnSettingContent: FC<IColumnSettingContentProps> = ({
   sortColumns,
   onOk,
 }) => {
+  const rootCtx = useRootContext()
   const [dataSource, setDataSource] = useState(() => createInitialDataSource(sortColumns))
+  const columns = useMemo(
+    () => createColumns({ locale: rootCtx.locale }),
+    [rootCtx.locale]
+  )
 
   // 配置数据变更事件
   const handleChange = useMemoizedFn(
@@ -123,10 +129,14 @@ const ColumnSettingContent: FC<IColumnSettingContentProps> = ({
 
       <div className={styles.footer}>
         <Space>
-          <Button onClick={handleRestoreDefaultSetting}>恢复默认设置</Button>
-          <Button onClick={handleResetCurrentSetting}>重置本次设置</Button>
+          <Button onClick={handleRestoreDefaultSetting}>
+            {rootCtx.locale.SearchTable.settingModalResetDefault}
+          </Button>
+          <Button onClick={handleResetCurrentSetting}>
+            {rootCtx.locale.SearchTable.settingModalReset}
+          </Button>
           <Button type="primary" onClick={handleOk}>
-            确定
+            {rootCtx.locale.SearchTable.settingModalOk}
           </Button>
         </Space>
       </div>

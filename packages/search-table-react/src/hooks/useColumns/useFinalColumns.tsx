@@ -3,20 +3,21 @@ import { useMemoizedFn } from '@schema-render/core-react'
 import { useMemo } from 'react'
 
 import { EColumnsKeys } from '../../constants'
-import type { ISearchTableProps } from '../../typings/index.d'
+import type { ILocale, ISearchTableProps } from '../../typings/index.d'
 import type { IColumnType } from '../../typings/table'
 import { createActions } from './helpers/actions'
 
 interface IParams {
   table: ISearchTableProps['table']
   sortColumns: IColumnType<any>[]
+  locale: ILocale
 }
 
 /**
  * 1、过滤未展示的列
  * 2、添加序号列、操作列
  */
-export default function useFinalColumns({ table, sortColumns }: IParams) {
+export default function useFinalColumns({ table, sortColumns, locale }: IParams) {
   const {
     // 是否展示行号
     showRowNumber = false,
@@ -43,6 +44,7 @@ export default function useFinalColumns({ table, sortColumns }: IParams) {
         actionItems,
         actionItemsCount,
         actionItemsDropdownProps,
+        locale,
       })
     }
   )
@@ -62,7 +64,7 @@ export default function useFinalColumns({ table, sortColumns }: IParams) {
     // 添加序号栏
     if (showRowNumber) {
       columns.unshift({
-        title: '序号',
+        title: locale.SearchTable.serialColumnName,
         align: 'center',
         width: 70,
         fixed: 'left',
@@ -75,7 +77,7 @@ export default function useFinalColumns({ table, sortColumns }: IParams) {
     // 添加操作栏
     if (actionItems) {
       columns.push({
-        title: '操作',
+        title: locale.SearchTable.actionColumnName,
         align: 'center',
         fixed: 'right',
         width: 134,

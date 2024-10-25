@@ -5,9 +5,10 @@ import SchemaSearch from '@schema-render/search-react'
 import type { MutableRefObject } from 'react'
 import { useRef } from 'react'
 
-import type { ISearchTableProps, ISearchTableRef } from '../typings'
+import type { ILocale, ISearchTableProps, ISearchTableRef } from '../typings'
 
 interface IUseSearchParams {
+  locale: ILocale
   loading: boolean
   search: ISearchTableProps['search']
   searchValueRef: MutableRefObject<IObjectAny>
@@ -21,6 +22,7 @@ const { hasOwnProperty } = utils
  * 搜索栏数据处理
  */
 export default function useSearch({
+  locale,
   loading,
   search,
   searchValueRef,
@@ -78,6 +80,7 @@ export default function useSearch({
   const searchNodeHolder = search ? (
     <SchemaSearch
       {...search}
+      locale={search.locale || locale}
       rootStyle={{
         marginBottom: 16,
         ...search.rootStyle,

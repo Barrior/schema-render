@@ -7,7 +7,7 @@ import type { ReactNode } from 'react'
 import { Fragment } from 'react'
 
 import ButtonLoading from '../../../components/ButtonLoading'
-import type { ISearchTableProps } from '../../../typings'
+import type { ILocale, ISearchTableProps } from '../../../typings'
 import type { IActionItem } from '../../../typings/table.d'
 
 const { isArray, isString, omit } = utils
@@ -78,12 +78,14 @@ export function createActions({
   actionItems,
   actionItemsCount,
   actionItemsDropdownProps,
+  locale,
 }: {
   record: IObjectAny
   index: number
   actionItems: ISearchTableProps['table']['actionItems']
   actionItemsCount: number
   actionItemsDropdownProps: ISearchTableProps['table']['actionItemsDropdownProps']
+  locale: ILocale
 }) {
   const items = actionItems?.(record, index)
 
@@ -133,7 +135,7 @@ export function createActions({
             size="small"
             style={{ gap: 2, display: 'inline-flex', alignItems: 'center' }}
           >
-            更多 <DownOutlined style={{ margin: 0 }} />
+            {locale.SearchTable.more} <DownOutlined style={{ margin: 0 }} />
           </Button>
         </Dropdown>
       </>

@@ -4,9 +4,15 @@ import { Button, Tabs, Tooltip } from 'antd'
 import type { ReactNode } from 'react'
 import { isValidElement } from 'react'
 
-import type { IGlobalStateRef, ISearchTableProps, ISearchTableRef } from '../typings'
+import type {
+  IGlobalStateRef,
+  ILocale,
+  ISearchTableProps,
+  ISearchTableRef,
+} from '../typings'
 
 interface IUseTitleParams {
+  locale: ILocale
   title: ISearchTableProps['title']
   loading: boolean
   globalStateRef: IGlobalStateRef
@@ -15,6 +21,7 @@ interface IUseTitleParams {
 }
 
 export default function useTitle({
+  locale,
   title = {},
   loading,
   globalStateRef,
@@ -50,7 +57,7 @@ export default function useTitle({
 
   const tabBarExtraContent: { left?: ReactNode; right?: ReactNode } = {}
   const settingBtn = title.showSetting ? (
-    <Tooltip title="列设置">
+    <Tooltip title={locale.SearchTable.settingTips}>
       <Button
         icon={<SettingOutlined />}
         disabled={loading}

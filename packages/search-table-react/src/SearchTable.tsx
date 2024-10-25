@@ -2,7 +2,7 @@ import type { IObjectAny } from '@schema-render/core-react'
 import { useMemoizedFn, useMounted, utils } from '@schema-render/core-react'
 import { Table } from 'antd'
 import type { Ref } from 'react'
-import { forwardRef, useRef } from 'react'
+import { forwardRef, useMemo, useRef } from 'react'
 
 import { EClassNames } from './constants'
 import { useBaseColumns, useFinalColumns, useSortColumns } from './hooks/useColumns'
@@ -12,6 +12,8 @@ import useScrollY from './hooks/useScrollY'
 import useSearch from './hooks/useSearch'
 import useSummary from './hooks/useSummary'
 import useTitle from './hooks/useTitle'
+import zh_CN from './locale/zh_CN'
+import RootContext from './RootContext'
 import type { IGlobalState, ISearchTableProps, ISearchTableRef } from './typings/index.d'
 import type { ITableProps } from './typings/table'
 
@@ -33,6 +35,7 @@ const SearchTable = (
   {
     className,
     style,
+    locale,
     request,
     requestOnMounted = true,
     header,
@@ -50,6 +53,9 @@ const SearchTable = (
     search === false ? {} : search.defaultValue || {}
   )
 
+  // 国际化处理
+  const internalLocale = useMemo(() => ({ ...zh_CN, ...locale }), [locale])
+
   /**
    * 全局状态
    */
@@ -64,7 +70,7 @@ const SearchTable = (
     baseColumns,
     globalStateRef,
   })
-  const { finalColumns } = useFinalColumns({ table, sortColumns })
+  const { finalColumns } = useFinalColumns({ table, sortColumns, locale: internalLocale })
 
   // 表格高度计算：“一屏显示”效果
   const { scrollY, updateScrollY } = useScrollY({ table, rootElemRef })
@@ -86,10 +92,12 @@ const SearchTable = (
     table,
     request,
     updateScrollY,
+    locale: internalLocale,
   })
 
   // 搜索栏
   const { searchNodeHolder, searchRef } = useSearch({
+    locale: internalLocale,
     loading,
     search,
     searchValueRef,
@@ -99,6 +107,7 @@ const SearchTable = (
 
   // 标题栏
   const { titleNodeHolder } = useTitle({
+    locale: internalLocale,
     title,
     loading,
     globalStateRef,
@@ -146,42 +155,44 @@ const SearchTable = (
   })
 
   return (
-    <div ref={rootElemRef} className={className} style={style}>
-      {header?.(comRenderParams)}
+    <RootContext.Provider value={{ locale: internalLocale }}>
+      <div ref={rootElemRef} className={className} style={style}>
+        {header?.(comRenderParams)}
 
-      {searchNodeHolder}
+        {searchNodeHolder}
 
-      {titleTop?.(comRenderParams)}
+        {titleTop?.(comRenderParams)}
 
-      {titleNodeHolder}
+        {titleNodeHolder}
 
-      {titleBottom?.(comRenderParams)}
+        {titleBottom?.(comRenderParams)}
 
-      <Table
-        tableLayout="fixed"
-        {...table}
-        className={classNames(table.className, EClassNames.table)}
-        columns={finalColumns as never}
-        dataSource={dataSource}
-        loading={{
-          spinning: loading,
-          ...(isPlainObject(table?.loading) ? table.loading : undefined),
-        }}
-        scroll={{
-          scrollToFirstRowOnChange: true,
-          x: 'max-content',
-          y: scrollY,
-          ...table?.scroll,
-        }}
-        summary={finalSummary}
-        pagination={finalPagination}
-        onChange={handleTableChange}
-      />
+        <Table
+          tableLayout="fixed"
+          {...table}
+          className={classNames(table.className, EClassNames.table)}
+          columns={finalColumns as never}
+          dataSource={dataSource}
+          loading={{
+            spinning: loading,
+            ...(isPlainObject(table?.loading) ? table.loading : undefined),
+          }}
+          scroll={{
+            scrollToFirstRowOnChange: true,
+            x: 'max-content',
+            y: scrollY,
+            ...table?.scroll,
+          }}
+          summary={finalSummary}
+          pagination={finalPagination}
+          onChange={handleTableChange}
+        />
 
-      {footer?.(comRenderParams)}
+        {footer?.(comRenderParams)}
 
-      {sortModalHolder}
-    </div>
+        {sortModalHolder}
+      </div>
+    </RootContext.Provider>
   )
 }
 

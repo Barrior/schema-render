@@ -5,14 +5,16 @@ export default {
   SearchTable: {
     serialColumnName: 'Rank',
     actionColumnName: 'Actions',
-    more: 'more',
+    more: 'More',
+    paginationTotal: 'Showing ${start} to ${end} of ${total} entries',
     settingTips: 'Columns Setting',
     settingModalTitle: 'Columns Setting',
     settingModalOk: 'Ok',
     settingModalReset: 'Reset Current Setting',
     settingModalResetDefault: 'Restore Defaults',
     settingModalColumnEnum: ['Name', 'Display', 'Width', 'Fixed', 'Sort'],
-    longText: 'All',
+    settingModalColumnSortEnum: ['left', 'right', '-'],
+    longTextModalLabel: 'All',
     longTextModalTitle: 'All',
   },
 }
