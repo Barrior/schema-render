@@ -22,21 +22,22 @@ const DateRangePicker: IProps = ({ schema, value, onChange, disabled, validator 
   return (
     <DatePicker.RangePicker
       allowClear
+      allowEmpty
       style={{ width: '100%' }}
       {...schema.renderOptions}
+      disabled={disabled}
       status={validator.status as never}
       value={value ? [dayjs(value[0]), dayjs(value[1])] : null}
       onChange={(val) => {
-        if (val) {
+        if (val && val[0] && val[1]) {
           // 不是 showTime 的情况，endTime 时分秒设置到当日结束时间
-          const startTime = showTime ? val[0] : val[0]?.startOf('day')
-          const endTime = showTime ? val[1] : val[1]?.endOf('day')
+          const startTime = showTime ? val[0] : val[0].startOf('day')
+          const endTime = showTime ? val[1] : val[1].endOf('day')
           onChange([toISOString(startTime), toISOString(endTime)])
         } else {
           onChange(undefined)
         }
       }}
-      disabled={disabled}
     />
   )
 }
