@@ -2,19 +2,19 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "dev": "yarn docs",
     "build": "node scripts/build-cli.mjs",
-    "release": "node scripts/release.mjs",
+    "cov": "yarn test --coverage",
+    "dev": "yarn docs",
     "docs": "ERROR_OVERLAY=none dumi dev",
     "docs:build": "dumi build",
     "postinstall": "husky install",
     "lint": "eslint --ext .ts,.tsx .",
     "lint:fix": "eslint --fix --ext .ts,.tsx .",
+    "release": "node scripts/release.mjs",
     "test": "jest",
     "test:d": "node --inspect-brk node_modules/.bin/jest --runInBand",
     "test:w": "yarn test --watch",
-    "test:w:d": "yarn test:d --watch",
-    "cov": "yarn test --coverage"
+    "test:w:d": "yarn test:d --watch"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
@@ -73,6 +73,7 @@
     "react-syntax-highlighter": "^15.5.0",
     "sass": "^1.58.2",
     "ts-jest": "^29.0.5",
+    "ts-node": "^10.9.2",
     "tsc-files": "^1.1.4",
     "typescript": "^5.1.6"
   }
