@@ -7,6 +7,8 @@ const config: Config.InitialOptions = {
     '^@test/(.*)': '<rootDir>/test/$1',
     '^@core-react/(.*)': '<rootDir>/packages/core-react/src/$1',
     '^@form-render-react/(.*)': '<rootDir>/packages/form-render-react/src/$1',
+    '^@search-react/(.*)': '<rootDir>/packages/search-react/src/$1',
+    '^@search-table-react/(.*)': '<rootDir>/packages/search-table-react/src/$1',
   },
   roots: ['<rootDir>/test/'],
   // 排查 test 目录以 @ 符号开头的目录，如 @helpers、core-react/@helpers
