@@ -18,7 +18,7 @@ const ColumnSettingModal: FC<IColumnSettingModalProps> = ({
   return (
     <Modal
       title={rootCtx.locale.SearchTable.settingModalTitle}
-      width={680}
+      width="auto"
       centered
       destroyOnClose
       footer={null}

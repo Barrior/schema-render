@@ -54,7 +54,6 @@ export const row = cij`
 `
 
 export const col = cij`
-  flex-grow: 1;
   display: flex;
   align-items: center;
   padding: 0 12px;
