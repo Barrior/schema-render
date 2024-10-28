@@ -178,7 +178,9 @@ const Demo = () => {
         ref={STableRef}
         search={{ schema, labelWidth: 80 }}
         title={{
-          // 显示列设置
+          // 显示刷新按钮
+          showRefresh: true,
+          // 显示列设置按钮
           showSetting: true,
           // 标签页
           tabs: {

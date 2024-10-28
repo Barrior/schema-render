@@ -30,6 +30,7 @@ const Demo = () => {
         labelWidth: 'max-content',
       }}
       title={{
+        showRefresh: true,
         showSetting: true,
       }}
       table={{

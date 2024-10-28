@@ -243,3 +243,45 @@ const Demo = () => {
 
 export default Demo
 ```
+
+## 自定义两侧内容(无标签情况)
+
+使用 Antd Tabs 自带的 `tabBarExtraContent` 属性实现，下划线样式请按需删除。
+
+```tsx
+import { sleep } from '@examples/utils'
+import schema from './helpers/schema'
+import columns from './helpers/columns'
+import createDataSource from './helpers/createDataSource'
+import SearchTable from '@schema-render/search-table-react'
+import { Button } from 'antd'
+
+const Demo = () => {
+  const tabBarExtraContent = {
+    left: <Button>左侧内容</Button>,
+    right: <Button>右侧内容</Button>,
+  }
+
+  return (
+    <SearchTable
+      search={{ schema, labelWidth: 80 }}
+      title={{
+        showRefresh: true,
+        showSetting: true,
+        tabs: {
+          tabBarExtraContent,
+        },
+      }}
+      table={{ columns }}
+      request={async (searchParams) => {
+        // 模拟请求接口获取表格数据
+        await sleep()
+        const data = createDataSource(searchParams.pageSize)
+        return { data, total: 100 }
+      }}
+    />
+  )
+}
+
+export default Demo
+```
