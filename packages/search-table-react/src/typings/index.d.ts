@@ -118,6 +118,10 @@ export interface ISearchTableProps<S extends IObjectAny = IObjectAny> {
      * 是否展示“列配置”功能
      */
     showSetting?: boolean
+    /**
+     * 是否展示“刷新”功能
+     */
+    showRefresh?: boolean
   }
   /**
    * 标题栏底部区域

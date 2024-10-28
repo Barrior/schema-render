@@ -7,6 +7,7 @@ export default {
     actionColumnName: '操作',
     more: '更多',
     paginationTotal: '共 ${total} 条数据',
+    refreshTips: '刷新',
     settingTips: '列设置',
     settingModalTitle: '列设置',
     settingModalOk: '确定',

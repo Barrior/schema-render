@@ -1,4 +1,4 @@
-import { SettingOutlined } from '@ant-design/icons'
+import { SettingOutlined, SyncOutlined } from '@ant-design/icons'
 import { useMemoizedFn } from '@schema-render/core-react'
 import { Button, Tabs, Tooltip } from 'antd'
 import type { ReactNode } from 'react'
@@ -56,6 +56,9 @@ export default function useTitle({
   })
 
   const tabBarExtraContent: { left?: ReactNode; right?: ReactNode } = {}
+  const hasBtn = title.showSetting || title.showRefresh
+
+  // 列设置按钮
   const settingBtn = title.showSetting ? (
     <Tooltip title={locale.SearchTable.settingTips}>
       <Button
@@ -63,6 +66,18 @@ export default function useTitle({
         disabled={loading}
         style={{ marginLeft: 10 }}
         onClick={openSettingModal}
+      />
+    </Tooltip>
+  ) : null
+
+  // 刷新按钮
+  const refreshBtn = title.showRefresh ? (
+    <Tooltip title={locale.SearchTable.refreshTips}>
+      <Button
+        icon={<SyncOutlined />}
+        disabled={loading}
+        style={{ marginLeft: 10 }}
+        onClick={() => runRequest()}
       />
     </Tooltip>
   ) : null
@@ -76,11 +91,12 @@ export default function useTitle({
     }
   }
 
-  // 添加列设置按钮
-  if (title.showSetting) {
+  // 添加「列设置」等按钮
+  if (hasBtn) {
     tabBarExtraContent.right = (
       <>
         {tabBarExtraContent.right}
+        {refreshBtn}
         {settingBtn}
       </>
     )
@@ -93,11 +109,12 @@ export default function useTitle({
       tabBarExtraContent={tabBarExtraContent}
       onChange={handleTabChange}
     />
-  ) : title.showSetting ? (
+  ) : hasBtn ? (
     <div
       className={title.className}
       style={{ textAlign: 'right', marginBottom: 16, ...title.style }}
     >
+      {refreshBtn}
       {settingBtn}
     </div>
   ) : null
