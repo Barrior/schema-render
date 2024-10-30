@@ -17,7 +17,7 @@ import RootContext from './RootContext'
 import type { IGlobalState, ISearchTableProps, ISearchTableRef } from './typings/index.d'
 import type { ITableProps } from './typings/table'
 
-const { classNames, isPlainObject } = utils
+const { classNames, isPlainObject, isNil } = utils
 
 /**
  * 备注：
@@ -55,6 +55,17 @@ const SearchTable = (
 
   // 国际化处理
   const internalLocale = useMemo(() => ({ ...zh_CN, ...locale }), [locale])
+
+  /**
+   * 解决存在 rowSelection 属性且数据源为空的情况下表头无宽度问题
+   * ref: https://github.com/ant-design/ant-design/issues/47114
+   */
+  if (table.rowSelection && isNil(table.rowSelection.columnWidth)) {
+    table.rowSelection = {
+      ...table.rowSelection,
+      columnWidth: 32,
+    }
+  }
 
   /**
    * 全局状态
@@ -118,11 +129,6 @@ const SearchTable = (
   // 总结栏处理
   const { finalSummary } = useSummary({ table, finalColumns, summaryData })
 
-  // 组件加载完毕请求一次数据
-  useMounted(() => {
-    requestOnMounted && runRequest()
-  })
-
   // 公共插槽参数
   const comRenderParams = { loading }
 
@@ -137,6 +143,11 @@ const SearchTable = (
       table.onChange?.(_p, filter, sorter, _e)
     }
   )
+
+  // 组件加载完毕请求一次数据
+  useMounted(() => {
+    requestOnMounted && runRequest()
+  })
 
   // 开放 API
   useOpenApi({
