@@ -1,42 +1,42 @@
 {
   "name": "@schema-render/form-render-react",
+  "version": "1.8.1",
   "description": "Out-of-the-box form rendering library based on Core and Antd.",
   "keywords": [
     "SchemaRender",
     "FormRender"
   ],
-  "version": "1.8.1",
+  "bugs": {
+    "url": "https://github.com/Barrior/schema-render/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Barrior/schema-render.git"
+  },
   "license": "MIT",
+  "sideEffects": false,
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
   "files": [
     "dist"
   ],
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
-    "access": "public"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Barrior/schema-render.git"
-  },
   "scripts": {
     "build": "father build"
   },
-  "sideEffects": false,
-  "bugs": {
-    "url": "https://github.com/Barrior/schema-render/issues"
+  "dependencies": {
+    "@emotion/css": "^11.11.2",
+    "@schema-render/core-react": "^1.8.1",
+    "dayjs": "^1.11.0"
   },
   "peerDependencies": {
-    "react": ">=16.9.0",
-    "react-dom": ">=16.9.0",
+    "@ant-design/icons": "^5.0.0",
     "antd": "^5.0.0",
-    "@ant-design/icons": "^5.0.0"
+    "react": ">=16.9.0",
+    "react-dom": ">=16.9.0"
   },
-  "dependencies": {
-    "dayjs": "^1.11.0",
-    "@schema-render/core-react": "^1.8.1",
-    "@emotion/css": "^11.11.2"
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }
