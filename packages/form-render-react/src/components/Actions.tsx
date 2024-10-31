@@ -12,7 +12,7 @@ import type { IRegisterActions, IRegisterActionsFnParams } from '../typings'
  * 内置操作：提交、重置
  */
 const BUILTIN_ACTIONS: IRegisterActions = {
-  [ACTIONS.submit]: ({ loading, locale, disabled }) => (
+  [ACTIONS.submit]: ({ loading, locale, disabled, submitText }) => (
     <Button
       type="primary"
       htmlType="submit"
@@ -20,10 +20,10 @@ const BUILTIN_ACTIONS: IRegisterActions = {
       disabled={loading.submit ? false : disabled || loading.reset}
       loading={loading.submit}
     >
-      {locale?.FormRender?.submit}
+      {submitText || locale?.FormRender?.submit}
     </Button>
   ),
-  [ACTIONS.reset]: ({ handleReset, loading, locale, disabled }) => (
+  [ACTIONS.reset]: ({ handleReset, loading, locale, disabled, resetText }) => (
     <Button
       htmlType="button"
       // 自身在 loading 时不使用禁用态
@@ -31,7 +31,7 @@ const BUILTIN_ACTIONS: IRegisterActions = {
       loading={loading.reset}
       onClick={handleReset}
     >
-      {locale?.FormRender?.reset}
+      {resetText || locale?.FormRender?.reset}
     </Button>
   ),
 }
@@ -53,6 +53,8 @@ const Actions: FC<IActionsProps> = ({ disabled, ...spaceProps }) => {
     handleSubmit,
     layoutColumnGap,
     locale,
+    submitText,
+    resetText,
   } = useFormRenderContext()
 
   const isShowActions = utils.isArray(actions) && actions.length > 0
@@ -73,6 +75,8 @@ const Actions: FC<IActionsProps> = ({ disabled, ...spaceProps }) => {
           locale,
           disabled,
           loading: actionsLoading,
+          submitText,
+          resetText,
         }
 
         if (action === ACTIONS.submit) {

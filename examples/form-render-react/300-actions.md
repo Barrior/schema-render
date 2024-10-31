@@ -450,13 +450,15 @@ export default Demo
 
 `IRegisterActionsFnParams` 参数详解如下表格
 
-| **参数**         | **描述**                             | **类型**                               |
-| ---------------- | ------------------------------------ | -------------------------------------- |
-| **handleSubmit** | 当操作名称为 `submit` 时，存在该事件 | `() => void`                           |
-| **handleReset**  | 当操作名称为 `reset` 时，存在该事件  | `() => void`                           |
-| **loading**      | 提交与重置事件的 `loading` 状态      | `{ submit: boolean; reset: boolean; }` |
-| **disabled**     | 全局禁用状态                         | `boolean`                              |
-| **locale**       | 当前语言数据                         | `object`                               |
+| **参数**         | **描述**                               | **类型**                               |
+| ---------------- | -------------------------------------- | -------------------------------------- |
+| **handleSubmit** | 当操作名称为 `submit` 时，存在该事件   | `() => void`                           |
+| **handleReset**  | 当操作名称为 `reset` 时，存在该事件    | `() => void`                           |
+| **loading**      | 提交与重置事件的 `loading` 状态        | `{ submit: boolean; reset: boolean; }` |
+| **disabled**     | 全局禁用状态                           | `boolean`                              |
+| **locale**       | 当前语言数据                           | `object`                               |
+| **submitText**   | 提交按钮文案，优先级大于 locale 语言包 | `string`                               |
+| **resetText**    | 重置按钮文案，优先级大于 locale 语言包 | `string`                               |
 
 ## 其他相关 API 详解
 

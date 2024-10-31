@@ -67,7 +67,9 @@ const FormRender = (formRenderProps: IFormRenderProps, ref?: Ref<IFormRenderRef>
       'layoutRowGap',
       'actions',
       'registerActions',
-      'readonlyPlaceholder'
+      'readonlyPlaceholder',
+      'submitText',
+      'resetText'
     ),
     locale,
     actionsLoading,

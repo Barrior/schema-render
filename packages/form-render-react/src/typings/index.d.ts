@@ -35,8 +35,12 @@ export interface IRegisterActionsFnParams<T extends IObjectAny = ILocale> {
   loading: IActionsLoading
   /** 全局禁用状态，@schema-render/core-react global-status  */
   disabled?: boolean
-  /* 语言 */
+  /* 语言包 */
   locale: T
+  /** 提交按钮文案 */
+  submitText?: string
+  /** 重置按钮文案 */
+  resetText?: string
 }
 
 /**
@@ -151,6 +155,14 @@ export type IFormRenderProps = IPartPartial<
    */
   registerActions?: IRegisterActions<ILocale & IObjectAny>
   /**
+   * 提交按钮文案，优先级大于 locale 语言包
+   */
+  submitText?: string
+  /**
+   * 重置按钮文案，优先级大于 locale 语言包
+   */
+  resetText?: string
+  /**
    * 提交事件
    * @param value 表单数据
    */
@@ -200,6 +212,8 @@ export type IFormRenderContext = Pick<
   | 'layoutColumnGap'
   | 'layoutRowGap'
   | 'readonlyPlaceholder'
+  | 'submitText'
+  | 'resetText'
 > & {
   locale: ILocale
   actionsLoading: IActionsLoading
