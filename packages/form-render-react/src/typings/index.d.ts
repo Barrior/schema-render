@@ -130,7 +130,7 @@ export type IFormRenderProps = IPartPartial<
   /**
    * 定义操作行为：展示项、顺序
    */
-  actions?: IAction[]
+  actions?: IAction[] | null
   /**
    * @private 内部使用，操作行为渲染模式
    * normal: 标准渲染，作为独立节点渲染在 Form 底部
