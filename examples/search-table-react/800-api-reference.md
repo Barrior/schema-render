@@ -31,6 +31,7 @@ toc: content
 | **style**       | 标题栏样式                                                            | `CSSProperties` | -          |
 | **tabs**        | 标签页属性，见[Antd Tabs](https://ant.design/components/tabs-cn#tabs) | `TabsProps`     | -          |
 | **showSetting** | 是否展示“列设置”按钮                                                  | `boolean`       | -          |
+| **showRefresh** | 是否展示“刷新”按钮                                                    | `boolean`       | -          |
 
 ## table
 

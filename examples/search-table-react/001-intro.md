@@ -192,6 +192,10 @@ const Demo = () => {
         }}
         titleTop={() => <div style={titleSectionStyle}>Title Top 内容自定义</div>}
         titleBottom={() => <div style={titleSectionStyle}>Title Bottom 内容自定义</div>}
+        header={() => <div style={titleSectionStyle}>Header 内容自定义</div>}
+        footer={() => (
+          <div style={{ ...titleSectionStyle, marginTop: 16 }}>Footer 内容自定义</div>
+        )}
         table={{
           columns: fixedColumns,
           // 显示序号栏
