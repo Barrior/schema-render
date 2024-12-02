@@ -167,11 +167,6 @@ const Demo = () => {
     ]
   }
 
-  const tabBarExtraContent = {
-    left: <Button style={{ marginRight: 16 }}>自定义左侧内容</Button>,
-    right: <Button>自定义右侧内容</Button>,
-  }
-
   return (
     <ConfigProvider locale={zhCN}>
       <SearchTable
@@ -187,8 +182,13 @@ const Demo = () => {
             activeKey,
             items,
             onChange: setActiveKey,
-            tabBarExtraContent,
           },
+          leftExtraContent: ({ loading }) => (
+            <Button disabled={loading}>自定义左侧内容</Button>
+          ),
+          rightExtraContent: ({ loading }) => (
+            <Button disabled={loading}>自定义右侧内容</Button>
+          ),
         }}
         titleTop={() => <div style={titleSectionStyle}>Title Top 内容自定义</div>}
         titleBottom={() => <div style={titleSectionStyle}>Title Bottom 内容自定义</div>}
