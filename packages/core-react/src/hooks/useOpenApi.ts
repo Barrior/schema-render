@@ -2,7 +2,8 @@ import type { Ref, RefObject } from 'react'
 import { useImperativeHandle } from 'react'
 
 import { EValidationStatus } from '../constants'
-import type { ICoreRef, IScrollToOptions } from '../typings/core.d'
+import type { IApiPath } from '../typings/common'
+import type { ICoreRef, IScrollToOptions } from '../typings/core'
 import type { IRootContext } from '../typings/rootContext'
 import { isArray, isString } from '../utils/checking'
 import { positionedOffset } from '../utils/dom'
@@ -19,8 +20,6 @@ export interface IOpenApiParams {
   setValue: ICoreRef['setValue']
   resetValue: ICoreRef['resetValue']
 }
-
-type IPaths = string | string[]
 
 /**
  * 内部滚动到指定表单项位置方法
@@ -87,7 +86,7 @@ export default function useOpenApi({
   /**
    * 查找指定表单项
    */
-  const findItem = useMemoizedFn((paths?: IPaths) => {
+  const findItem = useMemoizedFn((paths?: IApiPath) => {
     const renderers = rootContextRef.current?.rendererStorage
     if (renderers && paths) {
       const sPath = isArray(paths) ? stringifyPath(paths) : paths
@@ -98,7 +97,7 @@ export default function useOpenApi({
   /**
    * 重置错误与警告
    */
-  const resetError = useMemoizedFn((paths?: IPaths) => {
+  const resetError = useMemoizedFn((paths?: IApiPath) => {
     const renderers = rootContextRef.current?.rendererStorage
     if (renderers) {
       const pathList = !paths ? Object.keys(renderers) : isString(paths) ? [paths] : paths
@@ -118,7 +117,7 @@ export default function useOpenApi({
   /**
    * 滚动到指定位置
    */
-  const scrollTo = useMemoizedFn((paths?: IPaths, options?: IScrollToOptions) =>
+  const scrollTo = useMemoizedFn((paths?: IApiPath, options?: IScrollToOptions) =>
     internalScrollTo(findItem(paths)?.getRootElement(), getRootElement(), options)
   )
 

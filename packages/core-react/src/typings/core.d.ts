@@ -4,6 +4,7 @@ import type { ReactNode } from 'react'
 import type { ILayout, IValidationStatus } from '../constants'
 import type localeStruct from '../locale/zh_CN'
 import type {
+  IApiPath,
   IDeepReadonly,
   IDictionary,
   IMaybePromise,
@@ -175,7 +176,7 @@ export interface ICoreRef {
   /**
    * 重置错误信息（含警告信息），当数据回填时，可以用此方法重置错误信息
    */
-  resetError: (paths?: string | string[]) => void
+  resetError: (paths?: IApiPath) => void
   /**
    * 获取表单数据
    */
@@ -195,13 +196,13 @@ export interface ICoreRef {
   /**
    * 查找指定表单项，返回表单项实例的开放 API
    */
-  findItem: (paths?: string | string[]) => IRendererInstance | undefined
+  findItem: (paths?: IApiPath) => IRendererInstance | undefined
   /**
    * 滚动到指定表单项
    * @param paths 表单项路径
    * @param options 滚动参数
    */
-  scrollTo: (paths?: string | string[], options?: IScrollToOptions) => void
+  scrollTo: (paths?: IApiPath, options?: IScrollToOptions) => void
 }
 
 export interface IRenderers<V extends any = any, S extends ISchema = ISchema> {

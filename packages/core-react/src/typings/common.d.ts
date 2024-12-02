@@ -48,6 +48,8 @@ export type IDeepReadonly<T> = {
 
 export type IPath = Array<string | number>
 
+export type IApiPath = string | IPath
+
 export interface ICommonProps<S extends ISchema = ISchema> {
   // 渲染器 schema
   schema: S
