@@ -1,6 +1,8 @@
 import { SettingOutlined, SyncOutlined } from '@ant-design/icons'
-import { useMemoizedFn } from '@schema-render/core-react'
-import { Button, Tabs, Tooltip } from 'antd'
+import { useMemoizedFn, utils } from '@schema-render/core-react'
+import { cij } from '@schema-render/form-render-react'
+import { Button, Space, Tabs, Tooltip } from 'antd'
+import type { TabBarExtraMap } from 'rc-tabs/lib/interface.d.ts'
 import type { ReactNode } from 'react'
 import { isValidElement } from 'react'
 
@@ -19,6 +21,15 @@ interface IUseTitleParams {
   runRequest: ISearchTableRef['refresh']
   openSettingModal: ISearchTableRef['openSettingModal']
 }
+
+const { classNames } = utils
+
+// 隐藏 Tabs 下划线
+const tabsHideLine = cij`
+  > div::before {
+    content: none !important;
+  }
+`
 
 export default function useTitle({
   locale,
@@ -55,71 +66,71 @@ export default function useTitle({
     )
   })
 
-  const tabBarExtraContent: { left?: ReactNode; right?: ReactNode } = {}
-  const hasBtn = title.showSetting || title.showRefresh
+  // 公共插槽参数
+  const comRenderParams = { loading }
+  // 额外的左右侧内容
+  const leftExtraContent = title.leftExtraContent?.(comRenderParams)
+  const rightExtraContent = title.rightExtraContent?.(comRenderParams)
+  let tabBarLeftExtraContent: ReactNode | null = null
+  let tabBarRightExtraContent: ReactNode | null = null
 
   // 列设置按钮
   const settingBtn = title.showSetting ? (
     <Tooltip title={locale.SearchTable.settingTips}>
-      <Button
-        icon={<SettingOutlined />}
-        disabled={loading}
-        style={{ marginLeft: 10 }}
-        onClick={openSettingModal}
-      />
+      <Button icon={<SettingOutlined />} disabled={loading} onClick={openSettingModal} />
     </Tooltip>
   ) : null
 
   // 刷新按钮
   const refreshBtn = title.showRefresh ? (
     <Tooltip title={locale.SearchTable.refreshTips}>
-      <Button
-        icon={<SyncOutlined />}
-        disabled={loading}
-        style={{ marginLeft: 10 }}
-        onClick={() => runRequest()}
-      />
+      <Button icon={<SyncOutlined />} disabled={loading} onClick={() => runRequest()} />
     </Tooltip>
   ) : null
 
-  // 用户 tabBarExtraContent 标准化处理
+  // Antd tabBarExtraContent 标准化处理
   if (title.tabs?.tabBarExtraContent) {
     if (isValidElement(title.tabs.tabBarExtraContent)) {
-      tabBarExtraContent.right = title.tabs.tabBarExtraContent
+      tabBarRightExtraContent = title.tabs.tabBarExtraContent
     } else {
-      Object.assign(tabBarExtraContent, title.tabs.tabBarExtraContent)
+      const extraContent = title.tabs.tabBarExtraContent as TabBarExtraMap
+      tabBarLeftExtraContent = extraContent.left
+      tabBarRightExtraContent = extraContent.right
     }
   }
 
-  // 添加「列设置」等按钮
-  if (hasBtn) {
-    tabBarExtraContent.right = (
-      <>
-        {tabBarExtraContent.right}
-        {refreshBtn}
-        {settingBtn}
-      </>
-    )
+  const tabBarExtraContent = {
+    left:
+      tabBarLeftExtraContent || leftExtraContent ? (
+        <Space size={10} style={{ marginRight: 16 }}>
+          {tabBarLeftExtraContent}
+          {leftExtraContent}
+        </Space>
+      ) : null,
+    right:
+      tabBarRightExtraContent || rightExtraContent || refreshBtn || settingBtn ? (
+        <Space size={10}>
+          {tabBarRightExtraContent}
+          {rightExtraContent}
+          {refreshBtn}
+          {settingBtn}
+        </Space>
+      ) : null,
   }
 
   // 标题节点内容
-  const titleNodeHolder = title.tabs ? (
-    <Tabs
-      {...title.tabs}
-      tabBarExtraContent={tabBarExtraContent}
-      onChange={handleTabChange}
-    />
-  ) : hasBtn ? (
-    <div
-      className={title.className}
-      style={{ textAlign: 'right', marginBottom: 16, ...title.style }}
-    >
-      {refreshBtn}
-      {settingBtn}
-    </div>
-  ) : null
+  const titleNodeHolder =
+    tabBarExtraContent.left || tabBarExtraContent.right || title.tabs ? (
+      <Tabs
+        {...title.tabs}
+        className={classNames(title.className, title.tabs?.className, {
+          [tabsHideLine]: !title.tabs,
+        })}
+        style={title.style || title.tabs?.style}
+        tabBarExtraContent={tabBarExtraContent}
+        onChange={handleTabChange}
+      />
+    ) : null
 
-  return {
-    titleNodeHolder,
-  }
+  return { titleNodeHolder }
 }

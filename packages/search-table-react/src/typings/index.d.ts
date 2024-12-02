@@ -122,6 +122,14 @@ export interface ISearchTableProps<S extends IObjectAny = IObjectAny> {
      * 是否展示“刷新”功能
      */
     showRefresh?: boolean
+    /**
+     * 左侧额外内容
+     */
+    leftExtraContent?: (p: IRenderParams) => ReactNode
+    /**
+     * 右侧额外内容
+     */
+    rightExtraContent?: (p: IRenderParams) => ReactNode
   }
   /**
    * 标题栏底部区域
