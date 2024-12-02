@@ -1,6 +1,6 @@
 {
   "name": "@schema-render/search-react",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "description": "Conditional search component based on FormRender.",
   "keywords": [
     "SchemaRender",
@@ -26,7 +26,7 @@
     "build": "father build"
   },
   "dependencies": {
-    "@schema-render/form-render-react": "^1.9.0"
+    "@schema-render/form-render-react": "^1.10.0"
   },
   "peerDependencies": {
     "@ant-design/icons": "^5.0.0"

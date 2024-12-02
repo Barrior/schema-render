@@ -1,6 +1,6 @@
 {
   "name": "@schema-render/search-table-react",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "description": "Conditional search table component.",
   "keywords": [
     "SchemaRender",
@@ -31,7 +31,7 @@
     "@dnd-kit/modifiers": "7.0.0",
     "@dnd-kit/sortable": "8.0.0",
     "@dnd-kit/utilities": "3.2.2",
-    "@schema-render/search-react": "^1.9.0"
+    "@schema-render/search-react": "^1.10.0"
   },
   "peerDependencies": {
     "@ant-design/icons": "^5.0.0",
