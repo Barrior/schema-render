@@ -25,13 +25,15 @@ toc: content
 
 ## title
 
-| **参数**        | **描述**                                                              | **类型**        | **默认值** |
-| --------------- | --------------------------------------------------------------------- | --------------- | ---------- |
-| **className**   | 标题栏类名                                                            | `string`        | -          |
-| **style**       | 标题栏样式                                                            | `CSSProperties` | -          |
-| **tabs**        | 标签页属性，见[Antd Tabs](https://ant.design/components/tabs-cn#tabs) | `TabsProps`     | -          |
-| **showSetting** | 是否展示“列设置”按钮                                                  | `boolean`       | -          |
-| **showRefresh** | 是否展示“刷新”按钮                                                    | `boolean`       | -          |
+| **参数**              | **描述**                                                              | **类型**                          | **默认值** |
+| --------------------- | --------------------------------------------------------------------- | --------------------------------- | ---------- |
+| **className**         | 标题栏类名                                                            | `string`                          | -          |
+| **style**             | 标题栏样式                                                            | `CSSProperties`                   | -          |
+| **tabs**              | 标签页属性，见[Antd Tabs](https://ant.design/components/tabs-cn#tabs) | `TabsProps`                       | -          |
+| **showSetting**       | 是否展示“列设置”按钮                                                  | `boolean`                         | -          |
+| **showRefresh**       | 是否展示“刷新”按钮                                                    | `boolean`                         | -          |
+| **leftExtraContent**  | 左侧额外内容                                                          | `(p: IRenderParams) => ReactNode` | -          |
+| **rightExtraContent** | 右侧额外内容                                                          | `(p: IRenderParams) => ReactNode` | -          |
 
 ## table
 
