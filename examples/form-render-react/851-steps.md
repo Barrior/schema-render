@@ -29,7 +29,6 @@ import type {
   IFormRenderRef,
 } from '@schema-render/form-render-react'
 import { Steps, Button } from 'antd'
-import { useMemoizedFn } from 'ahooks'
 
 const schema: IFormRenderRootSchema = {
   renderType: 'Root',
@@ -99,7 +98,7 @@ const Demo = () => {
   }
 
   // 下一步事件
-  const handleNext = useMemoizedFn(async () => {
+  const handleNext = async () => {
     // formRenderRef 的 validate 会校验所有表单项
     const res = await formRenderRef.current?.validate()
     if (res?.hasError || res?.hasWarning) {
@@ -116,10 +115,10 @@ const Demo = () => {
 
     // 校验通过才进行下一步
     setCurrentStep(currentStep + 1)
-  })
+  }
 
   // 只重置当前步骤下的表单项数据
-  const handleReset = useMemoizedFn(() => {
+  const handleReset = () => {
     // 重置数据
     setValue({
       ...value,
@@ -127,7 +126,7 @@ const Demo = () => {
     })
     // 重置错误提示
     formRenderRef.current?.resetError()
-  })
+  }
 
   const registerActions = useMemo(() => {
     return {
