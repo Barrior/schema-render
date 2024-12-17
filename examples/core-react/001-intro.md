@@ -2,18 +2,18 @@
 group:
   title: 介绍
   order: 0
-toc: false
+toc: content
 ---
 
 # 简介
 
 ## SchemaRender
 
-`SchemaRender` 是一套 `默认简单`，但又追求 `灵活`、`可高定`、`好用的` 表单渲染解决方案，旨在沉淀解决常见表单案例的渲染库，与相关的通用组件，以提升研发效率。
+`SchemaRender` 是一套 `默认简单`，但又追求 `灵活`、`可高定`、`好用的` 表单渲染解决方案，旨在沉淀解决常见表单案例的渲染库，与相关的通用组件，以提升研发效率；支持 SSR(Server-Side Rendering) 渲染。
 
 内容目录：
 
-- `Core`: 表单渲染库内核，通过一套简易的 [JSON Schema](./003-schema.md) 构建出一套表单，内核主要处理 Schema 协议、渲染器编排、逻辑联动、校验能力等，支持 SSR(Server-Side Rendering)。
+- `Core`: 表单渲染库内核，通过一套简易的 [JSON Schema](./003-schema.md) 构建出一套表单，内核主要处理 Schema 协议、渲染器编排、逻辑联动、校验能力等。
 - `FormRender`: 基于 Core + [Antd](https://ant.design) 封装的开箱即用的表单渲染库。
 - `Search`：基于 FormRender 封装的开箱即用的条件搜索组件。
 - `SearchTable`：基于 Search + Antd Table 封装的条件搜索表格。
@@ -22,14 +22,22 @@ toc: false
 目前项目是基于 React 技术栈实现的，所以后缀都加了 `-react` 字眼，后续可能会将 Core 抽离成不依赖于技术栈的纯 JavaScript 项目，以便支持任何技术框架。
 :::
 
-FormRender、Search 没有很好的支持 SSR，如果是 Next.js 项目，可以动态导入并配置 ssr 为不启用，如下示例。
+## SSR
+
+FormRender、Search、SearchTable 使用的是 css module 的样式方案，故项目需要开启模块编译。
+
+`Next.js` 项目须配置 `next.config.js` 文件：
 
 ```jsx | pure
-import dynamic from 'next/dynamic'
-
-const FormRender = dynamic(() => import('@schema-render/form-render-react'), {
-  ssr: false,
-})
+// 编译 node_modules 下的模块
+{
+  transpilePackages: [
+    '@schema-render/core-react',
+    '@schema-render/form-render-react',
+    '@schema-render/search-react',
+    '@schema-render/search-table-react',
+  ]
+}
 ```
 
 ## Core

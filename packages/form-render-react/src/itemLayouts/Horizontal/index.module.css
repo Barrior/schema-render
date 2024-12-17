@@ -1,59 +1,57 @@
-import { cij } from '../../cssinjs'
-
-export const main = cij`
+.main {
   display: flex;
   align-items: center;
-`
+}
 
-export const header = cij`
-  flex: 0 0 100px;
+.header {
+  display: flex;
+  align-items: center;
   justify-content: flex-end;
-  display: flex;
-  align-items: center;
-  margin-right: 15px;
+  flex: 0 0 100px;
   height: max-content;
-`
+  margin-right: 15px;
+}
 
-export const title = cij`
+.title {
   word-break: break-all;
-`
+}
 
-export const mark = cij`
+.mark {
   margin-right: 4px;
   color: var(--schema-render-color-required-mark);
   position: relative;
   top: 2px;
-`
+}
 
-export const titleTooltip = cij`
+.titleTooltip {
   margin-left: 4px;
   position: relative;
   top: 1px;
-`
+}
 
-export const body = cij`
+.body {
   flex-grow: 1;
-`
+}
 
-export const footer = cij`
-  word-break: break-all;
+.footer {
   padding-left: 115px;
+  word-break: break-all;
+}
 
-  &:empty {
-    display: none;
-  }
-`
+.footer:empty {
+  display: none;
+}
 
-export const description = cij`
+.description {
   margin-top: 6px;
   color: var(--schema-render-color-description);
-`
+}
 
-export const errorMsg = cij`
+.errorMsg {
   margin-top: 6px;
   color: var(--schema-render-color-error);
-`
+}
 
-export const warningMsg = cij`
+.warningMsg {
   color: var(--schema-render-color-warning);
-`
+}

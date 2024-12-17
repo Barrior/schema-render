@@ -1,0 +1,3 @@
+.tabsHideLine > div::before {
+  content: none !important;
+}

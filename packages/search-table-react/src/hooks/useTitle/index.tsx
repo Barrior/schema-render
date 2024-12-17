@@ -1,6 +1,5 @@
 import { SettingOutlined, SyncOutlined } from '@ant-design/icons'
 import { useMemoizedFn, utils } from '@schema-render/core-react'
-import { cij } from '@schema-render/form-render-react'
 import { Button, Space, Tabs, Tooltip } from 'antd'
 import type { TabBarExtraMap } from 'rc-tabs/lib/interface.d.ts'
 import type { ReactNode } from 'react'
@@ -11,7 +10,8 @@ import type {
   ILocale,
   ISearchTableProps,
   ISearchTableRef,
-} from '../typings'
+} from '../../typings'
+import styles from './index.module.css'
 
 interface IUseTitleParams {
   locale: ILocale
@@ -23,13 +23,6 @@ interface IUseTitleParams {
 }
 
 const { classNames } = utils
-
-// 隐藏 Tabs 下划线
-const tabsHideLine = cij`
-  > div::before {
-    content: none !important;
-  }
-`
 
 export default function useTitle({
   locale,
@@ -124,7 +117,7 @@ export default function useTitle({
       <Tabs
         {...title.tabs}
         className={classNames(title.className, title.tabs?.className, {
-          [tabsHideLine]: !title.tabs,
+          [styles.tabsHideLine]: !title.tabs,
         })}
         style={title.style || title.tabs?.style}
         tabBarExtraContent={tabBarExtraContent}

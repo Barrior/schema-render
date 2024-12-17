@@ -15,17 +15,13 @@
   },
   "license": "MIT",
   "sideEffects": false,
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
-  "types": "dist/esm/index.d.ts",
+  "main": "src/index.tsx",
+  "types": "src/index.tsx",
   "files": [
-    "dist"
+    "src"
   ],
-  "scripts": {
-    "build": "father build"
-  },
+  "scripts": {},
   "dependencies": {
-    "@emotion/css": "^11.11.2",
     "@schema-render/core-react": "^1.10.1",
     "dayjs": "^1.11.0"
   },

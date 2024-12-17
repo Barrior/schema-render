@@ -7,7 +7,7 @@ import useRootContext from '../../hooks/useRootContext'
 import type { IColumnType } from '../../typings/table'
 import Sortable from '../Sortable'
 import { createColumns } from './index.column'
-import * as styles from './index.style'
+import styles from './index.module.css'
 
 export interface IColumnSettingContentProps {
   sortColumns: IColumnType<any>[]
