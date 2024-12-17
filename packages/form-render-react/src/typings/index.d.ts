@@ -125,7 +125,7 @@ export type IFormRenderProps = IPartPartial<
   /**
    * 国际化
    */
-  locale?: ILocale
+  locale?: Partial<ILocale>
 
   /**
    * 定义操作行为：展示项、顺序

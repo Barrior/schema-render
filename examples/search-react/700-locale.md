@@ -15,7 +15,7 @@ import Search from '@schema-render/search-react'
 import type { IFormRenderRootSchema } from '@schema-render/form-render-react'
 
 // 引入英文语言包
-import enUS from '@schema-render/search-react/dist/esm/locale/en_US'
+import enUS from '@schema-render/search-react/src/locale/en_US'
 
 const schema: IFormRenderRootSchema = {
   renderType: 'Root',

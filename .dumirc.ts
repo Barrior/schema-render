@@ -1,6 +1,6 @@
 import { defineConfig } from 'dumi'
-import sass from 'sass'
 import path from 'path'
+import sass from 'sass'
 
 const globalStyles = sass.compile('./examples/global.scss')
 
@@ -31,12 +31,12 @@ export default defineConfig({
   ],
   alias: {
     // 根据精确程度按顺序声明
-    '@schema-render/core-react/dist/esm': path.resolve('packages/core-react/src'),
-    '@schema-render/form-render-react/dist/esm': path.resolve(
+    '@schema-render/core-react/src': path.resolve('packages/core-react/src'),
+    '@schema-render/form-render-react/src': path.resolve(
       'packages/form-render-react/src'
     ),
-    '@schema-render/search-react/dist/esm': path.resolve('packages/search-react/src'),
-    '@schema-render/search-table-react/dist/esm': path.resolve(
+    '@schema-render/search-react/src': path.resolve('packages/search-react/src'),
+    '@schema-render/search-table-react/src': path.resolve(
       'packages/search-table-react/src'
     ),
 

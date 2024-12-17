@@ -74,7 +74,7 @@ export interface ISearchTableProps<S extends IObjectAny = IObjectAny> {
   /**
    * 国际化
    */
-  locale?: ILocale
+  locale?: Partial<ILocale>
   /**
    * 表格数据接口请求
    */

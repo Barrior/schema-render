@@ -1,6 +1,6 @@
 import type { IClassNamesParams } from '../utils/classnames'
 import type { IDictionary, IObjectAny, IPath } from './common'
-import type { ICore, IOpenFunctionValidatorResult } from './core'
+import type { ICore, IInternalLocale, IOpenFunctionValidatorResult } from './core'
 import type { IRootSchema } from './schema'
 
 export interface IChangeEvent {
@@ -40,7 +40,7 @@ export interface IRootContext {
   // 表单项布局
   itemLayout: ICore['itemLayout']
   // 国际化
-  locale: Exclude<ICore['locale'], undefined>
+  locale: IInternalLocale
   // 错误提示
   catchErrorTips?: ICore['catchErrorTips']
 

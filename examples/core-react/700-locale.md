@@ -16,7 +16,7 @@ import Horizontal from './item-layout/Horizontal'
 import renderers from './renderers/common'
 
 // 引入英文语言包
-import enUS from '@schema-render/core-react/dist/esm/locale/en_US'
+import enUS from '@schema-render/core-react/src/locale/en_US'
 
 const schema: IRootSchema = {
   renderType: 'Root',

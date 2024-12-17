@@ -18,7 +18,7 @@ import SearchTable from '@schema-render/search-table-react'
 import { sleep } from '@examples/utils'
 
 // 引入英文语言包
-import enUS from '@schema-render/search-table-react/dist/esm/locale/en_US'
+import enUS from '@schema-render/search-table-react/src/locale/en_US'
 
 const Demo = () => {
   return (

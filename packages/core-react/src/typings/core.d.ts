@@ -15,6 +15,8 @@ import type {
 import type { IChangeEvent, IRendererInstance, IRootContext } from './rootContext'
 import type { IRootSchema, IRuleItem, ISchema } from './schema'
 
+export type IInternalLocale = typeof localeStruct
+
 export interface IItemChangeEvent extends IChangeEvent {
   /**
    * 字符串化路径
@@ -88,7 +90,7 @@ export interface ICore {
   itemLayout: React.ComponentType<IOpenItemLayoutParams>
 
   /* 国际化 */
-  locale?: typeof localeStruct
+  locale?: Partial<IInternalLocale>
 
   /* 功能型参数 */
   /**

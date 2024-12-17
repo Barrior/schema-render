@@ -1,4 +1,4 @@
-import zh_CN from '@schema-render/form-render-react/dist/esm/locale/zh_CN'
+import zh_CN from '@schema-render/form-render-react/src/locale/zh_CN'
 
 export default {
   ...zh_CN,

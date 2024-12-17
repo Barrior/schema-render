@@ -15,7 +15,7 @@ import FormRender from '@schema-render/form-render-react'
 import type { IFormRenderRootSchema } from '@schema-render/form-render-react'
 
 // 引入英文语言包
-import enUS from '@schema-render/form-render-react/dist/esm/locale/en_US'
+import enUS from '@schema-render/form-render-react/src/locale/en_US'
 
 const schema: IFormRenderRootSchema = {
   renderType: 'Root',
