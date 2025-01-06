@@ -41,7 +41,6 @@ class Release {
     await this.runLintAndTest()
     await this.askReleaseVersion()
     this.bumpVersion()
-    await this.buildProduct()
     this.commit()
     await this.publishToNpm()
     logger.log('🌟 命令执行完毕 🎉')
@@ -135,11 +134,11 @@ class Release {
       // 更新自身版本号
       pkgContent.version = this.newVersion
 
-      // 更新依赖项版本号
+      // 更新依赖项为 ssr 标签版本
       const matchedItem = projectMap[projectName]
       if (matchedItem) {
         matchedItem.dependencies.forEach((name) => {
-          pkgContent.dependencies[name] = `^${this.newVersion}`
+          pkgContent.dependencies[name] = 'ssr'
         })
       }
 
@@ -151,20 +150,6 @@ class Release {
   }
 
   /**
-   * 构建产品，将源码编译到 dist 目录
-   */
-  async buildProduct() {
-    for (let i = 0; i < projectNames.length; i++) {
-      const projectName = projectNames[i]
-      const dirPath = path.resolve(packages, `./${projectName}`)
-
-      spinner.start(`执行 ${projectName} 构建命令`)
-      await execaCommand('npm run build', { cwd: dirPath })
-      spinner.succeed()
-    }
-  }
-
-  /**
    * 发布到 npm
    */
   async publishToNpm() {
@@ -173,7 +158,7 @@ class Release {
       const dirPath = path.resolve(packages, `./${projectName}`)
 
       spinner.start(`发布 ${projectName}`)
-      await execaCommand('npm publish', { cwd: dirPath })
+      await execaCommand('npm publish --tag=ssr', { cwd: dirPath })
       spinner.succeed()
     }
   }
