@@ -177,6 +177,7 @@ class Release {
     execaCommandSync(`git tag v${this.newVersion}`)
     logger.log(`git tag 打标完成`)
 
+    execaCommandSync('git push origin')
     execaCommandSync('git push origin --tags')
     logger.log(`推送 Git 到远程 origin 仓库完成`)
   }
