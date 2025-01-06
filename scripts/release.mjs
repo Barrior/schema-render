@@ -63,8 +63,8 @@ class Release {
   checkBranchAndStatus() {
     // 检查分支名称
     const branchName = execaCommandSync('git symbolic-ref HEAD --short').stdout
-    if (!['master', 'main'].includes(branchName)) {
-      logger.error('命令执行分支不正确，只允许 master 或者 main 分支')
+    if (!['master', 'main', 'ssr'].includes(branchName)) {
+      logger.error('命令执行分支不正确，只允许 master、main、ssr 分支')
       process.exit(1)
     }
 
