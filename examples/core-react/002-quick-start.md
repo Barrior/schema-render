@@ -32,7 +32,7 @@ npm install @schema-render/core-react --save
 
 ### 示例一
 
-步骤一加步骤二
+步骤一和步骤二
 
 ```jsx
 /**
