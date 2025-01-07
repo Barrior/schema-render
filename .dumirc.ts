@@ -14,10 +14,10 @@ export default defineConfig({
     name: 'SchemaRender',
     logo: false,
     nav: [
-      { title: '💎 Core', link: '/core-react/001-intro' },
-      { title: '🚀 FormRender', link: '/form-render-react/001-intro' },
-      { title: '⛵️ Search', link: '/search-react/001-intro' },
-      { title: '🛳 SearchTable', link: '/search-table-react/001-intro' },
+      { title: '💎 Core', activePath: '/core-react', link: '/core-react/001-intro' },
+      { title: '🚀 FormRender', activePath: '/form-render-react', link: '/form-render-react/001-intro' },
+      { title: '⛵️ Search', activePath: '/search-react', link: '/search-react/001-intro' },
+      { title: '🛳 SearchTable', activePath: '/search-table-react', link: '/search-table-react/001-intro' },
     ],
     socialLinks: {
       github: 'https://github.com/Barrior/schema-render',
