@@ -78,7 +78,7 @@ const ColumnSettingContent: FC<IColumnSettingContentProps> = ({
   })
 
   return (
-    <>
+    <div className={styles.settingContent}>
       <div className={styles.header}>
         {columns.map((col, i) => (
           <div
@@ -140,7 +140,7 @@ const ColumnSettingContent: FC<IColumnSettingContentProps> = ({
           </Button>
         </Space>
       </div>
-    </>
+    </div>
   )
 }
 

@@ -1,3 +1,7 @@
+.settingContent {
+  font-size: 14px;
+}
+
 .header {
   display: flex;
   padding: 12px 0;
@@ -57,6 +61,7 @@
   padding: 0 12px;
   word-break: break-all;
   flex-shrink: 0;
+  box-sizing: border-box;
 }
 
 .footer {
