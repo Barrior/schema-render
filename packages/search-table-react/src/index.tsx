@@ -1,5 +1,3 @@
-import './typings/global.d'
-
 import SearchTable from './SearchTable'
 
 export default SearchTable

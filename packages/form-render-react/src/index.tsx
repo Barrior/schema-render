@@ -1,5 +1,3 @@
-import './typings/global.d'
-
 import FormRender from './FormRender'
 
 export default FormRender
