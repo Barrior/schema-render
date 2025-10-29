@@ -9,7 +9,7 @@ import type { IInnerFormRenderProps } from '../typings'
 
 interface IUseActionsParams {
   props: IInnerFormRenderProps
-  coreRef: RefObject<ICoreRef>
+  coreRef: RefObject<ICoreRef | null>
 }
 
 /**
