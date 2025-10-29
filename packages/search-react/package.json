@@ -1,6 +1,6 @@
 {
   "name": "@schema-render/search-react",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Conditional search component based on FormRender.",
   "keywords": [
     "SchemaRender",
