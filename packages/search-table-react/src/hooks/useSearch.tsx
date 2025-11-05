@@ -58,16 +58,20 @@ export default function useSearch({
     searchValueRef.current = { ...value }
 
     // 外部事件
-    await searchProps.onReset?.(value)
+    const status = await searchProps.onReset?.(value)
 
-    // 发送请求，重置时，分页重置为第一页
-    await runRequest({ current: 1 })
+    if (status !== false) {
+      // 发送请求，重置时，分页重置为第一页
+      await runRequest({ current: 1 })
+    }
   })
 
   // 提交事件
   const handleSearchSubmit = useMemoizedFn(async (value: IObjectAny) => {
-    await searchProps.onSubmit?.(value)
-    await runRequest()
+    const status = await searchProps.onSubmit?.(value)
+    if (status !== false) {
+      await runRequest({ current: 1 })
+    }
   })
 
   // 收起、展开事件
