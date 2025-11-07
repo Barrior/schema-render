@@ -22,6 +22,8 @@ toc: content
 - `clearSearchValue`: 清除搜索数据。
 - `getRequestParams`: 获取请求的参数，“导出”时常用。
 - `getRequestExtraParams`: 获取请求额外参数，如排序参数等。
+- `getPaginationData`: 获取分页数据。
+- `setPaginationData`: 设置分页数据。
 - `updateScrollY`: 更新表格高度以达到“一屏显示”效果。
 - `openSettingModal`: 打开列设置弹窗。
 
