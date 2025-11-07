@@ -4,7 +4,7 @@ import type { ISearchRef } from '@schema-render/search-react'
 import type { MutableRefObject, Ref, RefObject } from 'react'
 import { useImperativeHandle } from 'react'
 
-import type { ISearchTableRef } from '../typings'
+import type { IPaginationData, ISearchTableRef } from '../typings'
 
 interface IParams {
   ref: Ref<ISearchTableRef>
@@ -12,10 +12,12 @@ interface IParams {
   searchRef: RefObject<ISearchRef>
   requestParamsRef: MutableRefObject<IObjectAny>
   requestExtraParamsRef: MutableRefObject<IObjectAny>
+  paginationRef: MutableRefObject<IPaginationData>
   searchValueRef: MutableRefObject<IObjectAny>
   dataSource: IObjectAny[]
   updateDataSource: (data: IObjectAny[]) => void
   updateSummaryData: (data: IObjectAny) => void
+  updatePagination: ISearchTableRef['setPaginationData']
   updateScrollY: ISearchTableRef['updateScrollY']
   openSettingModal: ISearchTableRef['openSettingModal']
   runRequest: ISearchTableRef['refresh']
@@ -27,10 +29,12 @@ export default function useOpenApi({
   searchRef,
   requestParamsRef,
   requestExtraParamsRef,
+  paginationRef,
   searchValueRef,
   dataSource,
   updateDataSource,
   updateSummaryData,
+  updatePagination,
   updateScrollY,
   openSettingModal,
   runRequest,
@@ -42,6 +46,8 @@ export default function useOpenApi({
     refresh: runRequest,
     getRootElement: () => rootElemRef.current,
     getSearchRef: () => searchRef.current,
+    getPaginationData: () => paginationRef.current,
+    setPaginationData: updatePagination,
     getRequestParams: () => requestParamsRef.current,
     getRequestExtraParams: () => requestExtraParamsRef.current,
     getSearchValue: () => searchValueRef.current,

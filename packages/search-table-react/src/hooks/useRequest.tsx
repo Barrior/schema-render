@@ -7,6 +7,7 @@ import { useRef, useState } from 'react'
 import { EClassNames } from '../constants'
 import type {
   ILocale,
+  IPaginationData,
   IRequestExtraParams,
   IRequestOptions,
   IRequestParams,
@@ -179,6 +180,12 @@ export default function useRequest({
     requestExtraParamsRef.current = data
   })
 
+  const updatePagination = useMemoizedFn((data?: Partial<IPaginationData>) => {
+    if (data) {
+      Object.assign(paginationRef.current, data)
+    }
+  })
+
   return {
     loading,
     dataSource: dataSourceRef.current,
@@ -188,6 +195,8 @@ export default function useRequest({
     requestParamsRef,
     requestExtraParamsRef,
     updateRequestExtraParams,
+    paginationRef,
+    updatePagination,
     finalPagination,
     runRequest,
   }
