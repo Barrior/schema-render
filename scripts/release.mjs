@@ -81,11 +81,11 @@ class Release {
    */
   async runLintAndTest() {
     spinner.start('代码风格校验')
-    await execaCommand('yarn lint')
+    await execaCommand('npm run lint')
     spinner.succeed()
 
     spinner.start('测试用例验证')
-    await execaCommand('yarn test --verbose=false')
+    await execaCommand('npm run test --verbose=false')
     spinner.succeed()
   }
 

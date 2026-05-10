@@ -2,8 +2,8 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "cov": "yarn test --coverage",
-    "dev": "yarn docs",
+    "cov": "npm run test --coverage",
+    "dev": "npm run docs",
     "docs": "ERROR_OVERLAY=none dumi dev",
     "docs:build": "dumi build",
     "postinstall": "husky install",
@@ -12,8 +12,8 @@
     "release": "node scripts/release.mjs",
     "test": "jest",
     "test:d": "node --inspect-brk node_modules/.bin/jest --runInBand",
-    "test:w": "yarn test --watch",
-    "test:w:d": "yarn test:d --watch"
+    "test:w": "npm run test --watch",
+    "test:w:d": "npm run test:d --watch"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
