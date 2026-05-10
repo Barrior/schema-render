@@ -85,7 +85,7 @@ class Release {
     spinner.succeed()
 
     spinner.start('测试用例验证')
-    await execaCommand('npm run test --verbose=false')
+    await execaCommand('npm run test')
     spinner.succeed()
   }
 
