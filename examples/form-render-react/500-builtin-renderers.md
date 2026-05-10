@@ -88,11 +88,15 @@ FormRender v1.4.0 开始支持 SwitchBox 渲染器，通过 `renderOptions.text`
 
 ## DatePicker
 
-返回 [ISOString](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString) 格式的日期值，该值可以更好的支持跨时区的需要。
+默认返回 [ISOString](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString) 格式的日期值，该值可以很好的支持跨时区的需要。
+
+通过 `outputFormat` 可控制输出格式。<Badge>v2.1.0</Badge>
 
 ## DateRangePicker
 
-返回 ISOString 格式的日期值。
+默认返回 ISOString 格式的日期值。
+
+通过 `outputFormat` 可控制输出格式。<Badge>v2.1.0</Badge>
 
 只读态时，文案展示可以通过配置 `locale` 的 [FormRender.displayDateRange](https://github.com/Barrior/schema-render/blob/main/packages/form-render-react/src/locale/zh_CN.ts#L11) 来自定义。
 

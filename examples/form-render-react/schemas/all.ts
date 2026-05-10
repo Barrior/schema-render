@@ -90,6 +90,7 @@ const schema: IRootSchema = {
       renderOptions: {
         placeholder: '请选择日期',
         format: 'YYYY年MM月DD日',
+        outputFormat: 'YYYY-MM-DD',
       },
     },
     DateRangePicker: {
