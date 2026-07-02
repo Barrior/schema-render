@@ -63,8 +63,8 @@ class Release {
   checkBranchAndStatus() {
     // 检查分支名称
     const branchName = execaCommandSync('git symbolic-ref HEAD --short').stdout
-    if (!['master', 'main', 'ssr'].includes(branchName)) {
-      logger.error('命令执行分支不正确，只允许 master、main、ssr 分支')
+    if (!['master', 'main'].includes(branchName)) {
+      logger.error('命令执行分支不正确，只允许 master、main 分支')
       process.exit(1)
     }
 
@@ -138,7 +138,7 @@ class Release {
       const matchedItem = projectMap[projectName]
       if (matchedItem) {
         matchedItem.dependencies.forEach((name) => {
-          pkgContent.dependencies[name] = 'ssr'
+          pkgContent.dependencies[name] = `^${this.newVersion}`
         })
       }
 
@@ -158,7 +158,7 @@ class Release {
       const dirPath = path.resolve(packages, `./${projectName}`)
 
       spinner.start(`发布 ${projectName}`)
-      await execaCommand('npm publish --tag=ssr', { cwd: dirPath })
+      await execaCommand('npm publish', { cwd: dirPath })
       spinner.succeed()
     }
   }
@@ -172,14 +172,14 @@ class Release {
       .join(' ')
     execaCommandSync(`git add ${commitFiles}`)
     execaCommandSync(`git commit -m chore(release):\\ v${this.newVersion} -n`)
-    logger.log(`文件变更提交 Git 完成`)
+    logger.log('文件变更提交 Git 完成')
 
     execaCommandSync(`git tag v${this.newVersion}`)
-    logger.log(`git tag 打标完成`)
+    logger.log('git tag 打标完成')
 
     execaCommandSync('git push origin')
     execaCommandSync('git push origin --tags')
-    logger.log(`推送 Git 到远程 origin 仓库完成`)
+    logger.log('推送 Git 到远程 origin 仓库完成')
   }
 }
 
