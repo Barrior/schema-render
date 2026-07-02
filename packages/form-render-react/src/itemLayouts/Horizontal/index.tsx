@@ -6,7 +6,7 @@ import type { FC } from 'react'
 
 import useFormRenderContext from '../../hooks/useFormRenderContext'
 import type { IFormRenderProps } from '../../typings'
-import * as styles from './styles'
+import styles from './index.module.css'
 
 const { classNames } = utils
 

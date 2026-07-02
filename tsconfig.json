@@ -44,15 +44,13 @@
       "@@/*": [".dumi/tmp/*"],
       "@examples/*": ["./examples/*"],
       "@schema-render/core-react": ["packages/core-react/src/index"],
-      "@schema-render/core-react/dist/esm/*": ["packages/core-react/src/*"],
+      "@schema-render/core-react/src/*": ["packages/core-react/src/*"],
       "@schema-render/form-render-react": ["packages/form-render-react/src/index"],
-      "@schema-render/form-render-react/dist/esm/*": ["packages/form-render-react/src/*"],
+      "@schema-render/form-render-react/src/*": ["packages/form-render-react/src/*"],
       "@schema-render/search-react": ["packages/search-react/src/index"],
-      "@schema-render/search-react/dist/esm/*": ["packages/search-react/src/*"],
+      "@schema-render/search-react/src/*": ["packages/search-react/src/*"],
       "@schema-render/search-table-react": ["packages/search-table-react/src/index"],
-      "@schema-render/search-table-react/dist/esm/*": [
-        "packages/search-table-react/src/*"
-      ]
+      "@schema-render/search-table-react/src/*": ["packages/search-table-react/src/*"]
     }
   },
   "compileOnSave": true

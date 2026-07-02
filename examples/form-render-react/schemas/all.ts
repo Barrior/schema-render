@@ -100,6 +100,18 @@ const schema: IRootSchema = {
         placeholder: ['开始日期', '结束日期'],
       },
     },
+    DateRangePickerObjectStruct: {
+      title: '日期范围（DateRangePicker）-对象格式值',
+      renderType: 'DateRangePicker',
+      renderOptions: {
+        placeholder: ['开始日期', '结束日期'],
+        valueStruct: 'object',
+        valueFieldMap: {
+          start: 'start_time',
+          end: 'end_time',
+        },
+      },
+    },
     Description: {
       title: '纯展示（Description）',
       renderType: 'Description',

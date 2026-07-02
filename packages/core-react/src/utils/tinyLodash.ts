@@ -25,17 +25,18 @@ export function cloneDeep<T extends IObjectAny | any[]>(val: T): T {
   }
 
   if (Object.prototype.toString.call(val) === '[object Object]') {
-    out = {} as any
-    for (k in val) {
+    out = {} as IObjectAny
+    const internalVal = val as IObjectAny
+    for (k in internalVal) {
       if (k === '__proto__') {
         Object.defineProperty(out, k, {
-          value: cloneDeep(val[k]),
+          value: cloneDeep(internalVal[k]),
           configurable: true,
           enumerable: true,
           writable: true,
         })
       } else {
-        out[k] = (tmp = val[k]) && typeof tmp === 'object' ? cloneDeep(tmp) : tmp
+        out[k] = (tmp = internalVal[k]) && typeof tmp === 'object' ? cloneDeep(tmp) : tmp
       }
     }
     return out as T

@@ -1,5 +1,4 @@
 import FormRender from './FormRender'
-export { cij } from './cssinjs'
 
 export default FormRender
 

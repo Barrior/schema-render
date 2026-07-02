@@ -13,7 +13,7 @@ export interface ISearchProps extends Omit<IFormRenderProps, 'locale'> {
   /**
    * 国际化
    */
-  locale?: ILocale
+  locale?: Partial<ILocale>
 
   /**
    * 是否默认折叠

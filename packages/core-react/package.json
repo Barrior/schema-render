@@ -1,6 +1,6 @@
 {
   "name": "@schema-render/core-react",
-  "version": "1.10.1",
+  "version": "2.2.0",
   "description": "Through a set of simple JSON Schema, efficiently build a set of forms.",
   "keywords": [
     "SchemaRender",
@@ -15,17 +15,12 @@
   },
   "license": "MIT",
   "sideEffects": false,
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
-  "types": "dist/esm/index.d.ts",
+  "main": "src/index.tsx",
+  "types": "src/index.tsx",
   "files": [
-    "dist/cjs",
-    "dist/esm",
-    "dist/umd"
+    "src"
   ],
-  "scripts": {
-    "build": "father build"
-  },
+  "scripts": {},
   "dependencies": {},
   "peerDependencies": {
     "react": ">=16.9.0",

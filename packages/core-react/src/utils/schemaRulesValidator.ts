@@ -2,6 +2,7 @@ import { EValidationStatus, VALID_VALIDATION_STATUS } from '../constants'
 import type { IDeepReadonly, IObjectAny } from '../typings/common'
 import type {
   ICore,
+  IInternalLocale,
   IOpenFunctionValidatorResult,
   IOpenValidatorParams,
 } from '../typings/core'
@@ -22,7 +23,7 @@ export interface IParams {
   rules: IBaseSchema['rules'] | IDeepReadonly<IBaseSchema['rules']>
   globalValidators: ICore['validators'] | undefined
   globalValidatorParams: IOpenValidatorParams | undefined
-  locale: Required<ICore>['locale']['validation']
+  locale: IInternalLocale['validation']
 }
 
 export interface IValidationError extends IOpenFunctionValidatorResult {

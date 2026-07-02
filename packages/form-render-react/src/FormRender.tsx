@@ -9,7 +9,7 @@ import FormRenderContext from './FormRenderContext'
 import useActions from './hooks/useActions'
 import useItemLayout from './hooks/useItemLayout'
 import useSchema from './hooks/useSchema'
-import * as styles from './index.style'
+import styles from './index.module.css'
 import zh_CN from './locale/zh_CN'
 import renderers from './renderers/index'
 import type {

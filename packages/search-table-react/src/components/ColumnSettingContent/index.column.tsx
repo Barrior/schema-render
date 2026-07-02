@@ -49,7 +49,7 @@ export function createColumns({ locale }: { locale: ILocale }) {
     {
       title: titleEnum[3],
       dataIndex: 'fixed',
-      width: 60,
+      width: 90,
       algin: 'center',
       render: (value?: 'left' | 'right') => {
         const text = value ? (value === 'left' ? sortEnum[0] : sortEnum[1]) : sortEnum[2]
@@ -64,7 +64,7 @@ export function createColumns({ locale }: { locale: ILocale }) {
     {
       title: titleEnum[4],
       dataIndex: 'sort',
-      width: 50,
+      width: 60,
       algin: 'center',
       render: () => (
         <Button

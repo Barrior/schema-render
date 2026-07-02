@@ -1,7 +1,6 @@
 import { DownOutlined } from '@ant-design/icons'
 import type { IObjectAny } from '@schema-render/core-react'
 import { utils } from '@schema-render/core-react'
-import { cij } from '@schema-render/form-render-react'
 import { Button, Dropdown, Popconfirm } from 'antd'
 import type { ReactNode } from 'react'
 import { Fragment } from 'react'
@@ -9,27 +8,9 @@ import { Fragment } from 'react'
 import ButtonLoading from '../../../components/ButtonLoading'
 import type { ILocale, ISearchTableProps } from '../../../typings'
 import type { IActionItem } from '../../../typings/table.d'
+import styles from './actions.module.css'
 
 const { isArray, isString, omit } = utils
-
-const dropdownCls = cij`
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px 0 #ececec;
-  min-width: 70px;
-  padding: 6px;
-
-  > * {
-    display: block;
-    width: 100%;
-    height: auto !important;
-    padding: 3px 6px !important;
-
-    &:hover {
-      background: #f6f6f6 !important;
-    }
-  }
-`
 
 /**
  * 创建「操作栏」按钮
@@ -123,7 +104,7 @@ export function createActions({
           placement="bottomRight"
           {...actionItemsDropdownProps}
           dropdownRender={() => (
-            <div className={dropdownCls}>
+            <div className={styles.dropdownCls}>
               {dropdownItems.map((label, i) => (
                 <Fragment key={i}>{label}</Fragment>
               ))}

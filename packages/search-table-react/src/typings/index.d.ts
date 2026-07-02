@@ -38,6 +38,10 @@ export interface IPagination {
   pageSize: number
 }
 
+interface IPaginationData extends IPagination {
+  total: number
+}
+
 export interface IRequestResult {
   /**
    * 表格数据源
@@ -74,7 +78,7 @@ export interface ISearchTableProps<S extends IObjectAny = IObjectAny> {
   /**
    * 国际化
    */
-  locale?: ILocale
+  locale?: Partial<ILocale>
   /**
    * 表格数据接口请求
    */
@@ -206,6 +210,14 @@ export interface ISearchTableRef {
    * 清除搜索数据
    */
   clearSearchValue: () => void
+  /**
+   * 获取分页数据
+   */
+  getPaginationData: () => IPaginationData
+  /**
+   * 设置分页数据
+   */
+  setPaginationData: (data?: Partial<IPaginationData>) => void
   /**
    * 获取请求的参数，“导出”时常用
    */

@@ -1,6 +1,6 @@
 {
   "name": "@schema-render/search-react",
-  "version": "1.10.1",
+  "version": "2.2.0",
   "description": "Conditional search component based on FormRender.",
   "keywords": [
     "SchemaRender",
@@ -16,17 +16,14 @@
   },
   "license": "MIT",
   "sideEffects": false,
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
-  "types": "dist/esm/index.d.ts",
+  "main": "src/index.tsx",
+  "types": "src/index.tsx",
   "files": [
-    "dist"
+    "src"
   ],
-  "scripts": {
-    "build": "father build"
-  },
+  "scripts": {},
   "dependencies": {
-    "@schema-render/form-render-react": "^1.10.1"
+    "@schema-render/form-render-react": "ssr"
   },
   "peerDependencies": {
     "@ant-design/icons": "^5.0.0"

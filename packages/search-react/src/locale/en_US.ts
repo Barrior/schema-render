@@ -1,4 +1,4 @@
-import en_US from '@schema-render/form-render-react/dist/esm/locale/en_US'
+import en_US from '@schema-render/form-render-react/src/locale/en_US'
 
 export default {
   ...en_US,

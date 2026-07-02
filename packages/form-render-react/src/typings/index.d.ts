@@ -125,7 +125,7 @@ export type IFormRenderProps = IPartPartial<
   /**
    * 国际化
    */
-  locale?: ILocale
+  locale?: Partial<ILocale>
 
   /**
    * 定义操作行为：展示项、顺序
@@ -165,8 +165,9 @@ export type IFormRenderProps = IPartPartial<
   /**
    * 提交事件
    * @param value 表单数据
+   * @returns 返回 false 则不调用 request 请求
    */
-  onSubmit?: (value: IObjectAny) => IMaybePromise<void>
+  onSubmit?: (value: IObjectAny) => IMaybePromise<void | false>
   /**
    * 重置前置事件
    * @param value 表单数据
@@ -176,8 +177,9 @@ export type IFormRenderProps = IPartPartial<
   /**
    * 重置事件
    * @param value 重置后的表单数据
+   * @returns 返回 false 则不调用 request 请求
    */
-  onReset?: (value: IObjectAny) => IMaybePromise<void>
+  onReset?: (value: IObjectAny) => IMaybePromise<void | false>
 }
 
 /**

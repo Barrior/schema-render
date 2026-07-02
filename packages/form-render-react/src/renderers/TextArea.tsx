@@ -26,7 +26,8 @@ const TextArea: IProps = ({ schema, disabled, value, onChange, validator, locale
 
     /* istanbul ignore else */
     if (val !== value) {
-      onChange(val, { triggerValidator: !validateOnBlur })
+      // 空字符输出为 undefined，避免 rules 校验
+      onChange(val ? val : undefined, { triggerValidator: !validateOnBlur })
     }
   })
 

@@ -1,0 +1,18 @@
+.dropdownCls {
+  padding: 6px;
+  background-color: #fff;
+  box-shadow: 0 4px 12px 0 #ececec;
+  border-radius: 8px;
+  min-width: 70px;
+}
+
+.dropdownCls > * {
+  display: block;
+  width: 100%;
+  height: auto !important;
+  padding: 3px 6px !important;
+}
+
+.dropdownCls > *:hover {
+  background: #f6f6f6 !important;
+}

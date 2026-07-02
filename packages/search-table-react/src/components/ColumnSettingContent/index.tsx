@@ -7,7 +7,7 @@ import useRootContext from '../../hooks/useRootContext'
 import type { IColumnType } from '../../typings/table'
 import Sortable from '../Sortable'
 import { createColumns } from './index.column'
-import * as styles from './index.style'
+import styles from './index.module.css'
 
 export interface IColumnSettingContentProps {
   sortColumns: IColumnType<any>[]
@@ -78,7 +78,7 @@ const ColumnSettingContent: FC<IColumnSettingContentProps> = ({
   })
 
   return (
-    <>
+    <div className={styles.settingContent}>
       <div className={styles.header}>
         {columns.map((col, i) => (
           <div
@@ -140,7 +140,7 @@ const ColumnSettingContent: FC<IColumnSettingContentProps> = ({
           </Button>
         </Space>
       </div>
-    </>
+    </div>
   )
 }
 

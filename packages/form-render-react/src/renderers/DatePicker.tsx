@@ -1,5 +1,5 @@
 import type { IOpenComponentParams } from '@schema-render/core-react'
-import { utils } from '@schema-render/core-react'
+import { useMemoizedFn, utils } from '@schema-render/core-react'
 import { DatePicker as AntDatePicker } from 'antd'
 import dayjs from 'dayjs'
 import React, { useMemo } from 'react'
@@ -21,6 +21,13 @@ const DatePicker: IProps = ({ schema, value, onChange, disabled, locale, validat
     [schema.title, locale.FormRender.placeholderSelect]
   )
 
+  const handleChange = useMemoizedFn((val) => {
+    const format = schema.renderOptions?.outputFormat
+    onChange(
+      val ? (format ? dayjs(val).format(format) : dayjs(val).toISOString()) : undefined
+    )
+  })
+
   return (
     <AntDatePicker
       allowClear
@@ -29,7 +36,7 @@ const DatePicker: IProps = ({ schema, value, onChange, disabled, locale, validat
       {...schema.renderOptions}
       status={validator.status as never}
       value={value ? dayjs(value) : null}
-      onChange={(val) => onChange(val ? dayjs(val).toISOString() : undefined)}
+      onChange={handleChange}
       disabled={disabled}
     />
   )

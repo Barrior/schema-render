@@ -1,6 +1,6 @@
 {
   "name": "@schema-render/search-table-react",
-  "version": "1.10.1",
+  "version": "2.2.0",
   "description": "Conditional search table component.",
   "keywords": [
     "SchemaRender",
@@ -17,21 +17,18 @@
   },
   "license": "MIT",
   "sideEffects": false,
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
-  "types": "dist/esm/index.d.ts",
+  "main": "src/index.tsx",
+  "types": "src/index.tsx",
   "files": [
-    "dist"
+    "src"
   ],
-  "scripts": {
-    "build": "father build"
-  },
+  "scripts": {},
   "dependencies": {
     "@dnd-kit/core": "6.1.0",
     "@dnd-kit/modifiers": "7.0.0",
     "@dnd-kit/sortable": "8.0.0",
     "@dnd-kit/utilities": "3.2.2",
-    "@schema-render/search-react": "^1.10.1"
+    "@schema-render/search-react": "ssr"
   },
   "peerDependencies": {
     "@ant-design/icons": "^5.0.0",

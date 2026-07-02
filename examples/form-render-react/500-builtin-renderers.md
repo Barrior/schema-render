@@ -98,6 +98,11 @@ FormRender v1.4.0 开始支持 SwitchBox 渲染器，通过 `renderOptions.text`
 
 通过 `outputFormat` 可控制输出格式。<Badge>v2.2.0</Badge>
 
+控制值格式：<Badge>v2.3.0</Badge>
+
+- `valueStruct`: `object | array`, `object` 表示值为对象格式，此时通过 `valueFieldMap` 可控制字段名称。
+- `valueFieldMap`: 对象格式时可用，`{ start: '定义开始时间字段名', end: '定义结束时间字段名' }`。
+
 只读态时，文案展示可以通过配置 `locale` 的 [FormRender.displayDateRange](https://github.com/Barrior/schema-render/blob/main/packages/form-render-react/src/locale/zh_CN.ts#L11) 来自定义。
 
 ## Object
