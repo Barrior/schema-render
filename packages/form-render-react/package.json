@@ -1,6 +1,6 @@
 {
   "name": "@schema-render/form-render-react",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Out-of-the-box form rendering library based on Core and Antd.",
   "keywords": [
     "SchemaRender",
@@ -22,7 +22,7 @@
   ],
   "scripts": {},
   "dependencies": {
-    "@schema-render/core-react": "ssr",
+    "@schema-render/core-react": "^2.3.0",
     "dayjs": "^1.11.0"
   },
   "peerDependencies": {
