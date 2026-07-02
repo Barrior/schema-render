@@ -24,9 +24,9 @@ toc: content
 
 ## SSR
 
-FormRender、Search、SearchTable 使用的是 css module 的样式方案，故项目需要开启模块编译。
+FormRender、Search、SearchTable 使用的是 [CSS Modules](https://github.com/css-modules/css-modules) 的样式方案，故项目需要开启模块编译。
 
-`Next.js` 项目须配置 `next.config.js` 文件：
+以 `Next.js` 为例，项目需配置 `next.config.js` 文件：
 
 ```jsx | pure
 // 编译 node_modules 下的模块
