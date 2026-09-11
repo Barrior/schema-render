@@ -50,10 +50,11 @@ try {
   // 执行类型检查
   execSync(`npx tsc -p ${tempConfigPath}`, { stdio: 'inherit' })
   logger.log('✅ 暂存文件类型检查通过')
+  // 清理临时文件
+  fs.unlinkSync(tempConfigPath)
   process.exit(0)
 } catch (_err) {
   logger.error('❌ 类型检查失败')
-  // 清理临时文件
   fs.unlinkSync(tempConfigPath)
   process.exit(1)
 }
