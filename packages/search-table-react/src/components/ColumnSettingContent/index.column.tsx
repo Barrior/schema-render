@@ -1,5 +1,5 @@
 import { HolderOutlined } from '@ant-design/icons'
-import { Button, InputNumber, Switch, Tag } from 'antd'
+import { Button, InputNumber, Switch } from 'antd'
 import type { ReactNode } from 'react'
 
 import type { ILocale } from '../../typings'
@@ -14,18 +14,18 @@ interface IColumn {
 
 export function createColumns({ locale }: { locale: ILocale }) {
   const titleEnum = locale.SearchTable.settingModalColumnEnum
-  const sortEnum = locale.SearchTable.settingModalColumnSortEnum
+  // const sortEnum = locale.SearchTable.settingModalColumnSortEnum
 
   const columns: IColumn[] = [
     {
       title: titleEnum[0],
       dataIndex: 'name',
-      width: 200,
+      width: 250,
     },
     {
       title: titleEnum[1],
       dataIndex: 'hidden',
-      width: 90,
+      width: 120,
       render: (value: boolean, onChange) => {
         return <Switch checked={!value} onChange={(val) => onChange(!val)} />
       },
@@ -33,7 +33,7 @@ export function createColumns({ locale }: { locale: ILocale }) {
     {
       title: titleEnum[2],
       dataIndex: 'width',
-      width: 100,
+      width: 130,
       render: (value: number, onChange) => {
         return (
           <InputNumber
@@ -46,21 +46,21 @@ export function createColumns({ locale }: { locale: ILocale }) {
         )
       },
     },
-    {
-      title: titleEnum[3],
-      dataIndex: 'fixed',
-      width: 90,
-      algin: 'center',
-      render: (value?: 'left' | 'right') => {
-        const text = value ? (value === 'left' ? sortEnum[0] : sortEnum[1]) : sortEnum[2]
-        const color = value ? (value === 'left' ? 'orange' : 'blue') : undefined
-        return (
-          <Tag color={color} style={{ margin: 0 }}>
-            {text}
-          </Tag>
-        )
-      },
-    },
+    // {
+    //   title: titleEnum[3],
+    //   dataIndex: 'fixed',
+    //   width: 90,
+    //   algin: 'center',
+    //   render: (value?: 'left' | 'right') => {
+    //     const text = value ? (value === 'left' ? sortEnum[0] : sortEnum[1]) : sortEnum[2]
+    //     const color = value ? (value === 'left' ? 'orange' : 'blue') : undefined
+    //     return (
+    //       <Tag color={color} style={{ margin: 0 }}>
+    //         {text}
+    //       </Tag>
+    //     )
+    //   },
+    // },
     {
       title: titleEnum[4],
       dataIndex: 'sort',
