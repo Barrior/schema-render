@@ -30,8 +30,11 @@ const columns: IColumnType[] = [
     dataIndex: 'long_text',
     valueType: (_record, index) => ({
       type: 'long-text',
-      maxLength: 20,
-      color: index % 2 ? '#1677ff' : '#000',
+      maxLength: 15,
+      placement: index % 3 === 0 ? 'start' : index % 3 === 1 ? 'middle' : 'end',
+      tooltipProps: {
+        color: index % 2 ? '#1677ff' : '#000',
+      },
     }),
     width: 270,
   },
