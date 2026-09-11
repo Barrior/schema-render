@@ -19,11 +19,11 @@ jobs:
         uses: actions/cache/restore@v3
         with:
           path: node_modules
-          key: cache-${{ hashFiles('yarn.lock') }}
+          key: cache-${{ hashFiles('package-lock.json') }}
 
       - name: Install dependencies
         if: steps.restore-node-modules.outputs.cache-hit != 'true'
-        run: yarn install
+        run: npm install
 
       - name: Cache node_modules
         if: steps.restore-node-modules.outputs.cache-hit != 'true'
@@ -33,10 +33,10 @@ jobs:
           key: ${{ steps.restore-node-modules.outputs.cache-primary-key }}
 
       - name: Run lint
-        run: yarn lint
+        run: npm run lint
 
       - name: Run testing with coverage
-        run: yarn cov
+        run: npm run cov
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
