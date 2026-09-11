@@ -44,7 +44,9 @@ const columns: IColumnType[] = [
     valueType: () => ({
       type: 'long-text-modal',
       maxLength: 20,
-      width: 500,
+      modalProps: {
+        width: 500,
+      },
     }),
     width: 270,
   },
