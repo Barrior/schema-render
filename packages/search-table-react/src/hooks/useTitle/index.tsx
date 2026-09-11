@@ -1,7 +1,7 @@
 import { SettingOutlined, SyncOutlined } from '@ant-design/icons'
+import type { IObjectAny } from '@schema-render/core-react'
 import { useMemoizedFn, utils } from '@schema-render/core-react'
 import { Button, Space, Tabs, Tooltip } from 'antd'
-import type { TabBarExtraMap } from 'rc-tabs/lib/interface.d.ts'
 import type { ReactNode } from 'react'
 import { isValidElement } from 'react'
 
@@ -86,7 +86,7 @@ export default function useTitle({
     if (isValidElement(title.tabs.tabBarExtraContent)) {
       tabBarRightExtraContent = title.tabs.tabBarExtraContent
     } else {
-      const extraContent = title.tabs.tabBarExtraContent as TabBarExtraMap
+      const extraContent = title.tabs.tabBarExtraContent as IObjectAny
       tabBarLeftExtraContent = extraContent.left
       tabBarRightExtraContent = extraContent.right
     }
