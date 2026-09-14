@@ -43,6 +43,9 @@ jobs:
           path: node_modules
           key: ${{ steps.restore-node-modules.outputs.cache-primary-key }}
 
+      - name: Install swc
+        run: npm install @swc/core@1.13.20
+
       - name: Build docs
         run: npm run docs:build
 
