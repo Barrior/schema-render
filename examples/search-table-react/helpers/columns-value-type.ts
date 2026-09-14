@@ -41,12 +41,18 @@ const columns: IColumnType[] = [
   {
     title: '长文案(long-text-modal)',
     dataIndex: 'long_text_modal',
-    valueType: () => ({
+    valueType: (_record, index) => ({
       type: 'long-text-modal',
       maxLength: 20,
+      btnText: index % 2 ? '查看详情' : '全部',
       modalProps: {
+        title: index % 2 ? '详情' : '全部',
         width: 500,
       },
+      modalContent:
+        index % 2
+          ? '这是自定义的 modal 内容，您可以在这里放置任何 React 组件或元素。'
+          : undefined,
     }),
     width: 270,
   },
