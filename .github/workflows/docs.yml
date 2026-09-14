@@ -23,7 +23,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node: 18
+          node: 22
 
       - name: Restore node_modules
         id: restore-node-modules
