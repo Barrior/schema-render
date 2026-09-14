@@ -158,7 +158,9 @@ class Release {
       const dirPath = path.resolve(packages, `./${projectName}`)
 
       spinner.start(`发布 ${projectName}`)
-      await execaCommand('npm publish', { cwd: dirPath })
+      await execaCommand('npm publish --registry=https://registry.npmjs.org/', {
+        cwd: dirPath,
+      })
       spinner.succeed()
     }
   }
