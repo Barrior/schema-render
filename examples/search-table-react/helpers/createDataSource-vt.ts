@@ -23,6 +23,7 @@ function rangeNumber(min, max) {
       percent: rangeNumber(0, 100).toFixed(2),
       switch_status: Math.random() > 0.5,
       tags: Math.random() > 0.5 ? '张三' : ['李四', '王五'],
+      tags2: Math.random() > 0.5 ? 'apple' : ['peach', 'banana'],
       image_list:
         Math.random() > 0.5
           ? 'https://raw.githubusercontent.com/Barrior/assets/main/chrome-logo.svg'

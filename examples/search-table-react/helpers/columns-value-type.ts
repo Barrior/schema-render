@@ -68,6 +68,19 @@ const columns: IColumnType[] = [
     width: 140,
   },
   {
+    title: '标签(tags with options)',
+    dataIndex: 'tags2',
+    valueType: () => ({
+      type: 'tags',
+      options: [
+        { label: '苹果', value: 'apple', color: 'cyan' },
+        { label: '桃子', value: 'peach', color: 'pink' },
+        { label: '香蕉', value: 'banana', color: 'orange' },
+      ],
+    }),
+    width: 140,
+  },
+  {
     title: '图片(images)',
     dataIndex: 'image_list',
     valueType: 'images',

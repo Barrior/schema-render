@@ -1,5 +1,6 @@
+import type { IObjectAny } from '@schema-render/core-react'
 import { utils } from '@schema-render/core-react'
-import { Rate, Switch, Tag } from 'antd'
+import { Rate, Space, Switch, Tag, Tooltip } from 'antd'
 
 import ImagesPreview from '../components/ImagesPreview'
 import { STYLE_CODE } from '../constants/style'
@@ -9,7 +10,7 @@ import CommaNumber from './CommaNumber'
 import LongText from './LongText'
 import LongTextModal from './LongTextModal'
 
-const { isArray } = utils
+const { isArray, find } = utils
 
 export const BUILT_IN_VALUE_TYPES: ITableProps['registerValueType'] = {
   /**
@@ -34,18 +35,37 @@ export const BUILT_IN_VALUE_TYPES: ITableProps['registerValueType'] = {
    * 标签
    */
   tags: ({ value, options }) => {
-    const data = isArray(value) ? value : [value]
-    return data.map((text, i) => (
-      <Tag {...options} key={i}>
-        {text}
-      </Tag>
-    ))
+    const { options: valueOptions, tooltipProps, spaceProps } = options
+    const arrValue = isArray(value) ? value : [value]
+    return (
+      <Space {...spaceProps}>
+        {arrValue.map((val, index) => {
+          const item = valueOptions
+            ? find<IObjectAny>(valueOptions, { value: val })
+            : null
+
+          const tagNode = (
+            <Tag variant="outlined" {...item} key={`tag-${index}`}>
+              {item ? item.label : val}
+            </Tag>
+          )
+
+          return tooltipProps ? (
+            <Tooltip {...tooltipProps} key={index}>
+              {tagNode}
+            </Tooltip>
+          ) : (
+            tagNode
+          )
+        })}
+      </Space>
+    )
   },
   /**
    * 评分
    */
   rate: ({ value, options }) => (
-    <Rate style={{ width: 134 }} {...options} disabled value={value} />
+    <Rate style={{ width: 134 }} disabled {...options} value={value} />
   ),
   /**
    * 数字千分位

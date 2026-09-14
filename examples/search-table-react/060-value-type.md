@@ -42,7 +42,7 @@ const Demo = () => {
 export default Demo
 ```
 
-函数方式，可以用来传递参数，如下示例，彩色标签。
+函数方式，可以用来传递参数，如下示例，自定义 `Rate` 字符。
 
 ```tsx
 import { sleep } from '@examples/utils'
@@ -57,15 +57,15 @@ const columns: IColumnType[] = [
     dataIndex: 'title',
   },
   {
-    title: '彩色标签',
-    dataIndex: 'tags',
-    // 函数格式，接收当前行数据 record
-    valueType: (record: Record<string, any>) => {
+    title: '自定义 Rate 字符',
+    dataIndex: 'rate',
+    // 函数格式，接收当前行数据 record, 当前行索引 index
+    valueType: (record: Record<string, any>, index: number) => {
       return {
         // 必须返回 type 字段，对应数据显示类型
-        type: 'tags',
+        type: 'rate',
         // 其他参数，将透传给类型渲染组件，对应组件接收的 options 字段
-        color: Array.isArray(record.tags) ? 'blue' : 'green',
+        character: index % 2 === 0 ? 'A' : undefined,
       }
     },
   },
@@ -94,17 +94,17 @@ export default Demo
 
 ## 内置数据显示类型参数详解
 
-| **参数**            | **描述**            | **数据值类型**       | **传参说明**                                                                                                                                |
-| ------------------- | ------------------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| **code**            | 代码块形式显示      | `string`             | -                                                                                                                                           |
-| **rate**            | 评分形式显示        | `number`             | Antd Rate 组件参数                                                                                                                          |
-| **switch**          | 开关形式显示        | `boolean \| 1 \| 0`  | Antd Switch 组件参数                                                                                                                        |
-| **images**          | 图片预览形式显示    | `string \| string[]` | Antd Image 组件参数                                                                                                                         |
-| **tags**            | 标签形式            | `string \| string[]` | Antd Tag 组件参数                                                                                                                           |
-| **comma-number**    | 数字千分位处理显示  | `number \| string`   | -                                                                                                                                           |
-| **percent**         | 数字加百分号显示    | `number \| string`   | -                                                                                                                                           |
-| **long-text**       | 长文案 tooltip 显示 | `number \| string`   | `maxLength:` 溢出省略长度，默认为 10 <br>`placement:` 省略号位置，`'start' \| 'middle' \| 'end'` <br>`tooltipProps:` Antd Tooltip 组件参数  |
-| **long-text-modal** | 长文案点击弹窗显示  | `number \| string`   | `maxLength:` 溢出省略长度，默认为 10 <br> `btnText:` 按钮文案 <br> `modalProps:` Antd Modal 组件参数 <br> `modalContent:` 自定义 Modal 内容 |
+| **参数**            | **描述**            | **数据值类型**       | **传参说明**                                                                                                                                                                              |
+| ------------------- | ------------------- | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **code**            | 代码块形式显示      | `string`             | -                                                                                                                                                                                         |
+| **rate**            | 评分形式显示        | `number`             | Antd Rate 组件参数                                                                                                                                                                        |
+| **switch**          | 开关形式显示        | `boolean \| 1 \| 0`  | Antd Switch 组件参数                                                                                                                                                                      |
+| **images**          | 图片预览形式显示    | `string \| string[]` | Antd Image 组件参数                                                                                                                                                                       |
+| **tags**            | 标签形式            | `string \| string[]` | `options:` 数组格式，`{ label: ReactNode; value: string \| number }[]` 数组每一项对应 Antd Tag 组件参数 <br> `tooltipProps:` Antd Tooltip 组件参数 <br> `spaceProps:` Antd Space 组件参数 |
+| **comma-number**    | 数字千分位处理显示  | `number \| string`   | -                                                                                                                                                                                         |
+| **percent**         | 数字加百分号显示    | `number \| string`   | -                                                                                                                                                                                         |
+| **long-text**       | 长文案 tooltip 显示 | `number \| string`   | `maxLength:` 溢出省略长度，默认为 10 <br>`placement:` 省略号位置，`'start' \| 'middle' \| 'end'` <br>`tooltipProps:` Antd Tooltip 组件参数                                                |
+| **long-text-modal** | 长文案点击弹窗显示  | `number \| string`   | `maxLength:` 溢出省略长度，默认为 10 <br> `btnText:` 按钮文案 <br> `modalProps:` Antd Modal 组件参数 <br> `modalContent:` 自定义 Modal 内容                                               |
 
 ## 注册数据显示类型
 
