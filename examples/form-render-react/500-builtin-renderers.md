@@ -78,6 +78,14 @@ export default Demo
 
 FormRender v1.4.0 开始支持 SwitchBox 渲染器，通过 `renderOptions.text` 定义描述文案。
 
+参数有：
+
+- `text`: 定义描述文案。
+- `rightExtraContent`: `ReactNode | ({ value, disabled, readonly }) => ReactNode`, 右侧自定义内容。<Badge>v2.5.0</Badge>
+- `rootClassName`,: 根结点类名。<Badge>v2.5.0</Badge>
+- `rootStyle`: 根结点样式。<Badge>v2.5.0</Badge>
+- 其他为 Antd Checkbox 组件参数。
+
 ## Checkbox
 
 - onChange 事件支持 `extra.checkedOptions` 参数，表示当前选中的 `options` 数据。案例见[Checkbox 选中值联动](./880-relation-checkbox)。<Badge>v1.4.0</Badge>

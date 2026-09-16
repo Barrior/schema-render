@@ -35,6 +35,30 @@ const schema: IRootSchema = {
         text: '同意平台用户内容协议',
       },
     },
+    SwitchBoxWithRightContent: {
+      title: '开关（SwitchBox）',
+      renderType: 'SwitchBox',
+      renderOptions: {
+        text: '同意平台用户内容协议',
+        rightExtraContent: ({
+          value,
+          disabled,
+          readonly,
+        }: {
+          value: boolean
+          disabled: boolean
+          readonly: boolean
+        }) => {
+          return (
+            <span style={{ color: value ? 'green' : 'red' }}>
+              {value ? '已同意' : '未同意'}
+              {disabled && '（禁用）'}
+              {readonly && '（只读）'}
+            </span>
+          )
+        },
+      },
+    },
     TextArea: {
       title: '多行文本（TextArea）',
       renderType: 'TextArea',
