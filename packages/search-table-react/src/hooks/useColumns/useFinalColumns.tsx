@@ -88,8 +88,16 @@ export default function useFinalColumns({ table, sortColumns, locale }: IParams)
     }
 
     return columns
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [displayedColumns])
+  }, [
+    displayedColumns,
+    showRowNumber,
+    rowNumberColumnData,
+    actionItems,
+    actionsRender,
+    actionItemsColumnData,
+    locale.SearchTable.actionColumnName,
+    locale.SearchTable.serialColumnName,
+  ])
 
   return { finalColumns }
 }
