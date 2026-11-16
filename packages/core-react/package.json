@@ -21,7 +21,9 @@
     "src"
   ],
   "scripts": {},
-  "dependencies": {},
+  "dependencies": {
+    "expr-eval-fork": "^3.0.3"
+  },
   "peerDependencies": {
     "react": ">=16.9.0",
     "react-dom": ">=16.9.0"

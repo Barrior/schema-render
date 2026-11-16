@@ -29,6 +29,9 @@
       "prettier --write --no-error-on-unmatched-pattern"
     ]
   },
+  "dependencies": {
+    "expr-eval-fork": "^3.0.3"
+  },
   "devDependencies": {
     "@ant-design/icons": "^6.3.4",
     "@dnd-kit/core": "^6.1.0",

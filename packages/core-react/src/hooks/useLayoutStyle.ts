@@ -32,12 +32,15 @@ export default function useLayoutStyle({
   }, [layout, min, max])
 
   // 设置布局样式
-  const layoutStyle = {
-    display: 'grid',
-    gridTemplateColumns,
-    columnGap: layoutColumnGap,
-    rowGap: layoutRowGap,
-  }
+  const layoutStyle = useMemo(
+    () => ({
+      display: 'grid',
+      gridTemplateColumns,
+      columnGap: layoutColumnGap,
+      rowGap: layoutRowGap,
+    }),
+    [gridTemplateColumns, layoutColumnGap, layoutRowGap]
+  )
 
   return layoutStyle
 }

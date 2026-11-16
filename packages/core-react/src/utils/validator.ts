@@ -366,7 +366,7 @@ export function makeOpenValidatorParams({
   return {
     schema,
     value,
-    path: [...path],
+    path,
     sPath: stringifyPath(path),
     required,
     disabled: innerDisabled,
