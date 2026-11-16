@@ -13,7 +13,7 @@ const stagedFiles = execSync('git diff --cached --name-only --diff-filter=ACM')
   .map((file) => path.resolve(process.cwd(), file))
 
 // 收集需要一起加载的全局类型声明文件
-const globalTypeFiles = ['global.d.ts']
+const globalTypeFiles = ['global.d.ts', 'test/@types/jest-dom.d.ts']
   .map((file) => path.resolve(process.cwd(), file))
   // 只保留实际存在的文件
   .filter((file) => fs.existsSync(file))

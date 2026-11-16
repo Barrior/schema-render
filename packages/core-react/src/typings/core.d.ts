@@ -225,6 +225,15 @@ export interface IRenderer<V extends any = any, S extends ISchema = ISchema> {
   readonlyFormItem?: React.ComponentType<IOpenFormItemParams<V, S>>
   /** 禁用态 formItem */
   disabledFormItem?: React.ComponentType<IOpenFormItemParams<V, S>>
+  /**
+   * 值纯渲染器：只依赖自身 value、schema 与静态配置（locale / userCtx 等），
+   * **以及自己用 `useFieldValue(path)` 显式订阅的其它字段**。
+   * 声明后，其它字段变化时本字段会跳过重渲染，由订阅驱动内部更新。
+   *
+   * 默认不声明 = 每轮重渲染：渲染器可能读取 rootValue 等框架无法静态感知的数据，
+   * 未声明时按「有依赖」处理，保证拿到最新数据。
+   */
+  pure?: boolean
   /** 校验器 */
   validator?: IRuleItem[] | IOpenFunctionValidator<V, S>
 }

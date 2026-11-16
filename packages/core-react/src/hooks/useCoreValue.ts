@@ -16,7 +16,10 @@ import useUnmountedRef from './useUnmountedRef'
  * 需要考虑【多渲染器内部 onChange 初始化值】场景，参考 952 调试文档
  * @param props 内核参数
  */
-export default function useCoreValue(props: ICore) {
+export default function useCoreValue(
+  props: ICore,
+  onValueChange?: (value: IObjectAny) => void
+) {
   const valueRef = useRef<IObjectAny>(props.defaultValue ?? {})
   const isUnmountedRef = useUnmountedRef()
   const { forceUpdate } = useForceUpdate()
@@ -59,6 +62,14 @@ export default function useCoreValue(props: ICore) {
 
       // 整个表单数据的 change 事件
       props.onChange?.(nextValue, eventInfo)
+
+      /**
+       * 同步通知订阅者：放在 onChange 之后，既能拿到应用层对 nextValue 的就地修改，
+       * 又能让字段级重渲染与父组件更新同批提交。
+       * （若放到 Core 提交后的 layout effect 里，输入事件中 rc-input 内部重渲染
+       * 会拿到旧 props.value 并回写 DOM，打断中文输入法的组合过程。）
+       */
+      onValueChange?.(nextValue)
     }
   })
 

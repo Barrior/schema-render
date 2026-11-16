@@ -1,7 +1,9 @@
 import { createContext } from 'react'
 
-import type { IRootContext } from './typings/rootContext'
+import type { IRootStaticContext } from './typings/rootContext'
 
-const RootContext = createContext<Readonly<IRootContext>>({} as unknown as IRootContext)
+const RootContext = createContext<Readonly<IRootStaticContext>>(
+  {} as unknown as IRootStaticContext
+)
 
 export default RootContext

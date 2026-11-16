@@ -56,8 +56,8 @@ const renderers: IRenderers<any, ISchema> = {
           placeholder={`请输入${schema.title ?? ''}`}
           {...schema.renderOptions}
           value={value ?? ''}
-          onChange={(e) => onChange(e.target.value)}
           disabled={disabled}
+          onChange={(e) => onChange(e.target.value)}
         />
       )
     },
@@ -131,4 +131,14 @@ const renderers: IRenderers<any, ISchema> = {
   },
 }
 
-export default renderers
+/**
+ * 示例渲染器只依赖自身的 value / schema / disabled / readonly，
+ * 不读取 rootValue，因此声明为值纯渲染器：
+ * 其它字段变化时本字段跳过重渲染，只有自己的数据变化才重新渲染。
+ */
+const pureRenderers = Object.keys(renderers).reduce((acc, name) => {
+  acc[name] = { ...renderers[name], pure: true }
+  return acc
+}, {} as IRenderers<any, ISchema>)
+
+export default pureRenderers
